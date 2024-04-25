@@ -94,6 +94,49 @@ export const deleteProductThunk = (productId) => async (dispatch) => {
 
 const initialState = {};
 
-const ProductReducer = (state, initialState, action) => {};
+const ProductReducer = (state = initialState, action) => {
+  let newState;
+  switch (action.type) {
+    case LOAD_PRODUCTS: {
+      newState = {};
+      action.products.products.forEach((product) => {
+        newState[product.id] = product;
+      });
+      return newState;
+    }
+    case SINGLE_PRODUCT: {
+      return {
+        ...newState,
+        [action.product.id]: action.product,
+      };
+    }
+    case USER_PRODUCTS: {
+      newState = {};
+      action.products.products.forEach((product) => {
+        newState[product.id] = product;
+      });
+      return newState;
+    }
+    case CREATE_PRODUCT: {
+      return {
+        ...newState,
+        [action.product.id]: action.product,
+      };
+    }
+    case UPDATE_PRODUCT: {
+      return {
+        ...newState,
+        [action.product.id]: action.product,
+      };
+    }
+    case DELETE_PRODUCT: {
+      newState = { ...state };
+      delete newState[action.productId];
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
 
 export default ProductReducer;
