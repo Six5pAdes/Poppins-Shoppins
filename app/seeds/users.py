@@ -5,15 +5,21 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        first_name = 'Demo', last_name = 'User', username='DemoUser', email='test@aa.io', password='password')
+    tom = User(
+        first_name = 'Tom', last_name = 'Wayne', username='tom', email='marnie@aa.io', password='password')
+    dick = User(
+        first_name = 'Rich', last_name = 'Ard', username='dick', email='bobbie@aa.io', password='password')
+    harry = User(
+        first_name = 'Harry', last_name = 'Poppins', username='harry', email='hardluck@aa.io', password='password')
+    sally = User(
+        first_name = 'Sally', last_name = 'Carrera', username='sally', email='sobstory@aa.io', password='password')
 
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(tom)
+    db.session.add(dick)
+    db.session.add(harry)
+    db.session.add(sally)
     db.session.commit()
 
 
@@ -28,5 +34,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()
