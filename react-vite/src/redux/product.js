@@ -25,9 +25,9 @@ const editProduct = (product) => ({
   type: UPDATE_PRODUCT,
   product,
 });
-const deleteProduct = () => ({
+const deleteProduct = (productId) => ({
   type: DELETE_PRODUCT,
-  product,
+  productId,
 });
 
 export const loadProductsThunk = () => async (dispatch) => {
@@ -58,7 +58,7 @@ export const loadOneProductThunk = (productId) => async (dispatch) => {
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {
-  const res = await fetch(`/api/new`, {
+  const res = await fetch(`/api/new-product`, {
     method: "POST",
     body: product,
   });
@@ -88,7 +88,7 @@ export const deleteProductThunk = (productId) => async (dispatch) => {
 
   if (res.ok) {
     dispatch(deleteProduct(productId));
-    return;
+    return productId;
   }
 };
 
@@ -119,13 +119,13 @@ const ProductReducer = (state = initialState, action) => {
     }
     case CREATE_PRODUCT: {
       return {
-        ...newState,
+        ...state,
         [action.product.id]: action.product,
       };
     }
     case UPDATE_PRODUCT: {
       return {
-        ...newState,
+        ...state,
         [action.product.id]: action.product,
       };
     }
