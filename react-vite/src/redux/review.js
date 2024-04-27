@@ -68,7 +68,7 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 
 const initialState = {};
 
-const ReviewReducer = (state = initialState, action) => {
+export default function ReviewReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case LOAD_REVIEWS: {
@@ -98,4 +98,4 @@ const ReviewReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

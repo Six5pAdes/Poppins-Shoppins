@@ -1,1 +1,13 @@
 /* TODO: Add sitewide styles */
+
+.err-msg {
+    color: red;
+}
+
+/* label {
+    border: 2px;
+} */
+
+button:hover {
+    cursor: pointer;
+}

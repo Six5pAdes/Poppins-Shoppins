@@ -21,7 +21,7 @@ def create_product():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        image_filename = get_unique_filename(form.image.data.filename)
+        form.image.data.filename = get_unique_filename(form.image.data.filename) # save on form image data
         image_upload_result = upload_file_to_s3(form.image.data)
         if 'url' not in image_upload_result:
             return {"message": "File upload failed"}
@@ -50,7 +50,7 @@ def updateProduct(productId):
         data = form.data
 
         if 'image' in request.files:
-            image_filename = get_unique_filename(data['image'].filename)
+            data['image'].filename = get_unique_filename(data['image'].filename)
             image_upload_result = upload_file_to_s3(data['image'])
             if 'url' in image_upload_result:
                 product.image = image_upload_result['url']
@@ -72,10 +72,12 @@ def updateProduct(productId):
 @product_routes.route('/<int:productId>', methods=['DELETE'])
 def deleteProduct(productId):
     product = Product.query.get(productId)
-    remove_file_from_s3(product.to_dict()['image'])
+    delete = product.to_dict() # if line 79 returns error
+    remove_file_from_s3(product.image)
     db.session.delete(product)
     db.session.commit()
-    return product.to_dict()
+    return product.to_dict() # be careful, check whether this gives an error or not
+                                # if yes, replace with line 75
 
 # getting one product
 @product_routes.route('/<int:productId>')

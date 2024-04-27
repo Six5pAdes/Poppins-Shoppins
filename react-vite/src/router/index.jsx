@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "*",
+        element: <h1>ELEMENT NOT FOUND</h1>
+      }
     ],
   },
 ]);

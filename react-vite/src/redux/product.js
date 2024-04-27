@@ -94,7 +94,7 @@ export const deleteProductThunk = (productId) => async (dispatch) => {
 
 const initialState = {};
 
-const ProductReducer = (state = initialState, action) => {
+export default function ProductReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case LOAD_PRODUCTS: {
@@ -106,7 +106,7 @@ const ProductReducer = (state = initialState, action) => {
     }
     case SINGLE_PRODUCT: {
       return {
-        ...newState,
+        ...state,
         [action.product.id]: action.product,
       };
     }
@@ -137,6 +137,4 @@ const ProductReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default ProductReducer;
+}
