@@ -28,33 +28,60 @@ function LoginFormModal() {
     }
   };
 
+  const disabledButton = () => {
+    if (!email || !password) {
+      return true;
+    }
+    return false;
+  }
+
+  const badInfo = () => !email || !password
+
+
+  const demoUser = async (e) => {
+    e.preventDefault()
+    await dispatch(
+      thunkLogin({ email: "test@aa.io", password: "password" })
+    )
+  }
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+    <div className='login-modal'>
+      <h1 className='login-header'>Log In</h1>
+      <form className='login-form' onSubmit={handleSubmit}>
+        <label className='login-labels'>Email
           <input
+            className='login-inputs'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+          // required
           />
         </label>
-        {errors.email && <p className="err-msg">{errors.email}</p>}
-        <label>
-          Password
+        <label className='login-labels'>Password
           <input
+            className='login-inputs'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+          // required
           />
         </label>
-        {errors.password && <p className="err-msg">{errors.password}</p>}
-        <button type="submit">Log In</button>
+        {errors.email && (
+          <p className='err-msg'>{errors.email}</p>
+        )}
+        {disabledButton() ?
+          <button className='login-button' type="submit" disabled={badInfo()}>
+            Log In
+          </button>
+          :
+          <button className='login-success' type="submit" >Log In</button>
+        }
+        <a href="/" onClick={demoUser} className="demo-user-link">
+          Log In as Demo User
+        </a>
       </form>
-    </>
+    </div>
   );
 }
 

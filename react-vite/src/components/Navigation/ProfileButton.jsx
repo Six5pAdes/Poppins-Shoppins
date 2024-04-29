@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from 'react-icons/fa';
+// import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNavigate } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const navigate = useNavigate()
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -40,20 +42,75 @@ function ProfileButton() {
   };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
-      </button>
+    <div className="profile-button">
+      <div className="profile-container">
+        <div className="profile-info" onClick={toggleMenu}>
+          <p className="greeting">
+            {user ? `Hello, ${user?.username}` : `Please sign up or log in here.`}
+          </p>
+          <hr className="profile-divider" />
+          <p className="account-list">Account & List</p>
+        </div>
+      </div>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <div className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>Welcome, {user.first_name}</li>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
+              <div className="profile-email"
+                onClick={() => {
+                  alert("New feature coming soon")
+                  // navigate(`/users`)
+                  // closeMenu();
+                }}
+              >
+                Manage {user.email}
+              </div>
+              <hr className="profile-divider" />
+              <div
+                className="profile-menu-item"
+                onClick={() => {
+                  navigate(`/products/current`);
+                  closeMenu();
+                }}
+              >
+                Manage Products
+              </div>
+              <hr className="profile-divider" />
+              <div
+                className="profile-menu-item"
+                onClick={() => {
+                  navigate(`/new-product`);
+                  closeMenu();
+                }}
+              >
+                Create Product Listing
+              </div>
+              <hr className="profile-divider" />
+              <div
+                className="profile-menu-item"
+                onClick={() => {
+                  alert("New feature coming soon")
+                  // navigate(`/cart`);
+                  // closeMenu();
+                }}
+              >
+                Manage Cart
+              </div>
+              <hr className="profile-divider" />
+              <div
+                className="profile-menu-item"
+                onClick={() => {
+                  alert("New feature coming soon")
+                  // navigate(`/orders`);
+                  // closeMenu();
+                }}
+              >
+                My Order History
+              </div>
+              <hr className="profile-divider" />
+              <div className="profile-menu-item">
                 <button onClick={logout}>Log Out</button>
-              </li>
+              </div>
             </>
           ) : (
             <>
@@ -69,9 +126,9 @@ function ProfileButton() {
               />
             </>
           )}
-        </ul>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

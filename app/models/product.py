@@ -12,7 +12,7 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
-    price = db.Column(db.Float(10, 2), nullable=False)
+    price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
@@ -26,7 +26,7 @@ class Product(db.Model):
             'user_id': self.user_id,
             'name': self.name,
             'image': self.image,
-            'price': self.price,
+            'price': float(self.price),
             'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

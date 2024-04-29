@@ -1,3 +1,135 @@
+/* .profile-dropdown {
+  position: absolute;
+} */
+
+.full-navbar {
+  background-color: #d63d0a;
+}
+
+.nav-contain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.nav-logo {
+  margin-right: 20px;
+}
+
+.logo {
+height: 150px;
+cursor: pointer;
+}
+
+.profile-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.profile-username,
+.profile-email,
+.profile-menu-item {
+  color: black;
+}
+
+.profile-info {
+  margin-right: 10px;
+  font-size: 12px;
+  flex: 1;
+  border: 2px dashed darkblue;
+  text-align: center;
+}
+
+.profile-dropdown-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
 .profile-dropdown {
   position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.profile-dropdown li {
+  color: black;
+  list-style-type: none;
+}
+.profile-dropdown div {
+  padding: 8px 0;
+}
+
+.profile-divider {
+  margin: 5px 0;
+}
+
+.profile-dropdown button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-search {
+  position: relative;
+}
+
+.navigation-search input[type="text"] {
+  padding: 10px 40px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  cursor: pointer;
+}
+
+.search-icon:hover {
+  color: #333;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-contain {
+  border-top: 1px solid #e77d7d;
+  padding: 10px;
+}
+
+.cat-items {
+  margin: 0;
+  padding: 0;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.cat-item {
+  color: white;
+  background-color: #e77d7d;
+  text-decoration: none;
+  padding: 3px 10px;
 }
