@@ -12,7 +12,7 @@ const ManageProduct = () => {
     const { closeModal } = useModal()
 
     const userId = useSelector(state => state.session.user ? state.session.user.id : null)
-    const products = useSelector(state => Object.values(state.product).filter(product => product.user_id === userId))
+    const products = useSelector(state => Object.values(state.products).filter(product => product.user_id === userId))
 
     useEffect(() => {
         dispatch(loadUserProductsThunk())
@@ -29,27 +29,20 @@ const ManageProduct = () => {
     }
 
     return (
-        <div id='this-spot'>
+        <div id='this-product'>
             <h1 id='curr-title'>Your Products</h1>
             <button type='button' id='new-product' onClick={() => navigate('/new-product')}>Create a New Product</button>
             <br />
-            <ul id='spots'>
+            <ul id='products'>
                 {products.map((product) => (
-                    <div key={product.id} className='spot-card'>
+                    <div key={product.id} className='product-card'>
                         <div
                             title={product.name}
-                            key={product.id}>
-                            <img
-                                src={product.image}
-                                className='spot-img'
-                                onClick={() => navigate(`/products/${product.id}`)}
-                            />
-                            <p
-                                className='name'
-                                onClick={() => navigate(`/products/${product.id}`)}
-                            >
-                                {product.name}
-                            </p>
+                            key={product.id}
+                            onClick={() => navigate(`/products/${product.id}`)}
+                        >
+                            <img src={product.image} className='spot-img' />
+                            <p className='name'>{product.name}</p>
                             <p className='spot-price'>${parseFloat(product.price).toFixed(2)}</p>
                         </div>
                         <div className='edit-or-delete'>

@@ -29,7 +29,7 @@ export const loadReviewsThunk = (productId) => async (dispatch) => {
     return data;
   }
 };
-export const newProductThunk = (review) => async (dispatch) => {
+export const newReviewThunk = (review) => async (dispatch) => {
   const res = await fetch(`/api/new-review`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

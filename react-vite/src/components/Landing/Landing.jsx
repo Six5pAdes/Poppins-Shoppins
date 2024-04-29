@@ -7,7 +7,7 @@ import './Landing.css'
 const Landing = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const products = useSelector(state => state.product)
+    const products = useSelector(state => state.products)
 
     useEffect(() => {
         dispatch(loadProductsThunk())

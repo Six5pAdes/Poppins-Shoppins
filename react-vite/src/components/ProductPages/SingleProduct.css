@@ -1,0 +1,58 @@
+.single-product {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .image-sec {
+    display: grid;
+    grid-template-areas:
+        "a a b c"
+        "a a d e";
+    margin-bottom: 3em;
+    justify-content: space-evenly;
+} */
+
+.image-full {
+    width: 550px;
+    height: 450px;
+    border: 1px solid #319938;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.desc {
+    flex-grow: 2;
+}
+
+.callout {
+    border: black solid 1px;
+    border-radius: 10px;
+    flex-grow: 1;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-to-here {
+    border-radius: 20px;
+    color: whitesmoke;
+    background-color: navy;
+    margin-right: 15px;
+}
+
+.extraInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cashNView {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

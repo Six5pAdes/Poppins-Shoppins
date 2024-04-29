@@ -58,7 +58,7 @@ export const loadOneProductThunk = (productId) => async (dispatch) => {
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {
-  const res = await fetch(`/api/new-product`, {
+  const res = await fetch(`/api/products/new-product`, {
     method: "POST",
     body: product,
   });
@@ -95,10 +95,9 @@ export const deleteProductThunk = (productId) => async (dispatch) => {
 const initialState = {};
 
 export default function ProductReducer(state = initialState, action) {
-  let newState;
   switch (action.type) {
     case LOAD_PRODUCTS: {
-      newState = {};
+      const newState = {};
       action.products.products.forEach((product) => {
         newState[product.id] = product;
       });
@@ -111,8 +110,8 @@ export default function ProductReducer(state = initialState, action) {
       };
     }
     case USER_PRODUCTS: {
-      newState = {};
-      action.products.products.forEach((product) => {
+      const newState = {};
+      action.products.Products.forEach((product) => {
         newState[product.id] = product;
       });
       return newState;
@@ -130,7 +129,7 @@ export default function ProductReducer(state = initialState, action) {
       };
     }
     case DELETE_PRODUCT: {
-      newState = { ...state };
+      const newState = { ...state };
       delete newState[action.productId];
       return newState;
     }
