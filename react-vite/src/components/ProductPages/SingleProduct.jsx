@@ -1,59 +1,86 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { loadOneProductThunk } from '../../redux/product';
 import { useParams } from 'react-router-dom';
-// import ReviewList from '../Reviews/ReviewList';
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import CreateReview from '../ReviewPages/ReviewForm';
+import ProductReviews from '../ReviewPages/ReviewList';
 import './SingleProduct.css'
 
 const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
-    const product = useSelector(state => state.product[productId])
+    const product = useSelector(state => state.products[productId])
 
     const userId = useSelector(state => state.session.user ? state.session.user.id : null)
-    const user = useSelector(state => Object.values(state.product).filter(product => product.user_id === userId))
+    const user = useSelector(state => Object.values(state.products).filter(product => product.user_id === userId))
+
+    const reviews = useSelector((state) => state.reviews);
+    const [avgRating, setAvgRating] = useState(null);
+    const [numReviews, setNumReviews] = useState(0);
 
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
     }, [dispatch, productId])
 
+    useEffect(() => {
+        const productReviews = Object.values(reviews).filter(
+            (review) => review.product_id === parseInt(productId)
+        );
+        if (productReviews.length > 0) {
+            const totalRating = productReviews.reduce(
+                (acc, review) => acc + review.rating,
+                0
+            );
+            setAvgRating(totalRating / productReviews.length);
+            setNumReviews(productReviews.length);
+        } else {
+            setAvgRating(null);
+            setNumReviews(0);
+        }
+    }, [reviews, productId]);
+
+    if (!product) {
+        return null;
+    }
+
     return (
         <div className="product-contain">
-            <div className="product-tophalf">
-                <div className="product-detail-image-container">
+            <div className="single-product">
+                <div className="image-contain">
                     <img
                         src={product?.image}
                         alt="Product"
-                        className="product-detail-image"
+                        className="image-full"
                     />
                 </div>
-                <div className="product-detail-details">
-                    <h1 className="product-detail-title">{product?.name}</h1>
-                    <p className="product-detail-description">{product?.description}</p>
-                    {/* <div className="product-detail-rating-container">
+                <div className="product-details">
+                    <h1 className="product-title">{product?.name}</h1>
+                    <p className="product-description">{product?.description}</p>
+                    <div className="rating-contain">
                         {numReviews > 0 ? (
-                            <span className="product-detail-rating">
+                            <span className="product-rating">
                                 ⭐️ {avgRating.toFixed(2)} · {numReviews}{" "}
                                 {numReviews === 1 ? "Review" : "Reviews"}
                             </span>
                         ) : (
-                            <span className="product-detail-rating">⭐ New</span>
+                            <span className="product-rating">⭐ New</span>
                         )}
-                    </div> */}
+                    </div>
                 </div>
-                <div className="product-detail-actions">
-                    <p className="product-detail-price">
+                <div className="product-actions">
+                    <p className="product-price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
-                    <p className="product-detail-seller">
+                    <p className="product-seller">
                         Uploaded by: {user?.first_name} {user?.last_name}
                     </p>
                     <button className="add-to-here" onClick={() => alert("Wishlist unavailable, check again later.")}>Add to Wishlist</button>
                     <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
                 </div>
             </div>
-            {/* <div className="product-detail-reviews">
-                {sessionUser && product.user_id !== sessionUser.id && (
+            <div className="product-reviews">
+                {userId && product.user_id !== userId.id && (
                     <OpenModalButton
                         buttonText="Write a Review"
                         buttonId="writeReviewButton"
@@ -61,7 +88,7 @@ const ProductDetails = () => {
                     />
                 )}
                 <ProductReviews productId={productId} />
-            </div> */}
+            </div>
         </div>
     );
 }

@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
-import { newProductThunk } from "../../redux/product";
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { editProductThunk, loadOneProductThunk } from "../../redux/product"
 import './ProductForm.css'
 
-const CreateProduct = () => {
+const ProductUpdate = () => {
+    const { productId } = useParams()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const history = useHistory()
+    const currProduct = useSelector(state => state.products[productId])
+    const user = useSelector(state => state.session.user)
+
     const [name, setName] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(null);
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
-    const user = useSelector(state => state.session.user)
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -22,16 +24,27 @@ const CreateProduct = () => {
 
         if (!Object.values(errors).length) {
             const formData = new FormData();
-            formData.append("user_id", user.id);
+            formData.append("user_id", user?.id);
             formData.append("name", name);
-            formData.append("image", image);
+            if (image) formData.append("image", image);
             formData.append("description", description);
             formData.append("price", price);
 
-            const product = await dispatch(newProductThunk(formData));
-            navigate(`/products/${product.id}`);
+            await dispatch(editProductThunk(formData, productId));
+            navigate(`/products/${productId}`);
         }
     }
+
+    useEffect(() => {
+        if (productId) dispatch(loadOneProductThunk(productId))
+    }, [dispatch, productId])
+    useEffect(() => {
+        if (currProduct) {
+            setName(currProduct.name)
+            setPrice(currProduct.price)
+            setDescription(currProduct.description)
+        }
+    }, [currProduct])
 
     useEffect(() => {
         const valErr = {}
@@ -39,18 +52,18 @@ const CreateProduct = () => {
         if (!name) {
             valErr.name = "Name is required"
         }
-        if (!image) {
-            valErr.image = "Image is required"
-        } else if (typeof image === "object" && image.none) {
-            if (
-                !image.name.endsWith(".jpeg") &&
-                !image.name.endsWith(".jpg") &&
-                !image.name.endsWith(".png")
-            ) {
-                valErr.image =
-                    "Image must be in .jpeg, .jpg, or .png format";
-            }
-        }
+        // if (!image) {
+        //     valErr.image = "Image is required"
+        // } else if (typeof image === "object" && image.none) {
+        //     if (
+        //         !image.name.endsWith(".jpeg") &&
+        //         !image.name.endsWith(".jpg") &&
+        //         !image.name.endsWith(".png")
+        //     ) {
+        //         valErr.image =
+        //             "Image must be in .jpeg, .jpg, or .png format";
+        //     }
+        // }
         if (!price) {
             valErr.price = "Price is required"
         } else if (isNaN(price) || parseFloat(price) <= 0) {
@@ -60,19 +73,15 @@ const CreateProduct = () => {
             valErr.description = "Description is required"
         }
         setErrors(valErr)
-    }, [name, image, description, price])
-
-    // const handleCancel = () => {
-    //     history.goBack()
-    // }
+    }, [name, description, price])
 
     return (
         <div id="product-new">
-            <h1>Create a New Product</h1>
             <form
                 onSubmit={handleSubmit}
                 id='full-form'
                 encType="multipart/form-data">
+                <h1>Make Changes to Product</h1>
                 <div>
                     <label className="product-label">
                         Product Name
@@ -113,11 +122,10 @@ const CreateProduct = () => {
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
                     {submit && errors.price && <p className="err-msg">{errors.price}</p>}
                 </div>
-                <button id="submit-button" type="submit">Create Product</button>
-                {/* <button id="cancel-button" type="button" onClick={handleCancel}>Cancel Creation</button> */}
+                <button id="submit-button" type="submit">Update Product</button>
             </form>
         </div>
     )
 }
 
-export default CreateProduct;
+export default ProductUpdate

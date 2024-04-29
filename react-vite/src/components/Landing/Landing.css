@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 40px;
-    /* gap: 15px; */
     width: auto;
     margin: 0 auto;
     padding-top: 20px;
@@ -33,7 +32,6 @@
     font-weight: bold;
     overflow: hidden;
     padding-left: 5px;
-    /* max-width: 200px; */
   }
 
  .price {

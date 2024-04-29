@@ -11,8 +11,8 @@ import reviewReducer from "./review";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  product: productReducer,
-  review: reviewReducer,
+  products: productReducer,
+  reviews: reviewReducer,
 });
 
 let enhancer;

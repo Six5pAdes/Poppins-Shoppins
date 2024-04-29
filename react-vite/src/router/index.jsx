@@ -6,6 +6,8 @@ import Layout from './Layout';
 import ProductDetails from '../components/ProductPages/SingleProduct';
 import CreateProduct from '../components/ProductPages/ProductForm';
 import ManageProduct from '../components/ProductPages/ManageProduct';
+import ProductUpdate from '../components/ProductPages/EditProduct';
+import CreateReview from '../components/ReviewPages/ReviewForm';
 
 export const router = createBrowserRouter([
   {
@@ -20,13 +22,33 @@ export const router = createBrowserRouter([
         element: <ProductDetails />
       },
       {
+        path: "/products/current",
+        element: <ManageProduct />
+      },
+      {
         path: "/new-product",
         element: <CreateProduct />
       },
       {
-        path: "/products/current",
-        element: <ManageProduct />
+        path: "/products/:productId/edit",
+        element: <ProductUpdate />
       },
+      {
+        path: "/new-review",
+        element: < CreateReview />
+      },
+      // {
+      //   path: "/cart",
+      //   element: < />
+      // },
+      // {
+      //   path: "/wishlist",
+      //   element: < />
+      // },
+      // {
+      //   path: "/my-orders",
+      //   element: < />
+      // },
       {
         path: "*",
         element: <h1>ELEMENT NOT FOUND</h1>

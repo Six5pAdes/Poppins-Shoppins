@@ -1,6 +1,6 @@
-# Poppins' Shoppings
+# Poppins's Shoppings
 
-Welcome to Poppin's Shoppings, the one-stop shop for anything and everything that you'll ever need!
+Welcome to [Poppins's Shoppings](https://poppins-shoppings.onrender.com), the one-stop pop-in shop for anything and everything that you'll ever need! <br />
 Inspired by e-commerce sites such as Etsy and Amazon, and themed around the magic of "practically perfect in every way" Mary Poppins.
 
 # To run the site locally...
