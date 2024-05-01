@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { newProductThunk } from "../../redux/product";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './ProductForm.css'
 
@@ -14,7 +14,7 @@ const CreateProduct = () => {
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
-    // const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user)
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -22,13 +22,14 @@ const CreateProduct = () => {
 
         if (!Object.values(errors).length) {
             const formData = new FormData();
-            // formData.append("user_id", user.id);
+            formData.append("user_id", user.id);
             formData.append("name", name);
             formData.append("image", image);
-            formData.append("description", description);
             formData.append("price", price);
+            formData.append("description", description);
 
             const product = await dispatch(newProductThunk(formData));
+            console.log('LOOK HERE', product)
             navigate(`/products/${product?.id}`);
         }
     }

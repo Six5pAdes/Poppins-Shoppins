@@ -22,7 +22,6 @@ const deleteReview = (reviewId) => ({
 
 export const loadReviewsThunk = (productId) => async (dispatch) => {
   const res = await fetch(`/api/reviews/${productId}`);
-
   if (res.ok) {
     const data = await res.json();
     dispatch(loadReviews(data));
@@ -30,10 +29,10 @@ export const loadReviewsThunk = (productId) => async (dispatch) => {
   }
 };
 export const newReviewThunk = (review) => async (dispatch) => {
+  console.log(review);
   const res = await fetch(`/api/new-review`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(review),
+    body: review,
   });
   if (res.ok) {
     const data = await res.json();
@@ -41,11 +40,11 @@ export const newReviewThunk = (review) => async (dispatch) => {
     return data;
   }
 };
-export const editReviewThunk = (review, reviewId) => async (dispatch) => {
-  const res = await fetch(`/api/reviews/${reviewId}/edit`, {
+export const editReviewThunk = (review) => async (dispatch) => {
+  console.log(review.id);
+  const res = await fetch(`/api/reviews/${review.id}/edit`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(review),
+    body: review,
   });
   if (res.ok) {
     const data = await res.json();
@@ -54,11 +53,12 @@ export const editReviewThunk = (review, reviewId) => async (dispatch) => {
   }
 };
 export const deleteReviewThunk = (reviewId) => async (dispatch) => {
-  const res = await fetch(`/api/reviews/${reviewId}`, {
+  const res = await fetch(`/api/reviews/${reviewId}/delete`, {
     method: "DELETE",
   });
   if (res.ok) {
     dispatch(deleteReview(reviewId));
+    return reviewId;
   }
 };
 

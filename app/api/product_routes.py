@@ -76,7 +76,8 @@ def deleteProduct(productId):
     remove_file_from_s3(product.image)
     db.session.delete(product)
     db.session.commit()
-    return product.to_dict() # be careful, check whether this gives an error or not
+    print(product.to_dict) # be careful, check whether this gives an error or not
+    return product.to_dict()
                                 # if yes, replace with line 75
 
 # getting one product

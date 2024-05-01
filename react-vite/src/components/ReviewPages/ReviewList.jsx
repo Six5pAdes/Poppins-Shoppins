@@ -6,17 +6,17 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import UpdateReview from "./EditReview";
 import "./ReviewList.css";
 
-const ProductReviews = ({ productId, reviewId }) => {
+const ProductReviews = ({ productId }) => {
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.reviews);
     const currUser = useSelector((state) => state.session.user);
 
     const { closeModal } = useModal();
 
-    const onClick = (e) => {
-        e.preventDefault();
-        dispatch(deleteReviewThunk(reviewId))
-            .then(() => closeModal());
+    const handleDelete = review => {
+        // e.preventDefault();
+        dispatch(deleteReviewThunk(review.id))
+        closeModal();
     };
 
     useEffect(() => {
@@ -88,7 +88,7 @@ const ProductReviews = ({ productId, reviewId }) => {
                             />
                             <OpenModalButton
                                 buttonText="Delete Review"
-                                buttonId={`deleteReviewButton-${review.id}`}
+                                // buttonId={`deleteReviewButton-${review.id}`}
                                 modalComponent={<div id="delete-container">
                                     <h1>Confirm Delete</h1>
                                     <div className="delete-button-container">
@@ -98,7 +98,7 @@ const ProductReviews = ({ productId, reviewId }) => {
                                         <button
                                             id="confirm-delete"
                                             className="delete-buttons"
-                                            onClick={onClick}
+                                            onClick={() => handleDelete(review.id)}
                                         >
                                             Yes (Delete Review)
                                         </button>

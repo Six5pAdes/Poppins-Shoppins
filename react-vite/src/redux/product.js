@@ -55,22 +55,24 @@ export const loadOneProductThunk = (productId) => async (dispatch) => {
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {
-  console.log(product);
-  const res = await fetch("/api/products/new", {
+  const res = await fetch("/api/products/new-product", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product),
+    body: product,
   });
   if (res.ok) {
     const data = await res.json();
     dispatch(createProduct(data));
     return data;
+  } else {
+    const data = res.json();
+    if (data.errors) {
+      return data;
+    }
   }
 };
 export const editProductThunk = (product, productId) => async (dispatch) => {
   const res = await fetch(`/api/products/${productId}/edit`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
     body: product,
   });
   if (res.ok) {

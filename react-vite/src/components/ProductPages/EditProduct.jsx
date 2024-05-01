@@ -27,8 +27,8 @@ const ProductUpdate = () => {
             formData.append("user_id", user?.id);
             formData.append("name", name);
             if (image) formData.append("image", image);
-            formData.append("description", description);
             formData.append("price", price);
+            formData.append("description", description);
 
             await dispatch(editProductThunk(formData, productId));
             navigate(`/products/${productId}`);
