@@ -7,7 +7,7 @@ review_routes = Blueprint('review', __name__ )
 
 
 # getting reviews
-@review_routes.route('/<int:id>')
+@review_routes.route('/<int:reviewId>')
 def getReviews(id):
     reviews = Review.query.filter(Review.product_id == id)
     response = [review.to_dict() for review in reviews]
@@ -35,7 +35,7 @@ def create_review():
 
 
 # update review
-@review_routes.route('/<int:id>/edit', methods = ['PUT'])
+@review_routes.route('/<int:reviewId>/edit', methods = ['PUT'])
 def updateReview(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -53,7 +53,7 @@ def updateReview(id):
 
 
 # delete review
-@review_routes.route('/<int:id>/delete', methods = ['DELETE'])
+@review_routes.route('/<int:reviewId>/delete', methods = ['DELETE'])
 def deleteReview(id):
     review = Review.query.get(id)
     db.session.delete(review)
