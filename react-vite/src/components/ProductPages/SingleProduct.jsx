@@ -11,9 +11,7 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
     const product = useSelector(state => state.products[productId])
-
-    const userId = useSelector(state => state.session.user ? state.session.user.id : null)
-    const user = useSelector(state => Object.values(state.products).filter(product => product.user_id === userId))
+    const userId = useSelector(state => state.session.user)
 
     const reviews = useSelector((state) => state.reviews);
     const [avgRating, setAvgRating] = useState(null);
@@ -72,9 +70,9 @@ const ProductDetails = () => {
                     <p className="product-price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
-                    <p className="product-seller">
+                    {/* <p className="product-seller">
                         Uploaded by: {user?.first_name} {user?.last_name}
-                    </p>
+                    </p> */}
                     <button className="add-to-here" onClick={() => alert("Wishlist unavailable, check again later.")}>Add to Wishlist</button>
                     <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
                 </div>

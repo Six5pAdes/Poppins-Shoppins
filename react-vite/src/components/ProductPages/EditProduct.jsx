@@ -22,7 +22,7 @@ const ProductUpdate = () => {
         e.preventDefault()
         setSubmit(true)
 
-        if (!Object.values(errors).length) {
+        if (Object.values(errors).length === 0) {
             const formData = new FormData();
             formData.append("user_id", user?.id);
             formData.append("name", name);
@@ -69,7 +69,7 @@ const ProductUpdate = () => {
         } else if (isNaN(price) || parseFloat(price) <= 0) {
             valErr.price = "Price must be more than one cent"
         }
-        if (!description.length) {
+        if (!description?.length) {
             valErr.description = "Description is required"
         }
         setErrors(valErr)

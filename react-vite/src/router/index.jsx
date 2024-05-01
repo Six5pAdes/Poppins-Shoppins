@@ -1,13 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 // import LoginFormPage from '../components/LoginFormPage';
 // import SignupFormPage from '../components/SignupFormPage';
-import Landing from '../components/Landing/Landing';
 import Layout from './Layout';
+import Landing from '../components/Landing/Landing';
 import ProductDetails from '../components/ProductPages/SingleProduct';
 import CreateProduct from '../components/ProductPages/ProductForm';
 import ManageProduct from '../components/ProductPages/ManageProduct';
 import ProductUpdate from '../components/ProductPages/EditProduct';
-import CreateReview from '../components/ReviewPages/ReviewForm';
 
 export const router = createBrowserRouter([
   {
@@ -32,10 +31,6 @@ export const router = createBrowserRouter([
       {
         path: "/products/:productId/edit",
         element: <ProductUpdate />
-      },
-      {
-        path: "/new-review",
-        element: < CreateReview />
       },
       // {
       //   path: "/cart",

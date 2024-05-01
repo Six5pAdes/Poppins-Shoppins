@@ -11,8 +11,9 @@ const ManageProduct = () => {
     const navigate = useNavigate()
     const { closeModal } = useModal()
 
+    const products = useSelector(state => state.products)
     const userId = useSelector(state => state.session.user ? state.session.user.id : null)
-    const products = useSelector(state => Object.values(state.products).filter(product => product.user_id === userId))
+    const userProducts = Object.values(products).filter(product => product.user_id === userId)
 
     useEffect(() => {
         dispatch(loadUserProductsThunk())
@@ -34,7 +35,7 @@ const ManageProduct = () => {
             <button type='button' id='new-product' onClick={() => navigate('/new-product')}>Create a New Product</button>
             <br />
             <ul id='products'>
-                {products.map((product) => (
+                {userProducts.map((product) => (
                     <div key={product.id} className='product-card'>
                         <div
                             title={product.name}

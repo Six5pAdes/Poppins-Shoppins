@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { loadReviewsThunk, deleteReviewThunk } from "../../redux/review";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
-// import UpdateReview from "../UpdateReviews/UpdateReviews";
+import UpdateReview from "./EditReview";
 import "./ReviewList.css";
 
 const ProductReviews = ({ productId, reviewId }) => {
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.reviews);
-    const sessionUser = useSelector((state) => state.session.user);
+    const currUser = useSelector((state) => state.session.user);
 
     const { closeModal } = useModal();
 
@@ -68,13 +68,13 @@ const ProductReviews = ({ productId, reviewId }) => {
         <div className="reviews-container">
             {reviewsForProduct.map((review) => (
                 <div key={review.id} className="review">
-                    <p className="review-text">{review.review}</p>
-                    <p className="review-date">{`${month(review.created_at)} ${year(review.created_at)}`}</p>
-                    <p className="review-stars">{renderStars(review.rating)}</p>
-                    <p className="review-username">By: {review.username}</p>
-                    {sessionUser?.id === review?.user_id && (
+                    <p className="review-text">{review?.body}</p>
+                    <p className="review-date">{`${month(review?.created_at)} ${year(review.created_at)}`}</p>
+                    <p className="review-stars">{renderStars(review?.rating)}</p>
+                    <p className="review-username">By: {review?.username}</p>
+                    {currUser?.id === review?.user_id && (
                         <div className="review-buttons">
-                            {/* <OpenModalButton
+                            <OpenModalButton
                                 buttonText="Edit Review"
                                 buttonId={`editReviewButton-${review.id}`}
                                 modalComponent={
@@ -85,7 +85,7 @@ const ProductReviews = ({ productId, reviewId }) => {
                                         productId={productId}
                                     />
                                 }
-                            /> */}
+                            />
                             <OpenModalButton
                                 buttonText="Delete Review"
                                 buttonId={`deleteReviewButton-${review.id}`}
