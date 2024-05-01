@@ -1,52 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newReviewThunk } from "../../redux/review";
+import { editReviewThunk } from "../../redux/review";
 import { loadOneProductThunk } from "../../redux/product";
-import "./ReviewForm.css";
 import { useModal } from "../../context/Modal";
+import "./ReviewForm.css"
 
-const CreateReview = ({ productId }) => {
+const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
-    const reviews = useSelector((state) => state.reviews);
-    const [reviewText, setReviewText] = useState("");
-    const [rating, setRating] = useState(0);
+    const [reviewText, setReviewText] = useState(initialReview);
+    const [rating, setRating] = useState(initialRating);
     const [hoverRating, setHoverRating] = useState(0);
-    const [errors, setErrors] = useState("");
+    const [reviewError, setReviewError] = useState("");
     const { closeModal } = useModal();
-
-
-    useEffect(() => {
-        const existingReview = Object.values(reviews).find(
-            review => review.product_id === parseInt(productId) && review.user_id === currentUser.id
-        );
-
-        if (existingReview) {
-            setErrors("You have already reviewed this product.");
-        }
-    }, [reviews, productId, currentUser.id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (errors) {
-            return;
-        }
 
         if (reviewText.length > 255) {
-            setErrors("Review text must be 255 characters or less.");
+            setReviewError("Review text must be 255 characters or less.");
             return;
         }
 
-        const newReview = {
+        const updatedReview = {
             review: reviewText,
             rating: rating,
             product_id: productId,
             user_id: currentUser.id
         };
 
-        const result = await dispatch(newReviewThunk(newReview));
+        const result = await dispatch(
+            editReviewThunk(updatedReview, reviewId)
+        );
         if (!result || result.errors) {
-            setErrors("An error occurred. Please try again later.");
+            setReviewError("Failed to update the review");
         } else {
             closeModal();
             dispatch(loadOneProductThunk(productId));
@@ -58,18 +45,10 @@ const CreateReview = ({ productId }) => {
         setHoverRating(newRating);
     };
 
-    if (errors === "You have already reviewed this product.") {
-        return (
-            <div id="create-review-modal">
-                <p className="err-msg">{errors}</p>
-            </div>
-        );
-    }
-
     return (
         <div id="create-review-modal">
-            <h1>Add a written review</h1>
-            {errors && <p className="err-msg">{errors}</p>}
+            <h1>Update Review</h1>
+            {reviewError && <p className="err-msg">{reviewError}</p>}
             <form onSubmit={handleSubmit} id="create-review-form">
                 <label id="review-text-label">
                     <textarea
@@ -96,9 +75,9 @@ const CreateReview = ({ productId }) => {
                 </div>
                 <button
                     type="submit"
-                    disabled={reviewText.length < 10 || rating < 1 || errors}
+                    disabled={reviewText.length < 10 || rating < 1 || reviewError}
                     id={
-                        reviewText.length < 10 || rating < 1 || errors
+                        reviewText.length < 10 || rating < 1
                             ? "review-submit-disabled"
                             : "review-submit-active"
                     }
@@ -110,4 +89,5 @@ const CreateReview = ({ productId }) => {
     );
 };
 
-export default CreateReview;
+
+export default UpdateReview

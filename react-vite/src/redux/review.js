@@ -35,7 +35,6 @@ export const newReviewThunk = (review) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
   });
-
   if (res.ok) {
     const data = await res.json();
     dispatch(createReview(data));
@@ -48,7 +47,6 @@ export const editReviewThunk = (review, reviewId) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
   });
-
   if (res.ok) {
     const data = await res.json();
     dispatch(editReview(data));
@@ -59,20 +57,17 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
   const res = await fetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
-
   if (res.ok) {
     dispatch(deleteReview(reviewId));
-    return reviewId;
   }
 };
 
 const initialState = {};
 
-export default function ReviewReducer(state = initialState, action) {
-  let newState;
+export default function reviewReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_REVIEWS: {
-      newState = {};
+      const newState = { ...state };
       action.reviews.reviews.forEach((review) => {
         newState[review.id] = review;
       });
@@ -91,7 +86,7 @@ export default function ReviewReducer(state = initialState, action) {
       };
     }
     case DELETE_REVIEW: {
-      newState = { ...state };
+      const newState = { ...state };
       delete newState[action.reviewId];
       return newState;
     }

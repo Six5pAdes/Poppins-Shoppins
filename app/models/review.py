@@ -23,8 +23,9 @@ class Review(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'username': self.user.username,
             'product_id': self.product_id,
-            'name': self.body,
+            'body': self.body,
             'rating': self.rating,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
