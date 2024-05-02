@@ -11,19 +11,23 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
     const [reviewText, setReviewText] = useState(initialReview);
     const [rating, setRating] = useState(initialRating);
     const [hoverRating, setHoverRating] = useState(0);
-    const [reviewError, setReviewError] = useState("");
+    const [errors, setErrors] = useState("");
     const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (reviewText.length < 10) {
+            setErrors("Review text must be at least 10 characters.");
+            return;
+        }
         if (reviewText.length > 255) {
-            setReviewError("Review text must be 255 characters or less.");
+            setErrors("Review text must be 255 characters or less.");
             return;
         }
 
         const updatedReview = {
-            review: reviewText,
+            body: reviewText,
             rating: rating,
             product_id: productId,
             user_id: currentUser.id
@@ -32,8 +36,8 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
         const result = await dispatch(
             editReviewThunk(updatedReview, reviewId)
         );
-        if (!result || result.errors) {
-            setReviewError("Failed to update the review");
+        if (result.errors) {
+            setErrors("Failed to update the review");
         } else {
             closeModal();
             dispatch(loadOneProductThunk(productId));
@@ -48,7 +52,7 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
     return (
         <div id="create-review-modal">
             <h1>Update Review</h1>
-            {reviewError && <p className="err-msg">{reviewError}</p>}
+            {errors && <p className="err-msg">{errors}</p>}
             <form onSubmit={handleSubmit} id="create-review-form">
                 <label id="review-text-label">
                     <textarea
@@ -75,7 +79,7 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
                 </div>
                 <button
                     type="submit"
-                    disabled={reviewText.length < 10 || rating < 1 || reviewError}
+                    disabled={reviewText.length < 10 || rating < 1 || errors}
                     id={
                         reviewText.length < 10 || rating < 1
                             ? "review-submit-disabled"

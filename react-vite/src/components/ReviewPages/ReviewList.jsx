@@ -13,10 +13,10 @@ const ProductReviews = ({ productId }) => {
 
     const { closeModal } = useModal();
 
-    const handleDelete = review => {
+    const handleDelete = async (reviewId) => {
         // e.preventDefault();
-        dispatch(deleteReviewThunk(review.id))
-        closeModal();
+        dispatch(deleteReviewThunk(reviewId))
+            .then(() => closeModal());
     };
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const ProductReviews = ({ productId }) => {
                                 modalComponent={
                                     <UpdateReview
                                         reviewId={review.id}
-                                        initialReview={review.review}
+                                        initialReview={review.body}
                                         initialRating={review.rating}
                                         productId={productId}
                                     />
@@ -88,7 +88,7 @@ const ProductReviews = ({ productId }) => {
                             />
                             <OpenModalButton
                                 buttonText="Delete Review"
-                                // buttonId={`deleteReviewButton-${review.id}`}
+                                buttonId={`deleteReviewButton-${review.id}`}
                                 modalComponent={<div id="delete-container">
                                     <h1>Confirm Delete</h1>
                                     <div className="delete-button-container">

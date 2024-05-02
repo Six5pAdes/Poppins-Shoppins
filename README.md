@@ -3,6 +3,8 @@
 Welcome to [Poppins's Shoppings](https://poppins-shoppings.onrender.com), the one-stop pop-in shop for anything and everything that you'll ever need! <br />
 Inspired by e-commerce sites such as Etsy and Amazon, and themed around the magic of "practically perfect in every way" Mary Poppins.
 
+![1_o4syQ6kk6AuKzqTTP8iI7g](https://github.com/Six5pAdes/Poppins-Shoppings/assets/138395132/f4a95e2a-bb32-49ed-bf05-2303c46ebba9)
+
 # To run the site locally...
 
 ## Getting started

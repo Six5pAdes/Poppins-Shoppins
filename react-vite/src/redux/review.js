@@ -30,9 +30,10 @@ export const loadReviewsThunk = (productId) => async (dispatch) => {
 };
 export const newReviewThunk = (review) => async (dispatch) => {
   console.log(review);
-  const res = await fetch(`/api/new-review`, {
+  const res = await fetch(`/api/reviews/new-review`, {
     method: "POST",
-    body: review,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(review),
   });
   if (res.ok) {
     const data = await res.json();
@@ -40,11 +41,11 @@ export const newReviewThunk = (review) => async (dispatch) => {
     return data;
   }
 };
-export const editReviewThunk = (review) => async (dispatch) => {
-  console.log(review.id);
-  const res = await fetch(`/api/reviews/${review.id}/edit`, {
+export const editReviewThunk = (review, reviewId) => async (dispatch) => {
+  const res = await fetch(`/api/reviews/${reviewId}/edit`, {
     method: "PUT",
-    body: review,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(review),
   });
   if (res.ok) {
     const data = await res.json();

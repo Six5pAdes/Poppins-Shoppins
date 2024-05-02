@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newReviewThunk } from "../../redux/review";
 import { loadOneProductThunk } from "../../redux/product";
-import "./ReviewForm.css";
 import { useModal } from "../../context/Modal";
+import "./ReviewForm.css";
 
 const CreateReview = ({ productId }) => {
     const dispatch = useDispatch();
@@ -32,20 +32,24 @@ const CreateReview = ({ productId }) => {
             return;
         }
 
+        if (reviewText.length < 10) {
+            setErrors("Review text must be at least 10 characters.");
+            return;
+        }
         if (reviewText.length > 255) {
             setErrors("Review text must be 255 characters or less.");
             return;
         }
 
         const newReview = {
-            review: reviewText,
+            body: reviewText,
             rating: rating,
             product_id: productId,
             user_id: currentUser.id
         };
 
         const result = await dispatch(newReviewThunk(newReview));
-        if (!result || result.errors) {
+        if (result.errors) {
             setErrors("An error occurred. Please try again later.");
         } else {
             closeModal();
