@@ -1,12 +1,17 @@
 /* TODO: Add sitewide styles */
+* {
+    border: 0;
+    /* padding: 0; */
+    margin: 0;
+}
 
 .err-msg {
     color: red;
 }
 
-/* label {
+label {
     border: 2px;
-} */
+}
 
 button:hover {
     cursor: pointer;

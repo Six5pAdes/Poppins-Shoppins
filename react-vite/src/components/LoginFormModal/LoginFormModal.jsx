@@ -31,14 +31,8 @@ function LoginFormModal() {
   };
 
   const disabledButton = () => {
-    if (!email || !password) {
-      return true;
-    }
-    return false;
+    return (!email || !password)
   }
-
-  const badInfo = () => !email || !password
-
 
   const demoUser = async (e) => {
     e.preventDefault()
@@ -59,31 +53,24 @@ function LoginFormModal() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          // required
           />
         </label>
+        {errors.email && <p className="err-msg">{errors.email}</p>}
         <label className='login-labels'>Password
           <input
             className='login-inputs'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          // required
           />
+          {errors.password && <p className="err-msg">{errors.password}</p>}
         </label>
-        {errors.email && (
-          <p className='err-msg'>{errors.email}</p>
-        )}
         {disabledButton() ?
-          <button className='login-button' type="submit" disabled={badInfo()}>
-            Log In
-          </button>
+          <button className='login-disabled' type="submit">Log In</button>
           :
-          <button className='login-success' type="submit" >Log In</button>
+          <button className='login-success' type="submit">Log In</button>
         }
-        <button href="/" onClick={demoUser} className="demo-user-link">
-          Log In as Demo User
-        </button>
+        <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
       </form>
     </div>
   );

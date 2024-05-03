@@ -55,8 +55,8 @@ const ManageProduct = () => {
                                     <div id='confirm-delete'>
                                         <h2>Confirm Delete</h2>
                                         <span>Are you sure you want to remove this product?</span>
-                                        <button id='delete-complete' type='button' onClick={() => handleDelete(product.id)}>Yes (Delete Product)</button>
-                                        <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Product)</button>
+                                        <button id='delete-complete' type='button' onClick={() => handleDelete(product.id)}>Delete Product</button>
+                                        <button id='delete-cancel' type='button' onClick={closeModal}>Keep Product</button>
                                     </div>
                                 )}
                             />
