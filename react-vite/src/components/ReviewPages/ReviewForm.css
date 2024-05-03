@@ -1,0 +1,65 @@
+#create-review-contain {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+
+#create-review-contain > h1{
+    margin-bottom: 20px;
+}
+
+#text-label {
+    width: 100%;
+    height: 100%;
+}
+
+#text-input {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#rating-contain {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+#overall-rating {
+    font-size: 16px;
+    margin: 10px;
+}
+
+#stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#stars div {
+    cursor: pointer;
+    font-size: 25px;
+    display: inline-block;
+}
+
+.filled {
+    background-image: linear-gradient(45deg, #e77d7d, #e77d7d);
+}
+
+.empty {
+    background-image: linear-gradient(45deg, white, white);
+}
+
+#create-review-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    width: 300px;
+}

@@ -1,0 +1,21 @@
+.reviews-contain {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+.no-reviews {
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+  .review {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+.change-reviews {
+    padding-bottom: 10px;
+}

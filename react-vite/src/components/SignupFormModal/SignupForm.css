@@ -45,23 +45,3 @@
     padding: 5px;
     color: red;
 }
-
-.signup-disabled {
-    font-size: 15px;
-    margin: 10px;
-    height: 30px;
-    width: 120px;
-    color: white;
-    border: 1px black solid;
-    background-color: #afdfdf;
-}
-
-.signup-success {
-    font-size: 15px;
-    margin: 10px;
-    height: 30px;
-    width: 120px;
-    color: white;
-    border: 1px black solid;
-    background-color: #c6286d;
-}

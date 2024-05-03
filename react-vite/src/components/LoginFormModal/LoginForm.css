@@ -41,32 +41,12 @@
     outline: none;
   }
 
-  .login-disabled {
-    font-size: 15px;
-    margin-top: 10px;
-    width: 120px;
-    height: 30px;
-    background-color: #afdfdf;
-    color: white;
-    border: black solid 1px;
-  }
-
-  .login-success {
-    font-size: 15px;
-    margin-top: 10px;
-    width: 120px;
-    height: 30px;
-    background-color: #c6286d;
-    color: white;
-    border: black solid 1px;
-  }
-
   .demo-user {
     font-size: 15px;
     margin-bottom: 10px;
     width: auto;
     height: 50px;
-    /* padding-bottom: 10px; */
+    padding: 10px;
     color: white;
     background-color: #c6286d;
     border: black solid 1px;

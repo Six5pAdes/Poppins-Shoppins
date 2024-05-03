@@ -7,6 +7,7 @@
 
 .err-msg {
     color: red;
+    margin-bottom: 10px;
 }
 
 label {
@@ -15,4 +16,29 @@ label {
 
 button:hover {
     cursor: pointer;
+}
+
+.disabled {
+    font-size: 15px;
+    margin: 10px;
+    height: 100%;
+    width: auto;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    background-color: #afdfdf;
+}
+
+.success {
+    font-size: 15px;
+    margin: 10px;
+    height: 100%;
+    width: auto;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* margin: 2rem; */
+    padding: 10px;
+    background-color: #c6286d;
 }

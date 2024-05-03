@@ -63,6 +63,10 @@ const CreateProduct = () => {
         setErrors(valErr)
     }, [name, image, description, price])
 
+    const disabledButton = () => {
+        return (!name || !image || !price || !description)
+    }
+
     // const handleCancel = () => {
     //     history.goBack()
     // }
@@ -79,6 +83,7 @@ const CreateProduct = () => {
                         Product Name
                         <input
                             type="text"
+                            className="product-inputs"
                             placeholder="Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -89,6 +94,7 @@ const CreateProduct = () => {
                         Image
                         <input
                             type="file"
+                            className="product-inputs"
                             label="Upload image"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}
@@ -96,25 +102,32 @@ const CreateProduct = () => {
                     </label>
                     {submit && errors.image && <p className="err-msg">{errors.image}</p>}
                     <label className="product-label">
-                        $ <input
+                        $<input
                             type="text"
+                            className="product-inputs"
                             placeholder="Price"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             id="price"
                         />
                     </label>
+                    {submit && errors.price && <p className="err-msg">{errors.price}</p>}
                     <label className="product-label">
+                        Description
                         <textarea
+                            className="product-inputs"
                             placeholder="Please describe what the item is"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </label>
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
-                    {submit && errors.price && <p className="err-msg">{errors.price}</p>}
                 </div>
-                <button id="submit-button" type="submit">Create Product</button>
+                {disabledButton() ?
+                    <button className="disabled" type="submit">Create Product</button>
+                    :
+                    <button className="success" type="submit">Create Product</button>
+                }
                 {/* <button id="cancel-button" type="button" onClick={handleCancel}>Cancel Creation</button> */}
             </form>
         </div>

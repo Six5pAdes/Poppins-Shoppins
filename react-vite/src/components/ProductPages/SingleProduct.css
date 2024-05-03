@@ -1,8 +1,7 @@
 .single-product {
     margin: 2rem;
-    display: flex;
-    flex-direction: column;
-}
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);}
 
 .image-full {
     width: 550px;
@@ -13,16 +12,15 @@
     border-radius: 10px;
 }
 
-.details {
-    flex-grow: 2;
+.title, .description, .rating-contain, .actions {
+    margin-top: 20px;
 }
 
-.callout {
+.actions {
     border: black solid 1px;
     border-radius: 10px;
     flex-grow: 1;
     padding: 1rem;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,8 +29,11 @@
 .add-to-here {
     border-radius: 20px;
     color: whitesmoke;
+    padding: 10px;
     background-color: navy;
     margin-right: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .actions {
@@ -41,9 +42,14 @@
     justify-content: space-between;
 }
 
-.cashNView {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-}
+.reviews button {
+    margin: 2rem;
+    padding: 10px;
+    background-color: #27282d;
+    color:  white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }

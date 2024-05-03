@@ -13,14 +13,15 @@
     border-radius: 1em;
     width: 300px;
     padding: 15px;
+    box-shadow: 2px 2px 3px 3px gray;
 }
 
-.product-card:hover {
+.product-img:hover {
     box-shadow: 2px 2px 3px 3px gray;
     cursor: pointer;
   }
 
-#curr-title, #new-spot-btn {
+#curr-title, #new-product {
     margin-left: 45px;
 }
 
@@ -29,22 +30,24 @@
     justify-content: space-evenly;
 }
 
-.edit-or-delete>*:last-child, #update-btn, .spot-info, .spot-price, .spot-location {
+.edit-or-delete button {
+    margin: 2rem;
+    padding: 10px;
+    background-color: #27282d;
+    color:  white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+#update-btn, .product-price {
     margin-left: 5px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
-.avg-rate {
-    margin-bottom: 5px;
-    margin-right: 5px;
-}
-
-.name:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.spot-img {
+.product-img {
     width: 300px;
     height: 200px;
 }
@@ -60,33 +63,6 @@
     align-self: center;
 }
 
-#confirm-delete>button {
-    /* margin: 4px 4px; */
-    padding: 10px;
-}
-
-#delete-complete {
-    background-color: red;
-    box-shadow: 5px 5px 5px grey;
-    color: white;
-    border: black solid 1px;
-    font-size: 18px;
-    margin-top: 20px;
-    width: 100%;
-    height: 50px;
-}
-
-#delete-cancel {
-    background-color: darkgray;
-    box-shadow: 5px 5px 5px grey;
-    color: white;
-    border: black solid 1px;
-    font-size: 18px;
-    margin-top: 20px;
-    width: 100%;
-    height: 50px;
-}
-
-.spot-img:hover, #new-spot-btn:hover, .edit-or-delete>*:last-child, #update-btn, #delete-complete, #delete-cancel {
+#new-product:hover, .edit-or-delete>*:last-child, #update-btn {
     cursor: pointer;
 }

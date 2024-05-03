@@ -58,23 +58,23 @@ const ProductDetails = () => {
                     <div className="rating-contain">
                         {numReviews > 0 ? (
                             <span className="rating">
-                                ⭐️ {avgRating.toFixed(2)} · {numReviews}{" "}
+                                🪄 {avgRating.toFixed(2)} · {numReviews}{" "}
                                 {numReviews === 1 ? "Review" : "Reviews"}
                             </span>
                         ) : (
-                            <span className="rating">⭐ New</span>
+                            <span className="rating">🪄 New</span>
                         )}
                     </div>
-                </div>
-                <div className="actions">
-                    <p className="price">
-                        Price: ${parseFloat(product?.price).toFixed(2)}
-                    </p>
-                    {/* <p className="product-seller">
+                    <div className="actions">
+                        <p className="price">
+                            Price: ${parseFloat(product?.price).toFixed(2)}
+                        </p>
+                        {/* <p className="product-seller">
                         Uploaded by: {user?.first_name} {user?.last_name}
                     </p> */}
-                    <button className="add-to-here" onClick={() => alert("Wishlist unavailable, check again later.")}>Add to Wishlist</button>
-                    <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
+                        <button className="add-to-here" onClick={() => alert("Wishlist unavailable, check again later.")}>Add to Wishlist</button>
+                        <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
+                    </div>
                 </div>
             </div>
             <div className="reviews">
@@ -90,17 +90,5 @@ const ProductDetails = () => {
         </div>
     );
 }
-
-// const ReviewInfo = ({ numReviews, avgStarRating }) => {
-//     let ratingDisplay = avgStarRating > 0 ? avgStarRating.toFixed(1) : 'New';
-//     let sOrNot = numReviews !== 1 ? "s" : "";
-//     return (
-//         <p>
-//             <i className='fa-solid fa-ring'></i>&nbsp;
-//             {ratingDisplay}
-//             {numReviews !== 0 ? ` • ${numReviews} review${sOrNot}` : ''}
-//         </p>
-//     );
-// }
 
 export default ProductDetails

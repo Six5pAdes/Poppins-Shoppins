@@ -52,18 +52,6 @@ const ProductUpdate = () => {
         if (!name) {
             valErr.name = "Name is required"
         }
-        // if (!image) {
-        //     valErr.image = "Image is required"
-        // } else if (typeof image === "object" && image.none) {
-        //     if (
-        //         !image.name.endsWith(".jpeg") &&
-        //         !image.name.endsWith(".jpg") &&
-        //         !image.name.endsWith(".png")
-        //     ) {
-        //         valErr.image =
-        //             "Image must be in .jpeg, .jpg, or .png format";
-        //     }
-        // }
         if (!price) {
             valErr.price = "Price is required"
         } else if (isNaN(price) || parseFloat(price) <= 0) {
@@ -75,18 +63,23 @@ const ProductUpdate = () => {
         setErrors(valErr)
     }, [name, description, price])
 
+    const disabledButton = () => {
+        return (!name || !price || !description)
+    }
+
     return (
         <div id="product-new">
+            <h1>Make Changes to Product</h1>
             <form
                 onSubmit={handleSubmit}
                 id='full-form'
                 encType="multipart/form-data">
-                <h1>Make Changes to Product</h1>
                 <div>
                     <label className="product-label">
                         Product Name
                         <input
                             type="text"
+                            className="product-inputs"
                             placeholder="Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -97,6 +90,7 @@ const ProductUpdate = () => {
                         Image
                         <input
                             type="file"
+                            className="product-inputs"
                             label="Upload image"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}
@@ -106,24 +100,30 @@ const ProductUpdate = () => {
                     <label className="product-label">
                         $ <input
                             type="text"
+                            className="product-inputs"
                             placeholder="Price"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             id="price"
                         />
                     </label>
+                    {submit && errors.price && <p className="err-msg">{errors.price}</p>}
                     <label className="product-label">
+                        Description
                         <textarea
                             placeholder="Please describe what the item is"
+                            className="product-inputs"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </label>
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
-                    {submit && errors.price && <p className="err-msg">{errors.price}</p>}
                 </div>
-                <button id="submit-button" type="submit">Update Product</button>
-            </form>
+                {disabledButton() ?
+                    <button className="disabled" type="submit">Update Product</button>
+                    :
+                    <button className="success" type="submit">Update Product</button>
+                }            </form>
         </div>
     )
 }

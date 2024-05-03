@@ -50,40 +50,43 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
     };
 
     return (
-        <div id="create-review-modal">
-            <h1>Update Review</h1>
+        <div id="create-review-contain">
+            <h1>Edit Review</h1>
             {errors && <p className="err-msg">{errors}</p>}
-            <form onSubmit={handleSubmit} id="create-review-form">
-                <label id="review-text-label">
+            <form onSubmit={handleSubmit} id="review-form">
+                <label id="text-label">
                     <textarea
-                        id="review-text-input"
+                        id="text-input"
                         value={reviewText}
                         onChange={(e) => setReviewText(e.target.value)}
                         placeholder="Write your review here... (Minimum 10 characters)"
                     />
                 </label>
-                <div id="rating-container">
+                {errors.reviewText && <p className="err-msg">{errors.reviewText}</p>}
+                <div id="rating-contain">
                     <span id="overall-rating">Overall Rating:</span>
-                    <div id="rating-stars" onMouseLeave={() => setHoverRating(rating)}>
+                    <div id="stars" onMouseLeave={() => setHoverRating(rating)}>
                         {[1, 2, 3, 4, 5].map((star) => (
                             <div
                                 key={star}
                                 onClick={() => handleStarClick(star)}
                                 onMouseEnter={() => setHoverRating(star)}
-                                className={hoverRating >= star ? "star-filled" : "star-empty"}
+                                className={hoverRating >= star ? "filled" : "empty"}
                             >
-                                ⭐️
+                                🪄
                             </div>
                         ))}
                     </div>
                 </div>
+                {errors.hoverRating && <p className="err-msg">{errors.hoverRating}</p>}
+
                 <button
                     type="submit"
                     disabled={reviewText.length < 10 || rating < 1 || errors}
-                    id={
-                        reviewText.length < 10 || rating < 1
-                            ? "review-submit-disabled"
-                            : "review-submit-active"
+                    className={
+                        reviewText.length < 10 || rating < 1 || errors
+                            ? "disabled"
+                            : "success"
                     }
                 >
                     Submit Review

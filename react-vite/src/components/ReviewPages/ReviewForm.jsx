@@ -28,17 +28,13 @@ const CreateReview = ({ productId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (errors) {
-            return;
-        }
+        const newErr = {}
 
         if (reviewText.length < 10) {
-            setErrors("Review text must be at least 10 characters.");
-            return;
+            newErr.reviewText = ("Review text must be at least 10 characters.");
         }
         if (reviewText.length > 255) {
-            setErrors("Review text must be 255 characters or less.");
-            return;
+            newErr.reviewText = ("Review text must be 255 characters or less.");
         }
 
         const newReview = {
@@ -71,40 +67,43 @@ const CreateReview = ({ productId }) => {
     }
 
     return (
-        <div id="create-review-modal">
-            <h1>Add a written review</h1>
+        <div id="create-review-contain">
+            <h1>Add a New Review</h1>
             {errors && <p className="err-msg">{errors}</p>}
-            <form onSubmit={handleSubmit} id="create-review-form">
-                <label id="review-text-label">
+            <form onSubmit={handleSubmit} id="review-form">
+                <label id="text-label">
                     <textarea
-                        id="review-text-input"
+                        id="text-input"
                         value={reviewText}
                         onChange={(e) => setReviewText(e.target.value)}
                         placeholder="Write your review here... (Minimum 10 characters)"
                     />
                 </label>
-                <div id="rating-container">
+                {errors.reviewText && <p className="err-msg">{errors.reviewText}</p>}
+                <div id="rating-contain">
                     <span id="overall-rating">Overall Rating:</span>
-                    <div id="rating-stars" onMouseLeave={() => setHoverRating(rating)}>
+                    <div id="stars" onMouseLeave={() => setHoverRating(rating)}>
                         {[1, 2, 3, 4, 5].map((star) => (
                             <div
                                 key={star}
                                 onClick={() => handleStarClick(star)}
                                 onMouseEnter={() => setHoverRating(star)}
-                                className={hoverRating >= star ? "star-filled" : "star-empty"}
+                                className={hoverRating >= star ? "filled" : "empty"}
                             >
-                                ⭐️
+                                🪄
                             </div>
                         ))}
                     </div>
                 </div>
+                {errors.hoverRating && <p className="err-msg">{errors.hoverRating}</p>}
+
                 <button
                     type="submit"
                     disabled={reviewText.length < 10 || rating < 1 || errors}
-                    id={
+                    className={
                         reviewText.length < 10 || rating < 1 || errors
-                            ? "review-submit-disabled"
-                            : "review-submit-active"
+                            ? "disabled"
+                            : "success"
                     }
                 >
                     Submit Review

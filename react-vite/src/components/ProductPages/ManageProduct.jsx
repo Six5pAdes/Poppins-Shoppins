@@ -40,23 +40,24 @@ const ManageProduct = () => {
                         <div
                             title={product.name}
                             key={product.id}
-                            onClick={() => navigate(`/products/${product.id}`)}
                         >
-                            <img src={product.image} className='spot-img' />
+                            <img src={product.image} className='product-img'
+                                onClick={() => navigate(`/products/${product.id}`)}
+                            />
                             <p className='name'>{product.name}</p>
-                            <p className='spot-price'>${parseFloat(product.price).toFixed(2)}</p>
+                            <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
                         </div>
                         <div className='edit-or-delete'>
-                            <button id='update-btn' type='button' onClick={() => handleUpdate(product.id)}>Update</button>
+                            <button id='update-btn' type='button' onClick={() => handleUpdate(product.id)}>Edit Product</button>
                             <OpenModalMenuItem
-                                itemText='Delete'
+                                itemText='Delete Product'
                                 className='delete-button'
                                 modalComponent={(
                                     <div id='confirm-delete'>
                                         <h2>Confirm Delete</h2>
                                         <span>Are you sure you want to remove this product?</span>
-                                        <button id='delete-complete' type='button' onClick={() => handleDelete(product.id)}>Delete Product</button>
-                                        <button id='delete-cancel' type='button' onClick={closeModal}>Keep Product</button>
+                                        <button className='success' type='button' onClick={() => handleDelete(product.id)}>Delete Product</button>
+                                        <button className='disabled' type='button' onClick={closeModal}>Keep Product</button>
                                     </div>
                                 )}
                             />

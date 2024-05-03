@@ -51,7 +51,7 @@ const ProductReviews = ({ productId }) => {
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 0; i < rating; i++) {
-            stars.push(<span key={i}>⭐️</span>);
+            stars.push(<span key={i}>🪄</span>);
         }
         return stars;
     };
@@ -65,15 +65,15 @@ const ProductReviews = ({ productId }) => {
     }
 
     return (
-        <div className="reviews-container">
+        <div className="reviews-contain">
             {reviewsForProduct.map((review) => (
                 <div key={review.id} className="review">
-                    <p className="review-text">{review?.body}</p>
-                    <p className="review-date">{`${month(review?.created_at)} ${year(review.created_at)}`}</p>
-                    <p className="review-stars">{renderStars(review?.rating)}</p>
-                    <p className="review-username">By: {review?.username}</p>
+                    <p className="text">{review?.body}</p>
+                    <p className="date">{`${month(review?.created_at)} ${year(review.created_at)}`}</p>
+                    <p className="stars">{renderStars(review?.rating)}</p>
+                    <p className="username">By: {review?.username}</p>
                     {currUser?.id === review?.user_id && (
-                        <div className="review-buttons">
+                        <div className="edit-or-delete">
                             <OpenModalButton
                                 buttonText="Edit Review"
                                 buttonId={`editReviewButton-${review.id}`}
@@ -89,26 +89,26 @@ const ProductReviews = ({ productId }) => {
                             <OpenModalButton
                                 buttonText="Delete Review"
                                 buttonId={`deleteReviewButton-${review.id}`}
-                                modalComponent={<div id="delete-container">
-                                    <h1>Confirm Delete</h1>
-                                    <div className="delete-button-container">
-                                        <span className="confirm-text">
+                                modalComponent={
+                                    <div id="confirm-delete">
+                                        <h2>Confirm Delete</h2>
+                                        <span>
                                             Are you sure you want to remove this review?
                                         </span>
                                         <button
-                                            id="confirm-delete"
-                                            className="delete-buttons"
+                                            className="success"
                                             onClick={() => handleDelete(review.id)}
                                         >Delete Review</button>
-                                        <button id="no-delete" className="delete-buttons" onClick={closeModal}>Keep Review</button>
+                                        <button className="disabled" onClick={closeModal}>Keep Review</button>
                                     </div>
-                                </div>}
+                                }
                             />
                         </div>
                     )}
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 };
 
