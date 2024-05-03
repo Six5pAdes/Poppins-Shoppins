@@ -99,12 +99,8 @@ const ProductReviews = ({ productId }) => {
                                             id="confirm-delete"
                                             className="delete-buttons"
                                             onClick={() => handleDelete(review.id)}
-                                        >
-                                            Yes (Delete Review)
-                                        </button>
-                                        <button id="no-delete" className="delete-buttons" onClick={closeModal}>
-                                            No (Keep Review)
-                                        </button>
+                                        >Delete Review</button>
+                                        <button id="no-delete" className="delete-buttons" onClick={closeModal}>Keep Review</button>
                                     </div>
                                 </div>}
                             />

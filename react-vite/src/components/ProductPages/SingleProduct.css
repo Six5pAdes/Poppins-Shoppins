@@ -4,15 +4,6 @@
     flex-direction: column;
 }
 
-/* .image-sec {
-    display: grid;
-    grid-template-areas:
-        "a a b c"
-        "a a d e";
-    margin-bottom: 3em;
-    justify-content: space-evenly;
-} */
-
 .image-full {
     width: 550px;
     height: 450px;
@@ -22,7 +13,7 @@
     border-radius: 10px;
 }
 
-.desc {
+.details {
     flex-grow: 2;
 }
 
@@ -44,7 +35,7 @@
     margin-right: 15px;
 }
 
-.extraInfo {
+.actions {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

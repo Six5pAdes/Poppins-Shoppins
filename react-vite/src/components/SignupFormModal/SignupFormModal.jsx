@@ -19,18 +19,17 @@ function SignupFormModal() {
     e.preventDefault();
     const newErr = {}
 
-    if (username <= 3) {
-      newErr.username = "Username must be at least 3 characters long"
-    }
-    if (password < 6) {
-      newErr.password = "Password must be at least 6 characters long"
-    }
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
+    const validEmail = (email) => {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    };
+
+    if (!firstName) newErr.firstName = "First name must be provided"
+    if (!lastName) newErr.lastName = "Last name must be provided"
+    if (!validEmail(email)) newErr.email = "Email must be formatted correctly"
+    if (username <= 3) newErr.username = "Username must be at least 3 characters long"
+    if (password < 6) newErr.password = "Password must be at least 6 characters long"
+    if (password !== confirmPassword) newErr.confirmPassword = "Confirm Password field must be the same as the Password field"
     if (Object.keys(newErr).length > 0) {
       setErrors(newErr)
       return
@@ -57,87 +56,77 @@ function SignupFormModal() {
     return (email === '' || username === '' || firstName === '' || lastName === '' || password !== confirmPassword || username.length <= 2 || password.length < 6)
   }
 
-  const invalidInfo = () => {
-    return (
-      !email.length ||
-      username.length <= 2 ||
-      !firstName ||
-      !lastName ||
-      password.length < 6 ||
-      password !== confirmPassword
-    );
-  };
-
   return (
-    <div className="signupModalWrapper">
-      <h1>Sign Up</h1>
+    <div className="signup-modal">
+      <h1 className="signup-header">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form className="signupForm" onSubmit={handleSubmit}>
-        <label>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <label className='signup-labels'>
           First Name
           <input
+            className='signup-inputs'
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-          // required
           />
+          {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
         </label>
-        {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
-        <label>
+        <label className='signup-labels'>
           Last Name
           <input
+            className='signup-inputs'
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-          // required
           />
+          {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
         </label>
-        {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
-        <label>
+        <label className='signup-labels'>
           Email
           <input
+            className='signup-inputs'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          // required
           />
+          {errors.email && <p className="err-msg">{errors.email}</p>}
         </label>
-        {errors.email && <p className="err-msg">{errors.email}</p>}
-        <label>
+        <label className='signup-labels'>
           Username
           <input
+            className='signup-inputs'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-          // required
           />
+          {errors.username && <p className="err-msg">{errors.username}</p>}
         </label>
-        {errors.username && <p className="err-msg">{errors.username}</p>}
-        <label>
+        <label className='signup-labels'>
           Password
           <input
+            className='signup-inputs'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          // required
           />
+          {errors.password && <p className="err-msg">{errors.password}</p>}
         </label>
-        {errors.password && <p className="err-msg">{errors.password}</p>}
-        <label>
+        <label className='signup-labels'>
           Confirm Password
           <input
+            className='signup-inputs'
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-          // required
           />
+          {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword}</p>}
         </label>
-        {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword}</p>}
         {disabledButton() ?
-          <button className="disabledSignupButton" disabled={true} type="submit">Sign Up</button>
+          <button className="signup-disabled" type="submit">Sign Up</button>
           :
-          <button className="signupModalButton" disabled={invalidInfo()} type="submit">Sign Up</button>
-        }      </form>
+          <button className="signup-success" type="submit">Sign Up</button>
+        }
+      </form>
     </div>
   );
 }

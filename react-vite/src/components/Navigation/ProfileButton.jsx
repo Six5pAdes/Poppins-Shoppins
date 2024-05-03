@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -45,18 +45,20 @@ function ProfileButton() {
     <div className="profile-button">
       <div className="profile-container">
         <div className="profile-info" onClick={toggleMenu}>
-          <p className="greeting">
-            {user ? `Hello, ${user?.username}` : `Please sign up or log in here.`}
-          </p>
-          <hr className="profile-divider" />
-          <p className="account-list">Account & List</p>
+          {user ? (
+            <>
+              <FaUserCircle className="dropdown-icon" />
+            </>
+          ) : (
+            <p className="greeting">Please sign in here.</p>
+          )}
         </div>
       </div>
       {showMenu && (
         <div className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <div className="profile-email"
+              <div className="menu-item"
                 onClick={() => {
                   alert("New feature coming soon")
                   // navigate(`/users`)
@@ -67,7 +69,7 @@ function ProfileButton() {
               </div>
               <hr className="profile-divider" />
               <div
-                className="profile-menu-item"
+                className="menu-item"
                 onClick={() => {
                   navigate(`/products/current`);
                   closeMenu();
@@ -77,7 +79,7 @@ function ProfileButton() {
               </div>
               <hr className="profile-divider" />
               <div
-                className="profile-menu-item"
+                className="menu-item"
                 onClick={() => {
                   navigate(`/new-product`);
                   closeMenu();
@@ -87,7 +89,7 @@ function ProfileButton() {
               </div>
               <hr className="profile-divider" />
               <div
-                className="profile-menu-item"
+                className="menu-item"
                 onClick={() => {
                   alert("New feature coming soon")
                   // navigate(`/cart`);
@@ -98,7 +100,7 @@ function ProfileButton() {
               </div>
               <hr className="profile-divider" />
               <div
-                className="profile-menu-item"
+                className="menu-item"
                 onClick={() => {
                   alert("New feature coming soon")
                   // navigate(`/orders`);
@@ -108,7 +110,7 @@ function ProfileButton() {
                 My Order History
               </div>
               <hr className="profile-divider" />
-              <div className="profile-menu-item">
+              <div className="menu-item">
                 <button onClick={logout}>Log Out</button>
               </div>
             </>
@@ -116,12 +118,14 @@ function ProfileButton() {
             <>
               <OpenModalMenuItem
                 itemText="Log In"
+                className="menu-item"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <hr className="profile-divider" />
               <OpenModalMenuItem
                 itemText="Sign Up"
+                className="menu-item"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />

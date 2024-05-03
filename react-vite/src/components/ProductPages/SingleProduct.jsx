@@ -52,22 +52,22 @@ const ProductDetails = () => {
                         className="image-full"
                     />
                 </div>
-                <div className="product-details">
-                    <h1 className="product-title">{product?.name}</h1>
-                    <p className="product-description">{product?.description}</p>
+                <div className="details">
+                    <h1 className="title">{product?.name}</h1>
+                    <p className="description">{product?.description}</p>
                     <div className="rating-contain">
                         {numReviews > 0 ? (
-                            <span className="product-rating">
+                            <span className="rating">
                                 ⭐️ {avgRating.toFixed(2)} · {numReviews}{" "}
                                 {numReviews === 1 ? "Review" : "Reviews"}
                             </span>
                         ) : (
-                            <span className="product-rating">⭐ New</span>
+                            <span className="rating">⭐ New</span>
                         )}
                     </div>
                 </div>
-                <div className="product-actions">
-                    <p className="product-price">
+                <div className="actions">
+                    <p className="price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
                     {/* <p className="product-seller">
@@ -77,7 +77,7 @@ const ProductDetails = () => {
                     <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
                 </div>
             </div>
-            <div className="product-reviews">
+            <div className="reviews">
                 {userId && product.user_id !== userId.id && (
                     <OpenModalButton
                         buttonText="Write a Review"
