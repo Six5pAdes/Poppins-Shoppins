@@ -22,10 +22,12 @@
   }
 
   .login-labels {
+    position: relative;
     width: 25rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin: 10px 0;
     }
 
   .login-inputs {
@@ -50,4 +52,15 @@
     color: white;
     background-color: #c6286d;
     border: black solid 1px;
+  }
+
+  .floating-placeholders {
+    position: absolute;
+    pointer-events: none; /* We don't want the label to be recognized on hover or click */
+    top: -20px;
+    left: 10px
+  }
+
+  .login-inputs:focus+.floating-placeholders {
+    top: -10.5px
   }

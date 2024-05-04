@@ -27,13 +27,12 @@ function SignupFormModal() {
     if (!firstName) newErr.firstName = "First name must be provided"
     if (!lastName) newErr.lastName = "Last name must be provided"
     if (!validEmail(email)) newErr.email = "Email must be formatted correctly"
-    if (username <= 3) newErr.username = "Username must be at least 3 characters long"
+    if (username < 3) newErr.username = "Username must be at least 3 characters long"
     if (password < 6) newErr.password = "Password must be at least 6 characters long"
     if (password !== confirmPassword) newErr.confirmPassword = "Confirm Password field must be the same as the Password field"
-    if (Object.keys(newErr).length > 0) {
-      setErrors(newErr)
-      return
-    }
+
+    setErrors(newErr);
+    if (Object.keys(newErr).length > 0) return;
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -53,7 +52,16 @@ function SignupFormModal() {
   };
 
   const disabledButton = () => {
-    return (email === '' || username === '' || firstName === '' || lastName === '' || password !== confirmPassword || username.length <= 2 || password.length < 6)
+    return (
+      firstName === '' ||
+      lastName === '' ||
+      email === '' ||
+      username === '' ||
+      username.length < 3 ||
+      password === '' ||
+      password.length < 6 ||
+      password !== confirmPassword
+    )
   }
 
   return (
@@ -61,66 +69,90 @@ function SignupFormModal() {
       <h1 className="signup-header">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form className="signup-form" onSubmit={handleSubmit}>
-        <label className='signup-labels'>
-          First Name
-          <input
-            className='signup-inputs'
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
-        </label>
-        <label className='signup-labels'>
-          Last Name
-          <input
-            className='signup-inputs'
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
-        </label>
-        <label className='signup-labels'>
-          Email
-          <input
-            className='signup-inputs'
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <p className="err-msg">{errors.email}</p>}
-        </label>
-        <label className='signup-labels'>
-          Username
-          <input
-            className='signup-inputs'
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          {errors.username && <p className="err-msg">{errors.username}</p>}
-        </label>
-        <label className='signup-labels'>
-          Password
-          <input
-            className='signup-inputs'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password && <p className="err-msg">{errors.password}</p>}
-        </label>
-        <label className='signup-labels'>
-          Confirm Password
-          <input
-            className='signup-inputs'
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword}</p>}
-        </label>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <div className="floating-placeholders" style={firstName ? { top: "-10.5px" } : null}>
+              <label>Enter Your First Name</label>
+            </div>
+            {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
+          </label>
+        </div>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <div className="floating-placeholders" style={lastName ? { top: "-10.5px" } : null}>
+              <label>Enter Your Last Name</label>
+            </div>
+            {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
+          </label>
+        </div>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className="floating-placeholders" style={email ? { top: "-10.5px" } : null}>
+              <label>Enter a Valid Email Address</label>
+            </div>
+            {errors.email && <p className="err-msg">{errors.email}</p>}
+          </label>
+        </div>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <div className="floating-placeholders" style={username ? { top: "-10.5px" } : null}>
+              <label>Username must be at least 3 characters long</label>
+            </div>
+            {errors.username && <p className="err-msg">{errors.username}</p>}
+          </label>
+        </div>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="floating-placeholders" style={password ? { top: "-10.5px" } : null}>
+              <label>Password must be at least 6 characters long</label>
+            </div>
+            {errors.password && <p className="err-msg">{errors.password}</p>}
+          </label>
+        </div>
+        <div className='input-container'>
+          <label className='signup-labels'>
+            <input
+              className='signup-inputs'
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <div className="floating-placeholders" style={confirmPassword ? { top: "-10.5px" } : null}>
+              <label>Confirm Your Password</label>
+            </div>
+            {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword}</p>}
+          </label>
+        </div>
         {disabledButton() ?
           <button className="disabled" type="submit">Sign Up</button>
           :

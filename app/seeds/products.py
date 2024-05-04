@@ -120,8 +120,48 @@ def seed_products():
         user_id = 4,
         name = "Sword",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/sword.png",
-        price = 50.00,
+        price = 500.00,
         description = "A blade of unspeakable power, only wieldable by those of genuine heart.",
+        created_at = datetime.now()
+    )
+    poppins_item16 = Product(
+        user_id = 3,
+        name = "Umbrella",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/umbrella.jpeg",
+        price = 39.99,
+        description = "Fight off the rain, and fly along the east winds with this umbrella.",
+        created_at = datetime.now()
+    )
+    poppins_item17 = Product(
+        user_id = 4,
+        name = "Birdseed Bag",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/tuppence.jpeg",
+        price = 0.02,
+        description = "Feed the birds, tuppence a bag. Yeah, for real life.",
+        created_at = datetime.now()
+    )
+    poppins_item18 = Product(
+        user_id = 1,
+        name = "Ceramic Bowl",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/bowl.jpg",
+        price = 299.99,
+        description = "A crack-free piece of china, with artwork so vivid you'll want to jump into its world like it was chalk art.",
+        created_at = datetime.now()
+    )
+    poppins_item19 = Product(
+        user_id = 5,
+        name = "Carpet Bag",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/carpetbag.jpg",
+        price = 50.00,
+        description = "While this bag seems to big to carry around, it will fit everything you will need to carry around, guaranteed. Please contact seller for information about other patterns",
+        created_at = datetime.now()
+    )
+    poppins_item20 = Product(
+        user_id = 2,
+        name = "Kite",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/kite.jpeg",
+        price = 4.50,
+        description = "With tuppence for paper and string, you can have your own set of wings. With your feet on the ground, you're a bird in flight, with your fist holding tight to the string of your kite.",
         created_at = datetime.now()
     )
 
@@ -140,6 +180,11 @@ def seed_products():
     db.session.add(poppins_item13)
     db.session.add(poppins_item14)
     db.session.add(poppins_item15)
+    db.session.add(poppins_item16)
+    db.session.add(poppins_item17)
+    db.session.add(poppins_item18)
+    db.session.add(poppins_item19)
+    db.session.add(poppins_item20)
     db.session.commit()
 
 

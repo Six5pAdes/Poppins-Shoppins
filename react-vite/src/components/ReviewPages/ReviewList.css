@@ -2,6 +2,7 @@
     margin: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
   }
 
 .no-reviews {
@@ -11,6 +12,7 @@
 
   .review {
     margin-bottom: 20px;
+    margin-right: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;

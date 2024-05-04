@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from sqlalchemy import ForeignKeyConstraint
 
 
 class Product(db.Model):
@@ -18,7 +19,7 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
 
     user = db.relationship('User', back_populates='products')
-    reviews = db.relationship('Review', back_populates='product')
+    reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan", foreign_keys="[Review.product_id]")
 
     def to_dict(self):
         return {
