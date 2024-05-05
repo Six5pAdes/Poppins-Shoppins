@@ -31,7 +31,7 @@ def seed_products():
     poppins_item4 = Product(
         user_id = 1,
         name = "Lamp",
-        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/lamp.jpeg",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/lamp.jpg",
         price = 150.80,
         description = "Brighten your day with this exquisite lamp, complete with a detailed covering; two light bulbs included.",
         created_at = datetime.now()
@@ -39,9 +39,9 @@ def seed_products():
     poppins_item5 = Product(
         user_id = 5,
         name = "Pair of Heels",
-        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/heels.jpeg",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/heels.jpg",
         price = 29.99,
-        description = "A pair of fashionable heels. They are short in height, making them practical and easy to wear. They are also so comfortable you will be convinced they are made from magic.",
+        description = "A pair of fashionable heels. They are low-heeled, making them practical and easy to wear. They are also so comfortable you will be convinced they are made from magic.",
         created_at = datetime.now()
     )
     poppins_item6 = Product(
@@ -127,7 +127,7 @@ def seed_products():
     poppins_item16 = Product(
         user_id = 3,
         name = "Umbrella",
-        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/umbrella.jpeg",
+        image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/umbrella.png",
         price = 39.99,
         description = "Fight off the rain, and fly along the east winds with this umbrella.",
         created_at = datetime.now()
@@ -153,7 +153,7 @@ def seed_products():
         name = "Carpet Bag",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/carpetbag.jpg",
         price = 50.00,
-        description = "While this bag seems to big to carry around, it will fit everything you will need to carry around, guaranteed. Please contact seller for information about other patterns",
+        description = "While this bag seems to big to carry around, it will fit everything you will need to carry around, guaranteed. Please contact seller for information about other patterns.",
         created_at = datetime.now()
     )
     poppins_item20 = Product(
