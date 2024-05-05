@@ -25,6 +25,8 @@ class Product(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'first_name': self.user.first_name,
+            'last_name': self.user.last_name,
             'name': self.name,
             'image': self.image,
             'price': float(self.price),

@@ -81,7 +81,7 @@ def seed_products():
         name = "Medicine",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/medicine.jpeg",
         price = 9.95,
-        description = "A seemingly unappetizing bottle of medicine, its contents change color and flavour based on the patient. Plus, just a spoonful of sugar helps it go down in a most delightful way.",
+        description = "A seemingly unappetizing bottle of medicine, its contents change colour and flavour based on the patient. Plus, just a spoonful of sugar helps it go down in a most delightful way.",
         created_at = datetime.now()
     )
     poppins_item11 = Product(
@@ -137,7 +137,7 @@ def seed_products():
         name = "Birdseed Bag",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/tuppence.jpeg",
         price = 0.02,
-        description = "Feed the birds, tuppence a bag. Yeah, for real life.",
+        description = "Feed the birds, tuppence a bag. Yeah, for real life. This has not changed in 114 years, and it will never change.",
         created_at = datetime.now()
     )
     poppins_item18 = Product(

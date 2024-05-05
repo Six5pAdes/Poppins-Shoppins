@@ -64,8 +64,7 @@ function ProfileButton() {
                   alert("New feature coming soon")
                   // navigate(`/users`)
                   // closeMenu();
-                }}
-              >
+                }}>
                 Manage {user.email}
               </div>
               <hr className="profile-divider" />
@@ -74,8 +73,7 @@ function ProfileButton() {
                 onClick={() => {
                   navigate(`/products/current`);
                   closeMenu();
-                }}
-              >
+                }}>
                 Manage Products
               </div>
               <hr className="profile-divider" />
@@ -84,8 +82,7 @@ function ProfileButton() {
                 onClick={() => {
                   navigate(`/new-product`);
                   closeMenu();
-                }}
-              >
+                }}>
                 Create Product Listing
               </div>
               <hr className="profile-divider" />
@@ -95,8 +92,7 @@ function ProfileButton() {
                   alert("New feature coming soon")
                   // navigate(`/cart`);
                   // closeMenu();
-                }}
-              >
+                }}>
                 Manage Cart
               </div>
               <hr className="profile-divider" />
@@ -106,13 +102,13 @@ function ProfileButton() {
                   alert("New feature coming soon")
                   // navigate(`/orders`);
                   // closeMenu();
-                }}
-              >
+                }}>
                 My Order History
               </div>
               <hr className="profile-divider" />
-              <div className="menu-item">
-                <button onClick={logout}>Log Out</button>
+              <div className="menu-item"
+                onClick={logout}>
+                Log Out
               </div>
             </>
           ) : (

@@ -53,12 +53,10 @@ function SignupFormModal() {
 
   const disabledButton = () => {
     return (
-      firstName === '' ||
-      lastName === '' ||
-      email === '' ||
-      username === '' ||
+      !firstName.length ||
+      !lastName.length ||
+      !email.length ||
       username.length < 3 ||
-      password === '' ||
       password.length < 6 ||
       password !== confirmPassword
     )
