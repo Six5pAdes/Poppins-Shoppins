@@ -1,3 +1,19 @@
+#curr-title {
+    margin-top: 10px;
+}
+
+#new-product {
+    margin: 1rem;
+    padding: 10px;
+    background-color: #27282d;
+    color:  white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -5,7 +21,7 @@
     width: auto;
     margin: 0 auto;
     padding-top: 20px;
-    padding-left: 10px;
+    padding-left: 20px;
     box-sizing: border-box;
 }
 
@@ -50,6 +66,7 @@
 .product-img {
     width: 300px;
     height: 200px;
+    border: 1px solid gray;
 }
 
 #confirm-delete {

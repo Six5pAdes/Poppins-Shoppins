@@ -51,6 +51,8 @@
     padding: 10px;
     color: white;
     background-color: #c6286d;
+    font-weight: bolder;
+    text-transform: uppercase;
   }
 
   .floating-placeholders {
