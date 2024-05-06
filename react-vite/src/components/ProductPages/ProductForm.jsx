@@ -94,8 +94,7 @@ const CreateProduct = () => {
                         Image
                         <input
                             type="file"
-                            className="product-inputs"
-                            label="Upload image"
+                            className="product-inputs product-image"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}
                         />

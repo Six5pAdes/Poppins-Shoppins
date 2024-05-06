@@ -27,7 +27,6 @@
     border: 1px #ccc solid;
   }
 
-/* input[type="text"], */
   input[type="file"],
   textarea {
     width: 100%;
@@ -36,3 +35,7 @@
     border-radius: 5px;
     margin: 10px;
   }
+
+  .product-image::-webkit-file-upload-button {
+    cursor: pointer;
+}
