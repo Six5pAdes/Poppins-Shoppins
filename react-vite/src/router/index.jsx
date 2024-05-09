@@ -7,6 +7,7 @@ import ProductDetails from '../components/ProductPages/SingleProduct';
 import CreateProduct from '../components/ProductPages/ProductForm';
 import ManageProduct from '../components/ProductPages/ManageProduct';
 import ProductUpdate from '../components/ProductPages/EditProduct';
+import UserPage from '../components/Profile/ProfileInfo';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/products/:productId/edit",
         element: <ProductUpdate />
+      },
+      {
+        path: "/users/:userId",
+        element: <UserPage />
       },
       // {
       //   path: "/cart",

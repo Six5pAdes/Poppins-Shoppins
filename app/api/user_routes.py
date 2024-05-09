@@ -29,7 +29,7 @@ def user(id):
 
 
 # update user information
-@user_routes.route('/<int:id>', methods=['PUT'])
+@user_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def update_user(id):
     user = User.query.get(id)

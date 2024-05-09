@@ -10,7 +10,7 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
     const currentUser = useSelector((state) => state.session.user);
     const [reviewText, setReviewText] = useState(initialReview);
     const [rating, setRating] = useState(initialRating);
-    const [hoverRating, setHoverRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(initialRating);
     const [errors, setErrors] = useState("");
     const { closeModal } = useModal();
 
@@ -28,7 +28,7 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
 
         const updatedReview = {
             body: reviewText,
-            rating: rating,
+            rating: hoverRating,
             product_id: productId,
             user_id: currentUser.id
         };
@@ -91,6 +91,7 @@ const UpdateReview = ({ reviewId, initialReview = '', initialRating, productId }
                 >
                     Submit Review
                 </button>
+                <button onClick={closeModal} type="button" className="success">Cancel Review</button>
             </form>
         </div>
     );

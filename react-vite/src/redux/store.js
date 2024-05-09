@@ -8,9 +8,11 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import productReducer from "./product";
 import reviewReducer from "./review";
+import profileReducer from "./profile";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  user: profileReducer,
   products: productReducer,
   reviews: reviewReducer,
 });

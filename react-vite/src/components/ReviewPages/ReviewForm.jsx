@@ -108,6 +108,7 @@ const CreateReview = ({ productId }) => {
                 >
                     Submit Review
                 </button>
+                <button onClick={closeModal} type="button" className="success">Cancel Review</button>
             </form>
         </div>
     );

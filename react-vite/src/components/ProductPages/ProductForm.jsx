@@ -29,7 +29,7 @@ const CreateProduct = () => {
             formData.append("description", description);
 
             const product = await dispatch(newProductThunk(formData));
-            console.log('LOOK HERE', product)
+            // console.log('LOOK HERE', product)
             navigate(`/products/${product?.id}`);
         }
     }
@@ -67,9 +67,9 @@ const CreateProduct = () => {
         return (!name || !image || !price || !description)
     }
 
-    // const handleCancel = () => {
-    //     history.goBack()
-    // }
+    const handleCancel = () => {
+        navigate(-1)
+    }
 
     return (
         <div id="product-new">
@@ -122,12 +122,14 @@ const CreateProduct = () => {
                     </label>
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
                 </div>
+                <div id="button-contain">
                 {disabledButton() ?
                     <button className="disabled" type="submit">Create Product</button>
                     :
                     <button className="success" type="submit">Create Product</button>
                 }
-                {/* <button id="cancel-button" type="button" onClick={handleCancel}>Cancel Creation</button> */}
+                <button className="success" type="button" onClick={handleCancel}>Cancel Creation</button>
+                </div>
             </form>
         </div>
     )

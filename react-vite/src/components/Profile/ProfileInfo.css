@@ -1,0 +1,52 @@
+.profile-contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    margin: 0;
+    padding: 0;
+}
+
+#prof-info {
+    display: flex;
+    justify-content: center;
+}
+
+#prof-stuff {
+    border: 3px solid black;
+    width: fit-content;
+    margin: 5px;
+    padding: 5px;
+}
+
+.prof-piece {
+    font-size: larger;
+    font-weight: bolder;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.prof-piece, .info {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.info {
+    font-size: small;
+    white-space: nowrap;
+    text-align: right;
+}
+
+button {
+    font-size: 15px;
+    margin: 10px;
+    height: 100%;
+    width: auto;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* margin: 2rem; */
+    padding: 10px;
+    background-color: #c6286d;
+}

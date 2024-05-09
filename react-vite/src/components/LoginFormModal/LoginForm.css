@@ -49,6 +49,7 @@
     width: auto;
     height: 50px;
     padding: 10px;
+    border-radius: 10px;
     color: white;
     background-color: #c6286d;
     font-weight: bolder;

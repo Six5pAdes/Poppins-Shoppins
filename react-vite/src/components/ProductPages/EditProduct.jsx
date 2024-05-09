@@ -38,6 +38,7 @@ const ProductUpdate = () => {
     useEffect(() => {
         if (productId) dispatch(loadOneProductThunk(productId))
     }, [dispatch, productId])
+
     useEffect(() => {
         if (currProduct) {
             setName(currProduct.name)
@@ -65,6 +66,10 @@ const ProductUpdate = () => {
 
     const disabledButton = () => {
         return (!name || !price || !description)
+    }
+
+    const handleCancel = () => {
+        navigate(-1)
     }
 
     return (
@@ -119,11 +124,15 @@ const ProductUpdate = () => {
                     </label>
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
                 </div>
-                {disabledButton() ?
-                    <button className="disabled" type="submit">Update Product</button>
-                    :
-                    <button className="success" type="submit">Update Product</button>
-                }            </form>
+                <div id="button-contain">
+                    {disabledButton() ?
+                        <button className="disabled" type="submit">Create Product</button>
+                        :
+                        <button className="success" type="submit">Create Product</button>
+                    }
+                    <button className="success" type="button" onClick={handleCancel}>Cancel Creation</button>
+                </div>
+            </form>
         </div>
     )
 }

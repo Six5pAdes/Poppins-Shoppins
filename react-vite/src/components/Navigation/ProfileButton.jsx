@@ -61,9 +61,9 @@ function ProfileButton() {
             <>
               <div className="menu-item"
                 onClick={() => {
-                  alert("New feature coming soon")
-                  // navigate(`/users`)
-                  // closeMenu();
+                  // alert("New feature coming soon")
+                  navigate(`/users/${user.id}`)
+                  closeMenu();
                 }}>
                 Manage {user.email}
               </div>

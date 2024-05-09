@@ -39,3 +39,8 @@
   .product-image::-webkit-file-upload-button {
     cursor: pointer;
 }
+
+#button-contain {
+  display: flex;
+  justify-content: space-evenly;
+}
