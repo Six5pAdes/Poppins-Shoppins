@@ -25,6 +25,7 @@ const UserPage = () => {
     const handleDeleteProfile = toInt => {
         const deletedUser = dispatch(deleteUserThunk(toInt));
         if (deletedUser) {
+            dispatch(sessionActions.thunkLogout());
             navigate('/')
             closeModal()
         }
@@ -69,8 +70,8 @@ const UserPage = () => {
                                 <div id='confirm-delete'>
                                     <h2>Confirm Delete</h2>
                                     <span>Are you sure you want to remove this user?</span>
-                                    <button id='delete-complete' type='button' onClick={() => handleDeleteProfile(user.id)}>Yes (Delete User)</button>
-                                    <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep User)</button>
+                                    <button className='success' type='button' onClick={() => handleDeleteProfile(user.id)}>Delete User</button>
+                                    <button className='success' type='button' onClick={closeModal}>Keep User</button>
                                 </div>
                             )}
                         />

@@ -123,12 +123,12 @@ const CreateProduct = () => {
                     {submit && errors.description && <p className="err-msg">{errors.description}</p>}
                 </div>
                 <div id="button-contain">
-                {disabledButton() ?
-                    <button className="disabled" type="submit">Create Product</button>
-                    :
-                    <button className="success" type="submit">Create Product</button>
-                }
-                <button className="success" type="button" onClick={handleCancel}>Cancel Creation</button>
+                    {disabledButton() ?
+                        <button className="disabled" type="submit">Create Product</button>
+                        :
+                        <button className="success" type="submit">Create Product</button>
+                    }
+                    <button className="success" type="button" onClick={handleCancel}>Cancel Creation</button>
                 </div>
             </form>
         </div>

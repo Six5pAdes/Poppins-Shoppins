@@ -64,7 +64,7 @@ export default function profileReducer(state = initialState, action) {
     case EDIT_USER:
       return {
         ...state,
-        user: action.payload,
+        userProfile: action.user,
       };
     case DELETE_USER:
       newState = { ...state };
