@@ -5,7 +5,7 @@ import Layout from './Layout';
 import Landing from '../components/Landing/Landing';
 import ProductDetails from '../components/ProductPages/SingleProduct';
 import CreateProduct from '../components/ProductPages/ProductForm';
-import ManageProduct from '../components/ProductPages/ManageProduct';
+// import ManageProduct from '../components/ProductPages/ManageProduct';
 import ProductUpdate from '../components/ProductPages/EditProduct';
 import UserPage from '../components/Profile/ProfileInfo';
 
@@ -21,10 +21,10 @@ export const router = createBrowserRouter([
         path: "/products/:productId",
         element: <ProductDetails />
       },
-      {
-        path: "/products/current",
-        element: <ManageProduct />
-      },
+      // {
+      //   path: "/products/current",
+      //   element: <ManageProduct />
+      // },
       {
         path: "/new-product",
         element: <CreateProduct />

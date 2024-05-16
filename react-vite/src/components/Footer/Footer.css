@@ -1,0 +1,44 @@
+.footer-container {
+    background-color: #d63d0a;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: vh100;
+}
+
+.contactme-txt {
+    margin: 5px;
+    color: whitesmoke
+}
+
+.gitlink, a {
+    text-decoration: none;
+    color: whitesmoke;
+    margin-bottom: 5px;
+}
+
+.gitlink:hover, a:hover {
+    text-decoration: underline;
+}
+
+.icons-container {
+    margin: 0;
+    display: flex;
+}
+
+.footer-icons-link {
+    justify-content: center;
+    align-self: center;
+    width: fit-content;
+    margin: 5px 25px;
+    padding: 5px;
+    background-color: #e77d7d;
+}
+
+
+.foot-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

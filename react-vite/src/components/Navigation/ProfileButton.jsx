@@ -71,15 +71,6 @@ function ProfileButton() {
               <div
                 className="menu-item"
                 onClick={() => {
-                  navigate(`/products/current`);
-                  closeMenu();
-                }}>
-                Manage Products
-              </div>
-              <hr className="profile-divider" />
-              <div
-                className="menu-item"
-                onClick={() => {
                   navigate(`/new-product`);
                   closeMenu();
                 }}>

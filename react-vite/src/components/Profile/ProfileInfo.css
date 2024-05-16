@@ -1,7 +1,7 @@
 .profile-contain {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
+    align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -12,6 +12,8 @@
 }
 
 #prof-stuff {
+    display: flex;
+    flex-direction: row;
     border: 3px solid black;
     width: fit-content;
     margin: 5px;
@@ -49,4 +51,107 @@ button {
     /* margin: 2rem; */
     padding: 10px;
     background-color: #c6286d;
+}
+
+#curr-title {
+    margin-top: 10px;
+}
+
+#new-product {
+    margin: 1rem;
+    padding: 10px;
+    background-color: #27282d;
+    color:  white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 40px;
+    width: auto;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.product-card {
+    border-radius: 1em;
+    width: 300px;
+    padding: 15px;
+    box-shadow: 2px 2px 3px 3px gray;
+}
+
+.product-img:hover {
+    box-shadow: 2px 2px 3px 3px gray;
+    cursor: pointer;
+  }
+
+#curr-title, #new-product {
+    margin-left: 45px;
+}
+
+.edit-or-delete {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.edit-or-delete button {
+    margin: 2rem;
+    padding: 10px;
+    background-color: #27282d;
+    color:  white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+#update-btn, .product-price {
+    margin-left: 5px;
+    /* margin-bottom: 5px; */
+}
+
+.product-img {
+    width: 300px;
+    height: 200px;
+    border: 1px solid gray;
+}
+
+#confirm-delete {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    /* max-width: 300px; */
+}
+
+#confirm-delete>h2, span {
+    align-self: center;
+}
+
+#new-product:hover, .edit-or-delete>*:last-child, #update-btn {
+    cursor: pointer;
+}
+
+.button-contain {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    /* align-items: center; */
+    margin: 10px;
+}
+
+.button-group {
+    display: flex;
+}
+
+#logout-but,
+#delete-user-but {
+    margin: 10px; /* Add some space between buttons */
 }
