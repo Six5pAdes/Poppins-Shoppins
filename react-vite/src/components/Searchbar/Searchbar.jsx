@@ -34,7 +34,7 @@ function SearchBar() {
                 return
             }
         }
-        nav(`/error/${searched}`)
+        navigate(`/error/${searched}`)
     }
 
     // id included
