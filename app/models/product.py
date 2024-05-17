@@ -1,5 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from sqlalchemy import Enum
+from sqlalchemy.orm import relationship
+
+
+product_category = Enum('Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous', name='product_category')
 
 
 class Product(db.Model):
@@ -13,7 +18,7 @@ class Product(db.Model):
     name = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
     price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
-    category = db.Column(db.Enum('Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous'), nullable=False)
+    category = db.Column(product_category, nullable=False)
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
