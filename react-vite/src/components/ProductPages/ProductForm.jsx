@@ -11,6 +11,7 @@ const CreateProduct = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
@@ -26,10 +27,10 @@ const CreateProduct = () => {
             formData.append("name", name);
             formData.append("image", image);
             formData.append("price", price);
+            formData.append("category", category);
             formData.append("description", description);
 
             const product = await dispatch(newProductThunk(formData));
-            // console.log('LOOK HERE', product)
             navigate(`/products/${product?.id}`);
         }
     }
@@ -57,14 +58,20 @@ const CreateProduct = () => {
         } else if (isNaN(price) || parseFloat(price) <= 0) {
             valErr.price = "Price must be more than one cent"
         }
+        let product_category = ['Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous']
+        if (!category) {
+            valErr.category = 'Category is required';
+        } else if (!product_category.includes(category)) {
+            valErr.category = 'Please select one of the listed categories.';
+        }
         if (!description.length) {
             valErr.description = "Description is required"
         }
         setErrors(valErr)
-    }, [name, image, description, price])
+    }, [name, image, description, price, category])
 
     const disabledButton = () => {
-        return (!name || !image || !price || !description)
+        return (!name || !image || !price || !description || !category)
     }
 
     const handleCancel = () => {
@@ -111,6 +118,22 @@ const CreateProduct = () => {
                         />
                     </label>
                     {submit && errors.price && <p className="err-msg">{errors.price}</p>}
+                    <label className="product-label">
+                        Category
+                        <select
+                            className="product-inputs"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value='' hidden>Select a Category</option>
+                            <option value='Clothing'>Clothing</option>
+                            <option value='Creativity'>Creativity</option>
+                            <option value='Furniture'>Furniture</option>
+                            <option value='Handmade'>Handmade</option>
+                            <option value='Miscellaneous'>Miscellaneous</option>
+                        </select>
+                    </label>
+                    {submit && errors.category && <p className="err-msg">{errors.category}</p>}
                     <label className="product-label">
                         Description
                         <textarea

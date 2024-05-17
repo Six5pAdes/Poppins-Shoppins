@@ -8,6 +8,7 @@ import CreateProduct from '../components/ProductPages/ProductForm';
 // import ManageProduct from '../components/ProductPages/ManageProduct';
 import ProductUpdate from '../components/ProductPages/EditProduct';
 import UserPage from '../components/Profile/ProfileInfo';
+import Category from '../components/Categories/Category';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/users/:userId",
         element: <UserPage />
+      },
+      {
+        path: "/products/categories/:category",
+        element: <Category />
       },
       // {
       //   path: "/cart",

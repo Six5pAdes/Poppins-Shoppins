@@ -9,6 +9,7 @@ def seed_products():
         name = "Hat Stand",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/hatstand.png",
         price = 79.99,
+        category = "Furniture",
         description = "A towering pole for holding hats and scarves, takes up less space than one would expect.",
         created_at = datetime.now()
     )
@@ -17,6 +18,7 @@ def seed_products():
         name = "Mirror",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/mirror.jpeg",
         price = 49.97,
+        category = "Furniture",
         description = "A rather ornate looking glass, perfect for capturing every possible angle. Your reflection will have a mind of its own, though.",
         created_at = datetime.now()
     )
@@ -25,6 +27,7 @@ def seed_products():
         name = "Houseplant",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/houseplant.jpg",
         price = 228.00,
+        category = "Creativity",
         description = "A lovely piece of flora, always comes in handy for sprucing up a room.",
         created_at = datetime.now()
     )
@@ -33,6 +36,7 @@ def seed_products():
         name = "Lamp",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/lamp.jpg",
         price = 150.80,
+        category = "Furniture",
         description = "Brighten your day with this exquisite lamp, complete with a detailed covering; two light bulbs included.",
         created_at = datetime.now()
     )
@@ -41,6 +45,7 @@ def seed_products():
         name = "Pair of Heels",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/heels.jpg",
         price = 29.99,
+        category = "Clothing",
         description = "A pair of fashionable heels. They are low-heeled, making them practical and easy to wear. They are also so comfortable you will be convinced they are made from magic.",
         created_at = datetime.now()
     )
@@ -49,6 +54,7 @@ def seed_products():
         name = "Hand Mirror",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/handmirror.jpeg",
         price = 9.50,
+        category = "Handmade",
         description = "A smaller mirror for quick self-inspections while on the move.",
         created_at = datetime.now()
     )
@@ -57,6 +63,7 @@ def seed_products():
         name = "Overcoat",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/overcoat.jpeg",
         price = 66.79,
+        category = "Clothing",
         description = "A floor-length coat for special occasions. The cold will never bother you while you are wearing something so elegant.",
         created_at = datetime.now()
     )
@@ -65,6 +72,7 @@ def seed_products():
         name = "Tape Measure",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/tapemeasure.jpeg",
         price = 5.33,
+        category = "Miscellaneous",
         description = "Measure anything that comes to mind, from distances and sizes, to who you are and how you can change, with this tape measure.",
         created_at = datetime.now()
     )
@@ -73,6 +81,7 @@ def seed_products():
         name = "Cloak",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/cloak.jpeg",
         price = 34.99,
+        category = "Clothing",
         description = "A stylish cloak for traveling. It can be folded so many times, you would assume it's become invisible.",
         created_at = datetime.now()
     )
@@ -81,6 +90,7 @@ def seed_products():
         name = "Medicine",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/medicine.jpeg",
         price = 9.95,
+        category = "Miscellaneous",
         description = "A seemingly unappetizing bottle of medicine, its contents change colour and flavour based on the patient. Plus, just a spoonful of sugar helps it go down in a most delightful way.",
         created_at = datetime.now()
     )
@@ -89,6 +99,7 @@ def seed_products():
         name = "Camping Tent",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/tent.jpeg",
         price = 101.98,
+        category = "Handmade",
         description = "A single-person tent that is actually much bigger on the inside. Vital for sports events or being on the run.",
         created_at = datetime.now()
     )
@@ -97,6 +108,7 @@ def seed_products():
         name = "Bookshelf",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/bookshelf.jpeg",
         price = 129.86,
+        category = "Furniture",
         description = "A bookshelf for storing your favorite books. Some are even included to help start your own collection.",
         created_at = datetime.now()
     )
@@ -105,6 +117,7 @@ def seed_products():
         name = "Portrait Frame",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/frame.png",
         price = 59.25,
+        category = "Handmade",
         description = "A life-size portrait frame to help hang photos and paintings. Apparently, it was enchanted to bring its contents to life.",
         created_at = datetime.now()
     )
@@ -113,6 +126,7 @@ def seed_products():
         name = "Alcoholic Drink Starter Kit",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/alcohol.jpeg",
         price = 69.99,
+        category = "Creativity",
         description = "A package filled with an assortment of ingredients for making drinks. Consumption will also change how a person acts. Please contact seller directly for subscription details.",
         created_at = datetime.now()
     )
@@ -121,6 +135,7 @@ def seed_products():
         name = "Sword",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/sword.png",
         price = 500.00,
+        category = "Miscellaneous",
         description = "A blade of unspeakable power, only wieldable by those of genuine heart.",
         created_at = datetime.now()
     )
@@ -129,6 +144,7 @@ def seed_products():
         name = "Umbrella",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/umbrella.png",
         price = 39.99,
+        category = "Handmade",
         description = "Fight off the rain, and fly along the east winds with this umbrella.",
         created_at = datetime.now()
     )
@@ -137,6 +153,7 @@ def seed_products():
         name = "Birdseed Bag",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/tuppence.jpeg",
         price = 0.02,
+        category = "Miscellaneous",
         description = "Feed the birds, tuppence a bag. Yeah, for real life. This has not changed in 114 years, and it will never change.",
         created_at = datetime.now()
     )
@@ -145,6 +162,7 @@ def seed_products():
         name = "Ceramic Bowl",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/bowl.jpg",
         price = 299.99,
+        category = "Handmade",
         description = "A crack-free piece of china, with artwork so vivid you'll want to jump into its world like it was chalk art.",
         created_at = datetime.now()
     )
@@ -153,6 +171,7 @@ def seed_products():
         name = "Carpet Bag",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/carpetbag.jpg",
         price = 50.00,
+        category = "Handmade",
         description = "While this bag seems to big to carry around, it will fit everything you will need to carry around, guaranteed. Please contact seller for information about other patterns.",
         created_at = datetime.now()
     )
@@ -161,6 +180,7 @@ def seed_products():
         name = "Kite",
         image = "https://poppins-shoppings.s3.us-west-1.amazonaws.com/kite.jpeg",
         price = 4.50,
+        category = "Creativity",
         description = "With tuppence for paper and string, you can have your own set of wings. With your feet on the ground, you're a bird in flight, with your fist holding tight to the string of your kite.",
         created_at = datetime.now()
     )

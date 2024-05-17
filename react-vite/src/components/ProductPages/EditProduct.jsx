@@ -14,6 +14,7 @@ const ProductUpdate = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState(null);
     const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
@@ -28,6 +29,7 @@ const ProductUpdate = () => {
             formData.append("name", name);
             if (image) formData.append("image", image);
             formData.append("price", price);
+            formData.append("category", category);
             formData.append("description", description);
 
             await dispatch(editProductThunk(formData, productId));
@@ -43,6 +45,7 @@ const ProductUpdate = () => {
         if (currProduct) {
             setName(currProduct.name)
             setPrice(currProduct.price)
+            setCategory(currProduct.category)
             setDescription(currProduct.description)
         }
     }, [currProduct])
@@ -58,14 +61,18 @@ const ProductUpdate = () => {
         } else if (isNaN(price) || parseFloat(price) <= 0) {
             valErr.price = "Price must be more than one cent"
         }
+        let product_category = ['Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous']
+        if (!product_category.includes(category)) {
+            valErr.category = 'Please select one of the listed categories.'
+        }
         if (!description?.length) {
             valErr.description = "Description is required"
         }
         setErrors(valErr)
-    }, [name, description, price])
+    }, [name, description, price, category])
 
     const disabledButton = () => {
-        return (!name || !price || !description)
+        return (!name || !price || !description || !category)
     }
 
     const handleCancel = () => {
@@ -101,7 +108,6 @@ const ProductUpdate = () => {
                             onChange={(e) => setImage(e.target.files[0])}
                         />
                     </label>
-                    {submit && errors.address && <p className="err-msg">{errors.address}</p>}
                     <label className="product-label">
                         $ <input
                             type="text"
@@ -113,6 +119,22 @@ const ProductUpdate = () => {
                         />
                     </label>
                     {submit && errors.price && <p className="err-msg">{errors.price}</p>}
+                    <label className="product-label">
+                        Category
+                        <select
+                            className="product-inputs"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value='' hidden>Select a Category</option>
+                            <option value='Clothing'>Clothing</option>
+                            <option value='Creativity'>Creativity</option>
+                            <option value='Furniture'>Furniture</option>
+                            <option value='Handmade'>Handmade</option>
+                            <option value='Miscellaneous'>Miscellaneous</option>
+                        </select>
+                    </label>
+                    {submit && errors.category && <p className="err-msg">{errors.category}</p>}
                     <label className="product-label">
                         Description
                         <textarea
@@ -126,11 +148,11 @@ const ProductUpdate = () => {
                 </div>
                 <div id="button-contain">
                     {disabledButton() ?
-                        <button className="disabled" type="submit">Create Product</button>
+                        <button className="disabled" type="submit">Update Product</button>
                         :
-                        <button className="success" type="submit">Create Product</button>
+                        <button className="success" type="submit">Update Product</button>
                     }
-                    <button className="success" type="button" onClick={handleCancel}>Cancel Creation</button>
+                    <button className="success" type="button" onClick={handleCancel}>Cancel Update</button>
                 </div>
             </form>
         </div>

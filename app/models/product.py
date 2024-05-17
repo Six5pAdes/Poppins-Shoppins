@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from sqlalchemy import ForeignKeyConstraint
 
 
 class Product(db.Model):
@@ -14,6 +13,7 @@ class Product(db.Model):
     name = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
     price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    category = db.Column(db.Enum('Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous'), nullable=False)
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
@@ -30,6 +30,7 @@ class Product(db.Model):
             'name': self.name,
             'image': self.image,
             'price': float(self.price),
+            'category': self.category,
             'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

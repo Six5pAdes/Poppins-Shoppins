@@ -1,6 +1,7 @@
 const LOAD_PRODUCTS = "products/loadProducts";
 const USER_PRODUCTS = "products/loadUserProducts";
 const SINGLE_PRODUCT = "products/loadOneProduct";
+const CATEGORY_PRODUCTS = "products/loadCategoryProducts";
 const CREATE_PRODUCT = "products/createProduct";
 const UPDATE_PRODUCT = "products/updateProduct";
 const DELETE_PRODUCT = "products/deleteProduct";
@@ -16,6 +17,11 @@ const loadUserProducts = (products) => ({
 const loadOneProduct = (product) => ({
   type: SINGLE_PRODUCT,
   product,
+});
+const loadCategoryProducts = (category, products) => ({
+  type: CATEGORY_PRODUCTS,
+  category,
+  products,
 });
 const createProduct = (product) => ({
   type: CREATE_PRODUCT,
@@ -52,6 +58,20 @@ export const loadOneProductThunk = (productId) => async (dispatch) => {
     const data = await res.json();
     dispatch(loadOneProduct(data));
     return data;
+  }
+};
+export const loadCategoryProductsThunk = (category) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/products/categories/${category}`);
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(loadCategoryProducts(category, data.Products));
+      return data;
+    } else {
+      throw new Error("Category not found");
+    }
+  } catch (error) {
+    console.error("Failed to load category products:", error);
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {
@@ -114,6 +134,12 @@ export default function productReducer(state = initialState, action) {
         newState[product.id] = product;
       });
       return newState;
+    }
+    case CATEGORY_PRODUCTS: {
+      return {
+        ...state,
+        [action.category]: action.products,
+      };
     }
     case CREATE_PRODUCT: {
       return {

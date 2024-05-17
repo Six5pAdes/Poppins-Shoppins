@@ -31,6 +31,7 @@ def create_product():
             name=form.data['name'],
             image=image_upload_result['url'],
             price=form.data['price'],
+            category=form.data['category'],
             description=form.data['description'],
             created_at=form.data['created_at']
         )
@@ -61,6 +62,7 @@ def updateProduct(productId):
         product.user_id = data['user_id']
         product.name = data['name']
         product.price = data['price']
+        product.category = data['category']
         product.description = data['description']
         product.created_at = data['created_at']
 
@@ -92,3 +94,10 @@ def getUserProducts():
     products = Product.query.filter(Product.user_id == current_user.id).all()
 
     return {"Products":[product.to_dict() for product in products]}
+
+# getting products by category
+@product_routes.route('/categories/<string:category>')
+def productsByCategory(category):
+    products = Product.query.filter(Product.category.ilike(category)).all()
+    response = {"Products": [product.to_dict() for product in products]}
+    return response
