@@ -5,21 +5,69 @@ import { useParams } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import CreateReview from '../ReviewPages/ReviewForm';
 import ProductReviews from '../ReviewPages/ReviewList';
+import { addProductToCartThunk, updateItemQuantityThunk } from '../../redux/cartItem';
+import { createCartThunk } from '../../redux/cart';
+import Cart from '../Carts/Cart';
 import './SingleProduct.css'
 
 const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
-    const product = useSelector(state => state.products[productId])
-    const userId = useSelector(state => state.session.user)
+    const product = useSelector(state => state.products)
+    const users = useSelector(state => state.user.users) || []
+    const userId = useSelector(state => state.session.user?.id)
 
     const reviews = useSelector((state) => state.reviews);
     const [avgRating, setAvgRating] = useState(null);
     const [numReviews, setNumReviews] = useState(0);
 
+    const allCarts = useSelector(state => state.cart.Cart);
+    const [quantity, setQuantity] = useState('1')
+
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
     }, [dispatch, productId])
+
+    let activeCartObj
+    if (allCarts?.length) {
+        for (let cart of allCarts) {
+            if (cart?.is_ordered == false) {
+                activeCartObj = cart
+            }
+        }
+    }
+
+    let findInCart = activeCartObj?.cart_items?.find(item => item?.product_id == productId)
+
+    const addToCart = async (productId) => {
+        let addItem = {
+            cart_id: activeCartObj?.id,
+            product_id: productId,
+            quantity: quantity
+        }
+        if (activeCartObj && findInCart) {
+            let updateQty = {
+                product_id: productId,
+                quantity: (parseInt(findInCart?.quantity) + parseInt(quantity))
+            }
+            return await dispatch(updateItemQuantityThunk(updateQty, findInCart?.id))
+        }
+        if (activeCartObj) {
+            await dispatch(addProductToCartThunk(addItem, activeCartObj?.id))
+        }
+        else {
+            const createCart = await dispatch(createCartThunk())
+            const newCartId = createCart?.id;
+            await dispatch(addProductToCartThunk(addItem, newCartId))
+        }
+    }
+
+    let seller
+    for (let user of users) {
+        if (user?.id == product[productId]?.user_id) {
+            seller = user
+        }
+    }
 
     useEffect(() => {
         const productReviews = Object.values(reviews).filter(
@@ -68,12 +116,30 @@ const ProductDetails = () => {
                     <p className="price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
-                    {/* <p className="product-seller">
-                        Uploaded by: {product.user && product.user.first_name} {product.user && product.user.last_name}
-                    </p> */}
+                    <p className="product-seller">
+                        Uploaded by: {seller && seller?.first_name} {seller && seller?.last_name}
+                    </p>
                     <div className="actions">
                         <button className="add-to-here" onClick={() => alert("Wishlist unavailable, check again later.")}>Add to Wishlist</button>
-                        <button className="add-to-here" onClick={() => alert("Cart unavailable, check again later.")}>Add to Cart</button>
+                        <div className='cart'>
+                            <form className='options-container'>
+                                <select onChange={(e) => setQuantity(e.target.value)} className="select-qty-dropdown">
+                                    <option value='1'>Qty: 1</option>
+                                    <option value='2'>Qty: 2</option>
+                                    <option value='3'>Qty: 3</option>
+                                    <option value='4'>Qty: 4</option>
+                                    <option value='5'>Qty: 5</option>
+                                    <option value='6'>Qty: 6</option>
+                                    <option value='7'>Qty: 7</option>
+                                    <option value='8'>Qty: 8</option>
+                                    <option value='9'>Qty: 9</option>
+                                    <option value='10'>Qty: 10</option>
+                                </select>
+                            </form>
+                            <button className="add-to-here" onClick={() => addToCart(product[productId]?.id)}>Add to Cart
+                                <Cart />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

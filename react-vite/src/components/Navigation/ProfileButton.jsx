@@ -80,9 +80,9 @@ function ProfileButton() {
               <div
                 className="menu-item"
                 onClick={() => {
-                  alert("New feature coming soon")
-                  // navigate(`/cart`);
-                  // closeMenu();
+                  // alert("New feature coming soon")
+                  navigate(`/cart`);
+                  closeMenu();
                 }}>
                 Manage Cart
               </div>

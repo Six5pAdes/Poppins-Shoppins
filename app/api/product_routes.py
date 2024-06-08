@@ -4,7 +4,9 @@ from flask_login import current_user
 from .aws import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from ..forms.product_form import ProductForm
 
+
 product_routes = Blueprint('product', __name__ )
+
 
 # getting all products
 @product_routes.route('/')
@@ -16,7 +18,7 @@ def getProducts():
 
 # create a product
 @product_routes.route('/new-product', methods=['POST'])
-def create_product():
+def createProduct():
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -39,6 +41,7 @@ def create_product():
         db.session.commit()
         return new_product.to_dict()
     return form.errors
+
 
 # update a product
 @product_routes.route('/<int:productId>/edit', methods=['PUT'])
@@ -70,6 +73,7 @@ def updateProduct(productId):
         return product.to_dict()
     return form.errors
 
+
 # delete a product
 @product_routes.route('/<int:productId>', methods=['DELETE'])
 def deleteProduct(productId):
@@ -82,11 +86,13 @@ def deleteProduct(productId):
     return product.to_dict()
                                 # if yes, replace with line 75
 
+
 # getting one product
 @product_routes.route('/<int:productId>')
 def oneProduct(productId):
     product = Product.query.get(productId)
     return product.to_dict()
+
 
 # getting current users products
 @product_routes.route('/current')
@@ -94,6 +100,7 @@ def getUserProducts():
     products = Product.query.filter(Product.user_id == current_user.id).all()
 
     return {"Products":[product.to_dict() for product in products]}
+
 
 # getting products by category
 @product_routes.route('/categories/<string:category>')

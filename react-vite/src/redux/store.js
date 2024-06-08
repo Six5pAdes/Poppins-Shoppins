@@ -9,12 +9,16 @@ import sessionReducer from "./session";
 import productReducer from "./product";
 import reviewReducer from "./review";
 import profileReducer from "./profile";
+import cartReducer from "./cart";
+import cartItemReducer from "./cartItem";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   user: profileReducer,
   products: productReducer,
   reviews: reviewReducer,
+  cart: cartReducer,
+  cartItems: cartItemReducer,
 });
 
 let enhancer;

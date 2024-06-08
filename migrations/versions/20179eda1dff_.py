@@ -9,6 +9,11 @@ from alembic import op
 import sqlalchemy as sa
 
 
+import os
+environment = os.environ.get('FLASK_ENV')
+SCHEMA = os.environ.get('SCHEMA')
+
+
 # revision identifiers, used by Alembic.
 revision = '20179eda1dff'
 down_revision = None
@@ -59,7 +64,32 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('carts',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('is_ordered', sa.Boolean(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('cart_items',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('cart_id', sa.Integer(), nullable=False),
+    sa.Column('product_id', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['cart_id'], ['carts.id'], ),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
+    if environment == 'production' and SCHEMA:
+        op.execute(f'ALTER TABLE {SCHEMA}.users OWNER TO {SCHEMA};')
+        op.execute(f'ALTER TABLE {SCHEMA}.products OWNER TO {SCHEMA};')
+        op.execute(f'ALTER TABLE {SCHEMA}.reviews OWNER TO {SCHEMA};')
+        op.execute(f'ALTER TABLE {SCHEMA}.carts OWNER TO {SCHEMA};')
 
 
 def downgrade():
