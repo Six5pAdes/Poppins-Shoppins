@@ -13,7 +13,7 @@ import './SingleProduct.css'
 const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
-    const product = useSelector(state => state.products)
+    const product = useSelector(state => state.products[productId])
     const users = useSelector(state => state.user.users) || []
     const userId = useSelector(state => state.session.user?.id)
 
@@ -136,8 +136,12 @@ const ProductDetails = () => {
                                     <option value='10'>Qty: 10</option>
                                 </select>
                             </form>
-                            <button className="add-to-here" onClick={() => addToCart(product[productId]?.id)}>Add to Cart
-                                <Cart />
+                            <button className="add-to-here" onClick={() => addToCart(product[productId]?.id)}>
+                                <OpenModalButton
+                                    className='add-cart-modal'
+                                    itemText='Add to Cart'
+                                    modalComponent={<Cart />}
+                                />
                             </button>
                         </div>
                     </div>
