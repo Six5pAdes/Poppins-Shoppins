@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-class Favorite(db.Model):
-    __tablename__ = 'favorites'
+class Wishlist(db.Model):
+    __tablename__ = 'wishlists'
 
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
@@ -12,8 +12,8 @@ class Favorite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
-    user = db.relationship('User', back_populates='favorites')
-    product = db.relationship('Product', back_populates='favorites')
+    user = db.relationship('User', back_populates='wishlists')
+    product = db.relationship('Product', back_populates='wishlists')
 
     def to_dict(self):
         return {

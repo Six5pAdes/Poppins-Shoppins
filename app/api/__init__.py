@@ -4,4 +4,4 @@ from .product_routes import product_routes
 from .review_routes import review_routes
 from .cart_routes import cart_routes
 from .order_history_routes import order_history_routes
-from .favorite_routes import favorite_routes
+from .wishlist_routes import wishlist_routes

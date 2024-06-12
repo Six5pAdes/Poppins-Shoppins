@@ -1,29 +1,29 @@
-from app.models import db, Favorite, environment, SCHEMA
+from app.models import db, Wishlist, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
-def seed_favorites():
-    fav1 = Favorite(
+def seed_wishlists():
+    fav1 = Wishlist(
         product_id = 2,
         user_id = "1"
     )
-    fav2 = Favorite(
+    fav2 = Wishlist(
         product_id = 13,
         user_id = "1"
     )
-    fav3 = Favorite(
+    fav3 = Wishlist(
         product_id = 11,
         user_id = "1"
     )
-    fav4 = Favorite(
+    fav4 = Wishlist(
         product_id = 20,
         user_id = "1"
     )
-    fav5 = Favorite(
+    fav5 = Wishlist(
         product_id = 14,
         user_id = "1"
     )
-    fav6 = Favorite(
+    fav6 = Wishlist(
         product_id = 8,
         user_id = "1"
     )
@@ -38,10 +38,10 @@ def seed_favorites():
     db.session.commit()
 
 
-def undo_favorites():
+def undo_wishlists():
    if environment == "production":
-       db.session.execute(f"TRUNCATE table {SCHEMA}.favorites RESTART IDENTITY CASCADE;")
+       db.session.execute(f"TRUNCATE table {SCHEMA}.wishlists RESTART IDENTITY CASCADE;")
    else:
-       db.session.execute(text("DELETE FROM favorites"))
+       db.session.execute(text("DELETE FROM wishlists"))
 
    db.session.commit()

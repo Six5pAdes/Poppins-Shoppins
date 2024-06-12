@@ -11,6 +11,8 @@ import reviewReducer from "./review";
 import profileReducer from "./profile";
 import cartReducer from "./cart";
 import cartItemReducer from "./cartItem";
+import historyReducer from "./history";
+import wishlistReducer from "./wishlist";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   reviews: reviewReducer,
   cart: cartReducer,
   cartItems: cartItemReducer,
+  history: historyReducer,
+  wishlist: wishlistReducer,
 });
 
 let enhancer;
