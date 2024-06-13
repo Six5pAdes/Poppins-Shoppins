@@ -18,7 +18,7 @@ const ProductDetails = () => {
     const product = useSelector(state => state.products[productId])
     // const users = useSelector(state => state.user.users) || []
     const userId = useSelector(state => state.session.user)
-    const wishlists = useSelector(state => state.wishlists)
+    const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
     const reviews = useSelector((state) => state.reviews);
     const [avgRating, setAvgRating] = useState(null);
@@ -91,21 +91,21 @@ const ProductDetails = () => {
         setRemoveWishlist(false)
     }, [dispatch, isWishlist, removeWishlist])
 
-    const wishlistIds = wishlists?.map(ele => ele.instrument_id)
+    const wishlistIds = wishlists ? wishlists?.map(ele => ele.product_id) : []
 
     const handleFav = (productId) => {
         if (wishlistIds.includes(productId)) {
-            const favToRemove = wishlists.filter(fav => fav.product_id == productId)[0]
-            dispatch(deleteWishlistThunk(favToRemove.id))
-            alert(`Successfully removed ${product.name} from wishlists!`)
-            setIsWishlist(true)
+            const favToRemove = wishlists.filter(fav => fav.product_id == productId)[0];
+            dispatch(deleteWishlistThunk(favToRemove.id));
+            alert(`Successfully removed ${product.name} from wishlists!`);
+            setIsWishlist(true);
         } else {
-            const newFav = { "product_id": productId }
-            dispatch(addToWishlistsThunk(newFav))
-            alert(`Successfully added ${product.name} to wishlists!`)
-            setRemoveWishlist(true)
+            const newFav = { "product_id": productId };
+            dispatch(addToWishlistsThunk(newFav));
+            alert(`Successfully added ${product.name} to wishlists!`);
+            setRemoveWishlist(true);
         }
-    }
+    };
 
     if (!product) {
         return <h1>✨ Loading ✨</h1>;

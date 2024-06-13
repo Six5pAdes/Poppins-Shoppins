@@ -1,9 +1,11 @@
-.profile-contain {
+.profile-contain, #this-product, #wish-contain {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+    justify-content: center;
+    border: 3px solid black;
+    margin: 10px;
+    padding: 20px;
+    width: auto;
 }
 
 #prof-info {
@@ -14,7 +16,6 @@
 #prof-stuff {
     display: flex;
     flex-direction: row;
-    border: 3px solid black;
     width: fit-content;
     margin: 5px;
     padding: 5px;
@@ -24,7 +25,10 @@
     font-size: larger;
     font-weight: bolder;
     margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     white-space: nowrap;
+    border: 2px dotted black;
 }
 
 .prof-piece, .info {
@@ -75,14 +79,14 @@ button {
     row-gap: 40px;
     width: auto;
     margin: 0 auto;
-    padding-top: 20px;
-    padding-left: 20px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
 .product-card {
     border-radius: 1em;
     width: 300px;
+    margin: 5px;
     padding: 15px;
     box-shadow: 2px 2px 3px 3px gray;
 }
