@@ -27,7 +27,7 @@ def history_by_user():
     products = Product.query.filter(Product.id.in_(product_id_list)).all()
     product_list = [product.to_dict() for product in products]
 
-    return {'UserOrderHistory': curr_history_list, 'HistoryInst': product_list }, 200
+    return {'UserOrderHistory': curr_history_list, 'HistoryProd': product_list }, 200
 
 
 # add to history

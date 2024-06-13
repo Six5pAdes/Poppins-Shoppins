@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   cartItems: cartItemReducer,
   history: historyReducer,
-  wishlist: wishlistReducer,
+  wishlists: wishlistReducer,
 });
 
 let enhancer;

@@ -17,7 +17,7 @@ def fav_by_user():
     products = Product.query.filter(Product.id.in_(product_id_list)).all()
     product_list = [products.to_dict() for product in products]
 
-    return {'MyWishlists': wishlist_list, 'FavInst': product_list}, 200
+    return {'MyWishlists': wishlist_list, 'WishProd': product_list}, 200
 
 
 # add to wishlist

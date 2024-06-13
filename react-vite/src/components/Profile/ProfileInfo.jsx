@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfile'
 import { loadUserProductsThunk, deleteProductThunk } from '../../redux/product'
+import { getWishlistsThunk } from '../../redux/wishlist'
 import './ProfileInfo.css'
 
 const UserPage = () => {
@@ -20,9 +21,11 @@ const UserPage = () => {
     const products = useSelector(state => state.products)
     // const userId = useSelector(state => state.session.user ? state.session.user.id : null)
     const userProducts = Object.values(products).filter(product => product.user_id === parseInt(userId))
+    const wishlist = useSelector(state => state.wishlists?.WishProd)
 
     useEffect(() => {
         dispatch(loadUserProductsThunk())
+        dispatch(getWishlistsThunk())
     }, [dispatch])
 
     if (!userId) navigate('/')
@@ -77,7 +80,7 @@ const UserPage = () => {
                     )} />
             </section>
             <section id='this-product'>
-                <h1 id='curr-title'>Your Products</h1>
+                <h1 id='curr-title'>My Products</h1>
                 <button type='button' id='new-product' onClick={() => navigate('/new-product')}>Create a New Product</button>
                 <br />
                 <ul id='products'>
@@ -111,6 +114,17 @@ const UserPage = () => {
                         </div>
                     ))}
                 </ul>
+            </section>
+            <section id='wish-contain'>
+                <h1 id='wish-title'>My Wishlist</h1>
+                <div className='wishlist-contain'>
+                    {wishlist?.map((wishlist) => (
+                        <div key={wishlist.id} className='wishlist-item'>
+                            <p>{wishlist.product.name}</p>
+                            <button onClick={() => navigate(`/products/${wishlist.product.id}`)}>View Product</button>
+                        </div>
+                    ))}
+                </div>
             </section>
             <section className='button-contain'>
                 <div className='button-group'>
