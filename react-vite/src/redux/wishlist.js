@@ -16,22 +16,22 @@ const deleteWishlist = (wishlistId) => ({
 });
 
 export const getWishlistsThunk = () => async (dispatch) => {
-  const res = await fetch("/api/wishlists");
+  const res = await fetch("/api/wishlist/current");
   if (res.ok) {
-    const wishlists = await res.json();
-    dispatch(loadWishlists(wishlists));
-    return wishlists;
+    const data = await res.json();
+    dispatch(loadWishlists(data.MyWishlists));
+    return data;
   }
 };
 export const addToWishlistsThunk = (newWishlist) => async (dispatch) => {
-  const res = await fetch("/api/wishlists/new", {
+  const res = await fetch("/api/wishlist/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newWishlist),
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(addToWishlists(data));
+    dispatch(addToWishlists(data.wishlist));
     return data;
   }
 };
@@ -45,20 +45,25 @@ export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
   }
 };
 
-const initialState = {};
+const initialState = {
+  MyWishlists: [],
+};
 
 export default function wishlistReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_WISHLISTS: {
-      return { ...state, ...action.wishlists };
+      return { ...state, MyWishlists: action.wishlists };
     }
     case ADD_TO_WISHLISTS: {
-      return { ...state, ...action.newWishlist };
+      return { ...state, MyWishlists: [...state.MyWishlists, action.wishlist] };
     }
     case DELETE_WISHLIST: {
-      const newState = { ...state };
-      delete newState[action.wishlistId];
-      return newState;
+      return {
+        ...state,
+        MyWishlists: state.MyWishlists.filter(
+          (wishlist) => wishlist.id !== action.wishlistId
+        ),
+      };
     }
     default:
       return state;

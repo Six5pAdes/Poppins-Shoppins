@@ -14,10 +14,9 @@ import './SingleProduct.css'
 const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
-    const session = useSelector(state => state.session)
     const product = useSelector(state => state.products[productId])
     // const users = useSelector(state => state.user.users) || []
-    const userId = useSelector(state => state.session.user)
+    const userId = useSelector(state => state.session.users)
     const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
     const reviews = useSelector((state) => state.reviews);
@@ -32,9 +31,6 @@ const ProductDetails = () => {
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
     }, [dispatch, productId])
-
-    const allUsers = session.users
-    const seller = allUsers?.find(ele => ele.id == product.user_id)
 
     useEffect(() => {
         const productReviews = Object.values(reviews).filter(
@@ -68,22 +64,21 @@ const ProductDetails = () => {
         let addItem = {
             cart_id: activeCartObj?.id,
             product_id: productId,
-        }
+        };
         if (activeCartObj && findInCart) {
             let updateQty = {
                 product_id: productId,
-            }
-            return await dispatch(updateItemQuantityThunk(updateQty, findInCart?.id))
+            };
+            return await dispatch(updateItemQuantityThunk(updateQty, findInCart?.id));
         }
         if (activeCartObj) {
-            await dispatch(addProductToCartThunk(addItem, activeCartObj?.id))
-        }
-        else {
-            const createCart = await dispatch(createCartThunk())
+            await dispatch(addProductToCartThunk(addItem, activeCartObj?.id));
+        } else {
+            const createCart = await dispatch(createCartThunk());
             const newCartId = createCart?.id;
-            await dispatch(addProductToCartThunk(addItem, newCartId))
+            await dispatch(addProductToCartThunk(addItem, newCartId));
         }
-    }
+    };
 
     useEffect(() => {
         dispatch(getWishlistsThunk())
@@ -137,9 +132,6 @@ const ProductDetails = () => {
                     <p className="price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
-                    <p className="product-seller">
-                        Uploaded by: {seller && seller?.first_name} {seller && seller?.last_name}
-                    </p>
                     <div className="actions">
                         <button className="add-to-here" onClick={() =>
                             handleFav(product?.id)}
@@ -147,7 +139,7 @@ const ProductDetails = () => {
                         >Add to Wishlist
                         </button>
                         <div className='cart'>
-                            <button className="add-to-here" onClick={() => addToCart(product[productId]?.id)}>
+                            <button className="add-to-here" onClick={() => addToCart(product?.id)}>
                                 {/* <OpenModalButton
                                     className='add-cart-modal'
                                     itemText='Add to Cart'
@@ -159,7 +151,7 @@ const ProductDetails = () => {
                 </div>
             </div>
             <div className="reviews">
-                {userId && product.user_id !== userId.id && (
+                {userId && product.user_id !== userId && (
                     <OpenModalButton
                         buttonText="Write a Review"
                         buttonId="writeReviewButton"

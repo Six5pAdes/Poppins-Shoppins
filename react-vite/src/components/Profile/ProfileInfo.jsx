@@ -7,7 +7,8 @@ import { useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfile'
 import { loadUserProductsThunk, deleteProductThunk } from '../../redux/product'
-import { getWishlistsThunk } from '../../redux/wishlist'
+import Wishlist from '../Wishlists/Wishlist'
+// import { getWishlistsThunk } from '../../redux/wishlist'
 import './ProfileInfo.css'
 
 const UserPage = () => {
@@ -21,11 +22,11 @@ const UserPage = () => {
     const products = useSelector(state => state.products)
     // const userId = useSelector(state => state.session.user ? state.session.user.id : null)
     const userProducts = Object.values(products).filter(product => product.user_id === parseInt(userId))
-    const wishlist = useSelector(state => state.wishlists?.WishProd)
+    // const wishlist = useSelector(state => state.wishlists?.WishProd)
 
     useEffect(() => {
         dispatch(loadUserProductsThunk())
-        dispatch(getWishlistsThunk())
+        // dispatch(getWishlistsThunk())
     }, [dispatch])
 
     if (!userId) navigate('/')
@@ -56,6 +57,7 @@ const UserPage = () => {
     return (
         <>
             <section className='profile-contain'>
+                <h1 id='curr-title'>About Me</h1>
                 <div id='prof-info'>
                     <div id='prof-stuff'>
                         <div className='prof-piece'>First Name:
@@ -116,7 +118,7 @@ const UserPage = () => {
                 </ul>
             </section>
             <section id='wish-contain'>
-                <h1 id='wish-title'>My Wishlist</h1>
+                {/* <h1 id='wish-title'>My Wishlist</h1>
                 <div className='wishlist-contain'>
                     {wishlist?.map((wishlist) => (
                         <div key={wishlist.id} className='wishlist-item'>
@@ -124,7 +126,8 @@ const UserPage = () => {
                             <button onClick={() => navigate(`/products/${wishlist.product.id}`)}>View Product</button>
                         </div>
                     ))}
-                </div>
+                </div> */}
+                <Wishlist />
             </section>
             <section className='button-contain'>
                 <div className='button-group'>

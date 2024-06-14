@@ -1,0 +1,32 @@
+.wish-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 40px;
+    width: auto;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.product-card {
+    border-radius: 1em;
+    width: 300px;
+    margin: 5px;
+    padding: 15px;
+    box-shadow: 2px 2px 3px 3px gray;
+}
+
+.product-img {
+    width: 300px;
+    height: 200px;
+    border: 1px solid gray;
+}
+
+.product-img:hover {
+    box-shadow: 2px 2px 3px 3px gray;
+    cursor: pointer;
+  }
+
+#curr-title {
+    margin-left: 45px;
+}
