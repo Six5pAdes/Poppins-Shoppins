@@ -1,35 +1,39 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { loadOneProductThunk } from '../../redux/product';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import CreateReview from '../ReviewPages/ReviewForm';
 import ProductReviews from '../ReviewPages/ReviewList';
-import { addProductToCartThunk, updateItemQuantityThunk } from '../../redux/cartItem';
-import { createCartThunk } from '../../redux/cart';
+import { getAllUsersThunk } from '../../redux/session';
+import { createOrderThunk, loadUserOrderThunk } from '../../redux/cart';
+// import { createCartThunk } from '../../redux/cart';
 import { getWishlistsThunk, addToWishlistsThunk, deleteWishlistThunk } from '../../redux/wishlist';
-// import Cart from '../Carts/Cart';
 import './SingleProduct.css'
 
 const ProductDetails = () => {
+    const nav = useNavigate()
     const dispatch = useDispatch()
     const { productId } = useParams()
     const product = useSelector(state => state.products[productId])
     // const users = useSelector(state => state.user.users) || []
+    // const session = useSelector(state => state.session)
     const userId = useSelector(state => state.session.users)
+    const allCarts = useSelector(state => state.orders?.CurrOrders);
     const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
     const reviews = useSelector((state) => state.reviews);
     const [avgRating, setAvgRating] = useState(null);
     const [numReviews, setNumReviews] = useState(0);
 
-    const allCarts = useSelector(state => state.cart.Cart);
 
     const [isWishlist, setIsWishlist] = useState(false);
     const [removeWishlist, setRemoveWishlist] = useState(false);
 
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
+        dispatch(getAllUsersThunk())
+        dispatch(loadUserOrderThunk())
     }, [dispatch, productId])
 
     useEffect(() => {
@@ -49,42 +53,26 @@ const ProductDetails = () => {
         }
     }, [reviews, productId]);
 
-    let activeCartObj
-    if (allCarts?.length) {
-        for (let cart of allCarts) {
-            if (cart?.is_ordered == false) {
-                activeCartObj = cart
+    const handleAddToCart = (prodId) => {
+        const orderProdIds = allCarts.map(ele => ele.product)
+        //check if already added item to the cart
+        if (orderProdIds.includes(prodId)) {
+            alert("This product is already in your cart! You can change the quantity in your cart page.")
+        } else {
+            const newOrder = {
+                product_id: prodId
             }
+            dispatch(createOrderThunk(newOrder))
+            alert("You've placed the order successfully!")
+            nav('/orders/MyOrders')
         }
     }
-
-    let findInCart = activeCartObj?.cart_items?.find(item => item?.product_id == productId)
-
-    const addToCart = async (productId) => {
-        let addItem = {
-            cart_id: activeCartObj?.id,
-            product_id: productId,
-        };
-        if (activeCartObj && findInCart) {
-            let updateQty = {
-                product_id: productId,
-            };
-            return await dispatch(updateItemQuantityThunk(updateQty, findInCart?.id));
-        }
-        if (activeCartObj) {
-            await dispatch(addProductToCartThunk(addItem, activeCartObj?.id));
-        } else {
-            const createCart = await dispatch(createCartThunk());
-            const newCartId = createCart?.id;
-            await dispatch(addProductToCartThunk(addItem, newCartId));
-        }
-    };
 
     useEffect(() => {
         dispatch(getWishlistsThunk())
         setIsWishlist(false)
         setRemoveWishlist(false)
-    }, [dispatch, isWishlist, removeWishlist])
+    }, [dispatch, isWishlist, removeWishlist, isWishlist, removeWishlist])
 
     const wishlistIds = wishlists ? wishlists?.map(ele => ele.product_id) : []
 
@@ -92,12 +80,12 @@ const ProductDetails = () => {
         if (wishlistIds.includes(productId)) {
             const favToRemove = wishlists.filter(fav => fav.product_id == productId)[0];
             dispatch(deleteWishlistThunk(favToRemove.id));
-            alert(`Successfully removed ${product.name} from wishlists!`);
+            alert(`Successfully removed ${product.name} from wishlist!`);
             setIsWishlist(true);
         } else {
             const newFav = { "product_id": productId };
             dispatch(addToWishlistsThunk(newFav));
-            alert(`Successfully added ${product.name} to wishlists!`);
+            alert(`Successfully added ${product.name} to wishlist!`);
             setRemoveWishlist(true);
         }
     };
@@ -135,11 +123,10 @@ const ProductDetails = () => {
                     <div className="actions">
                         <button className="add-to-here" onClick={() =>
                             handleFav(product?.id)}
-                        // alert("Wishlist unavailable, check again later.")}
                         >Add to Wishlist
                         </button>
                         <div className='cart'>
-                            <button className="add-to-here" onClick={() => addToCart(product?.id)}>
+                            <button className="add-to-here" onClick={() => handleAddToCart(product?.id)}>
                                 {/* <OpenModalButton
                                     className='add-cart-modal'
                                     itemText='Add to Cart'

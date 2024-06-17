@@ -10,7 +10,7 @@ import productReducer from "./product";
 import reviewReducer from "./review";
 import profileReducer from "./profile";
 import cartReducer from "./cart";
-import cartItemReducer from "./cartItem";
+// import cartItemReducer from "./cartItem";
 import historyReducer from "./history";
 import wishlistReducer from "./wishlist";
 
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   reviews: reviewReducer,
   cart: cartReducer,
-  cartItems: cartItemReducer,
+  // cartItems: cartItemReducer,
   history: historyReducer,
   wishlists: wishlistReducer,
 });

@@ -20,7 +20,7 @@ class Product(db.Model):
 
     user = db.relationship('User', back_populates='products')
     reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan", foreign_keys="[Review.product_id]")
-    cart_items = db.relationship('CartItem', back_populates='product', cascade="all, delete-orphan", foreign_keys="[CartItem.product_id]")
+    order_items = db.relationship('OrderItem', back_populates='product', cascade="all, delete-orphan", foreign_keys="[OrderItem.product_id]")
     order_histories = db.relationship('OrderHistory', back_populates='product', cascade="all, delete-orphan", foreign_keys="[OrderHistory.product_id]")
     wishlists = db.relationship('Wishlist', back_populates='product', cascade="all, delete-orphan", foreign_keys="[Wishlist.product_id]")
 

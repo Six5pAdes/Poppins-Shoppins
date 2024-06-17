@@ -18,9 +18,9 @@ const deleteWishlist = (wishlistId) => ({
 export const getWishlistsThunk = () => async (dispatch) => {
   const res = await fetch("/api/wishlist/current");
   if (res.ok) {
-    const data = await res.json();
-    dispatch(loadWishlists(data.MyWishlists));
-    return data;
+    const allWishlists = await res.json();
+    dispatch(loadWishlists(allWishlists));
+    return allWishlists;
   }
 };
 export const addToWishlistsThunk = (newWishlist) => async (dispatch) => {
@@ -30,9 +30,9 @@ export const addToWishlistsThunk = (newWishlist) => async (dispatch) => {
     body: JSON.stringify(newWishlist),
   });
   if (res.ok) {
-    const data = await res.json();
-    dispatch(addToWishlists(data.wishlist));
-    return data;
+    const newWishlistItem = await res.json();
+    dispatch(addToWishlists(newWishlistItem));
+    return newWishlistItem;
   }
 };
 export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
@@ -40,30 +40,25 @@ export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
     method: "DELETE",
   });
   if (res.ok) {
-    dispatch(deleteWishlist(wishlistId));
-    return wishlistId;
+    const deleteFromWishList = await res.json();
+    dispatch(deleteWishlist(deleteFromWishList));
   }
 };
 
-const initialState = {
-  MyWishlists: [],
-};
+const initialState = {};
 
 export default function wishlistReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_WISHLISTS: {
-      return { ...state, MyWishlists: action.wishlists };
+      return { ...state, ...action.wishlists };
     }
     case ADD_TO_WISHLISTS: {
-      return { ...state, MyWishlists: [...state.MyWishlists, action.wishlist] };
+      return { ...state, ...action.wishlist };
     }
     case DELETE_WISHLIST: {
-      return {
-        ...state,
-        MyWishlists: state.MyWishlists.filter(
-          (wishlist) => wishlist.id !== action.wishlistId
-        ),
-      };
+      const deleteState = { ...state };
+      delete deleteState[action.deleteFromWishList];
+      return deleteState;
     }
     default:
       return state;

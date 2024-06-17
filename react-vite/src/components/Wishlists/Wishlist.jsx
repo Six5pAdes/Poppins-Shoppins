@@ -8,16 +8,17 @@ const Wishlist = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userId = useSelector((state) => state.session.user.id);
-    const wishlists = useSelector((state) => state.favorites?.MyWishlists);
+    const wishlists = useSelector((state) => state.favorites?.WishProd || []);
+
+    if (!userId) navigate("/");
 
     const handleNav = (productId) => {
         navigate(`/products/${productId}`);
     }
 
     useEffect(() => {
-        if (!userId) navigate("/");
-        else dispatch(getWishlistsThunk(userId));
-    }, [dispatch, userId, navigate]);
+        dispatch(getWishlistsThunk());
+    }, [dispatch]);
 
     return (
         <div className="wish-contain">
