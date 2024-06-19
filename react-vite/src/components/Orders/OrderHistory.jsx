@@ -5,11 +5,11 @@ import { getUserHistoryThunk } from "../../redux/history";
 
 const OrderHistory = () => {
     const dispatch = useDispatch();
-    const history = useSelector(state => state.history?.UserOrderHistory);
+    const histories = useSelector(state => state.history?.UserOrderHistory);
     const products = useSelector(state => state.history?.HistoryProd)
 
-    const allHistory = history?.map(order =>
-        history = {
+    const allHistory = histories?.map(order =>
+        order = {
             ...order, "product": products?.filter(product => product.id == order.product_id)[0]
         }
     )
@@ -44,6 +44,7 @@ const OrderHistory = () => {
         <div className='order-history-contain'>
             <h1 id='curr-title'>Order History</h1>
             <div id='order-history'>
+                <h3 className='history-subtotal'>Subtotal: {getTotal(historyArr)}</h3>
                 {history?.map((order, i) => (
                     <div key={i} className='order-history'>
                         <h3>{order.product.name}</h3>

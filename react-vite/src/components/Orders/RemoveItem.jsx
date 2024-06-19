@@ -15,7 +15,7 @@ const RemoveItem = ({ orderId, renderDelete }) => {
             navigate("/");
         }
         dispatch(loadIdOrderThunk(orderId));
-    }, [dispatch])
+    }, [dispatch, navigate])
 
     const handleOrderCancel = async (e) => {
         e.preventDefault();

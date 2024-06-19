@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderThunk } from "../../redux/cart";
 import { loadIdProductsThunk } from "../../redux/product";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import EmptyCart from "./EmptyCart";
-import OrderHistory from "./OrderHistory";
+// import EmptyCart from "./EmptyCart";
+// import OrderHistory from "./OrderHistory";
 import Checkout from "./Checkout";
 // import OrderOperation
 // import './Orders.css'
@@ -19,8 +19,8 @@ const MyOrders = () => {
     const productArr = Object.values(products)?.slice(0, orders?.length)
     const prodId = products?.map(ele => ele.product_id)
 
-    const [isDeleted, setIsDeleted] = useState(false)
-    const renderOnDelete = () => setIsDeleted(!isDeleted)
+    // const [isDeleted, setIsDeleted] = useState(false)
+    // const renderOnDelete = () => setIsDeleted(!isDeleted)
 
     const total = productArr?.reduce((acc, product) => {
         const orderEqual = orders?.find(order => order.product_id === product.id)
@@ -35,13 +35,13 @@ const MyOrders = () => {
             navigate('/')
         }
         dispatch(loadUserOrderThunk())
-    }, dispatch, user, isDeleted, total)
+    }, dispatch, user, total)
 
     useEffect(() => {
         if (prodId?.length > 0 && orders) {
             dispatch(loadIdProductsThunk(prodId))
         }
-    }, [dispatch, orders, isDeleted])
+    }, [dispatch, orders])
 
     if (!orders || !products) return <h1>✨ Loading ✨</h1>
 

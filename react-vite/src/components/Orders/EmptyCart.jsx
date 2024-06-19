@@ -14,7 +14,7 @@ const EmptyCart = () => {
         if (!user) {
             navigate('/')
         }
-    }, [dispatch, user])
+    }, [dispatch, user, navigate])
 
     const handleOrderCancel = async (e) => {
         e.preventDefault()

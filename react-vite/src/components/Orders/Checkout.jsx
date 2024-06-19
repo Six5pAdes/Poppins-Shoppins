@@ -27,7 +27,7 @@ const Checkout = () => {
             navigate('/')
         }
         dispatch(loadUserOrderThunk())
-    }, [dispatch, user])
+    }, [dispatch, user, navigate])
 
     const handleCheckout = async (e) => {
         e.preventDefault()
