@@ -16,9 +16,9 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
     const product = useSelector(state => state.products[productId])
-    // const users = useSelector(state => state.user.users) || []
-    // const session = useSelector(state => state.session)
-    const userId = useSelector(state => state.session.users)
+    const users = useSelector(state => state.session.users)
+    const session = useSelector(state => state.session)
+    const userId = useSelector(state => state.session.users?.id)
     const allCarts = useSelector(state => state.orders?.CurrOrders);
     const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
@@ -26,15 +26,16 @@ const ProductDetails = () => {
     const [avgRating, setAvgRating] = useState(null);
     const [numReviews, setNumReviews] = useState(0);
 
-
     const [isWishlist, setIsWishlist] = useState(false);
     const [removeWishlist, setRemoveWishlist] = useState(false);
 
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
-        dispatch(getAllUsersThunk())
-        dispatch(loadUserOrderThunk())
-    }, [dispatch, productId])
+        if (session.user) {
+            dispatch(getAllUsersThunk())
+            dispatch(loadUserOrderThunk())
+        }
+    }, [dispatch, productId, session.user])
 
     useEffect(() => {
         const productReviews = Object.values(reviews).filter(
@@ -53,10 +54,12 @@ const ProductDetails = () => {
         }
     }, [reviews, productId]);
 
+    const user = users?.find(user => user.id === product?.user_id)[0]
+
     const handleAddToCart = (prodId) => {
-        const orderProdIds = allCarts.map(ele => ele.product)
+        const orderIds = allCarts.map(ele => ele.product_id)
         //check if already added item to the cart
-        if (orderProdIds.includes(prodId)) {
+        if (orderIds.includes(prodId)) {
             alert("This product is already in your cart! You can change the quantity in your cart page.")
         } else {
             const newOrder = {
@@ -120,6 +123,9 @@ const ProductDetails = () => {
                     <p className="price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
+                    <p className="seller">
+                        Seller: {user?.first_name} {user?.last_name}
+                    </p>
                     <div className="actions">
                         <button className="add-to-here" onClick={() =>
                             handleFav(product?.id)}
@@ -127,11 +133,6 @@ const ProductDetails = () => {
                         </button>
                         <div className='cart'>
                             <button className="add-to-here" onClick={() => handleAddToCart(product?.id)}>
-                                {/* <OpenModalButton
-                                    className='add-cart-modal'
-                                    itemText='Add to Cart'
-                                modalComponent={<Cart />}
-                                /> */}
                                 Add to Cart</button>
                         </div>
                     </div>

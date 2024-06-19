@@ -22,7 +22,6 @@ const UserPage = () => {
     const products = useSelector(state => state.products)
     // const userId = useSelector(state => state.session.user ? state.session.user.id : null)
     const userProducts = Object.values(products).filter(product => product.user_id === parseInt(userId))
-    // const wishlist = useSelector(state => state.wishlists?.WishProd)
 
     useEffect(() => {
         dispatch(loadUserProductsThunk())
@@ -118,15 +117,6 @@ const UserPage = () => {
                 </ul>
             </section>
             <section id='wish-contain'>
-                {/* <h1 id='wish-title'>My Wishlist</h1>
-                <div className='wishlist-contain'>
-                    {wishlist?.map((wishlist) => (
-                        <div key={wishlist.id} className='wishlist-item'>
-                            <p>{wishlist.product.name}</p>
-                            <button onClick={() => navigate(`/products/${wishlist.product.id}`)}>View Product</button>
-                        </div>
-                    ))}
-                </div> */}
                 <Wishlist />
             </section>
             <section className='button-contain'>

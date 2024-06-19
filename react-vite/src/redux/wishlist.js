@@ -40,8 +40,8 @@ export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
     method: "DELETE",
   });
   if (res.ok) {
-    const deleteFromWishList = await res.json();
-    dispatch(deleteWishlist(deleteFromWishList));
+    // const deleteFromWishList = await res.json();
+    dispatch(deleteWishlist(wishlistId));
   }
 };
 
@@ -50,14 +50,14 @@ const initialState = {};
 export default function wishlistReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_WISHLISTS: {
-      return { ...state, ...action.wishlists };
+      return { ...action.wishlists };
     }
     case ADD_TO_WISHLISTS: {
-      return { ...state, ...action.wishlist };
+      return { ...state, [action.wishlist.id]: action.wishlist };
     }
     case DELETE_WISHLIST: {
       const deleteState = { ...state };
-      delete deleteState[action.deleteFromWishList];
+      delete deleteState[action.wishlistId];
       return deleteState;
     }
     default:

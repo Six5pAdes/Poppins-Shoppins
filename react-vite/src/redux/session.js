@@ -11,7 +11,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-export const getAllUsers = (users) => ({
+const getAllUsers = (users) => ({
   type: GET_ALL_USERS,
   users,
 });
@@ -70,16 +70,16 @@ export const thunkLogout = () => async (dispatch) => {
 };
 
 export const getAllUsersThunk = () => async (dispatch) => {
-  const response = await fetch("/api/users");
-  if (!response.ok) {
+  const res = await fetch("/api/users");
+  if (!res.ok) {
     throw new Error("Failed to fetch users");
   }
-  const data = await response.json();
-  if (data.errors) {
-    return data.errors;
+  const users = await res.json();
+  if (users.errors) {
+    return users.errors;
   }
-  dispatch(getAllUsers(data));
-  return data;
+  dispatch(getAllUsers(users));
+  return users;
 };
 
 const initialState = { user: null };

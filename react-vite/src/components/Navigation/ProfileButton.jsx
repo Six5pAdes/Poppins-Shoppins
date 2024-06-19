@@ -91,7 +91,7 @@ function ProfileButton() {
                 className="menu-item"
                 onClick={() => {
                   alert("New feature coming soon")
-                  // navigate(`/orders`);
+                  // navigate(`/history`);
                   // closeMenu();
                 }}>
                 My Order History
