@@ -81,7 +81,7 @@ function ProfileButton() {
                 className="menu-item"
                 onClick={() => {
                   // alert("New feature coming soon")
-                  navigate(`/cart`);
+                  navigate(`/orders`);
                   closeMenu();
                 }}>
                 Manage Cart

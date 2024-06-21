@@ -60,16 +60,16 @@ const UserPage = () => {
                 <div id='prof-info'>
                     <div id='prof-stuff'>
                         <div className='prof-piece'>First Name:
-                            <p className='info'>{user.first_name}</p>
+                            <p className='info'>{user?.first_name}</p>
                         </div>
                         <div className='prof-piece'>Last Name:
-                            <p className='info'>{user.last_name}</p>
+                            <p className='info'>{user?.last_name}</p>
                         </div>
                         <div className='prof-piece'>Email:
-                            <p className='info'>{user.email}</p>
+                            <p className='info'>{user?.email}</p>
                         </div>
                         <div className='prof-piece'>Username:
-                            <p className='info'>{user.username}</p>
+                            <p className='info'>{user?.username}</p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ const UserPage = () => {
                                 <img src={product.image} className='product-img'
                                     onClick={() => navigate(`/products/${product.id}`)}
                                 />
-                                <p className='name'>{product.name}</p>
+                                <p className='name' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
                                 <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
                             </div>
                             <div className='edit-or-delete'>

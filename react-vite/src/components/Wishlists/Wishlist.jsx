@@ -7,8 +7,8 @@ import "./Wishlist.css";
 const Wishlist = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userId = useSelector((state) => state.session.user.id);
-    const wishlists = useSelector((state) => state.favorites?.WishProd || []);
+    const userId = useSelector((state) => state.session.user);
+    const wishlists = useSelector((state) => state.wishlists?.WishProd);
 
     if (!userId) navigate("/");
 

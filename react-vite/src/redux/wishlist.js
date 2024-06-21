@@ -16,40 +16,62 @@ const deleteWishlist = (wishlistId) => ({
 });
 
 export const getWishlistsThunk = () => async (dispatch) => {
-  const res = await fetch("/api/wishlist/current");
-  if (res.ok) {
-    const allWishlists = await res.json();
-    dispatch(loadWishlists(allWishlists));
-    return allWishlists;
+  try {
+    const res = await fetch("/api/wishlist/current");
+    if (res.ok) {
+      const allWishlists = await res.json();
+      console.log("Fetched wishlists:", allWishlists); // Debug log
+      dispatch(loadWishlists(allWishlists));
+      return allWishlists;
+    } else {
+      const errorText = await res.text();
+      console.error("Error fetching wishlists:", errorText);
+    }
+  } catch (error) {
+    console.error("Error fetching wishlists:", error);
   }
 };
 export const addToWishlistsThunk = (newWishlist) => async (dispatch) => {
-  const res = await fetch("/api/wishlist/new", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newWishlist),
-  });
-  if (res.ok) {
-    const newWishlistItem = await res.json();
-    dispatch(addToWishlists(newWishlistItem));
-    return newWishlistItem;
+  try {
+    const res = await fetch("/api/wishlist/new", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newWishlist),
+    });
+    if (res.ok) {
+      const newWishlistItem = await res.json();
+      dispatch(addToWishlists(newWishlistItem));
+      return newWishlistItem;
+    } else {
+      const errorText = await res.text();
+      console.error("Error adding to wishlist:", errorText);
+    }
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
   }
 };
 export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
-  const res = await fetch(`/api/wishlists/${wishlistId}/delete`, {
-    method: "DELETE",
-  });
-  if (res.ok) {
-    // const deleteFromWishList = await res.json();
-    dispatch(deleteWishlist(wishlistId));
+  try {
+    const res = await fetch(`/api/wishlist/${wishlistId}/delete`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      dispatch(deleteWishlist(wishlistId));
+    } else {
+      const errorText = await res.text();
+      console.error("Error deleting wishlist:", errorText);
+    }
+  } catch (error) {
+    console.error("Error deleting wishlist:", error);
   }
 };
 
 const initialState = {};
 
-export default function wishlistReducer(state = initialState, action) {
+const wishlistReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_WISHLISTS: {
+      console.log("Loading wishlists into state:", action.wishlists); // Debug log
       return { ...action.wishlists };
     }
     case ADD_TO_WISHLISTS: {
@@ -63,4 +85,6 @@ export default function wishlistReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default wishlistReducer;
