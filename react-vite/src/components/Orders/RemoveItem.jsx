@@ -27,8 +27,8 @@ const RemoveItem = ({ orderId, renderDelete }) => {
 
     return (
         <div className="delete-product-modal">
-            <div className="delete-form-contain">
-                <span className="confirmation">Are you sure you want to remove this item from your cart?</span>
+            <div id='confirm-delete'>
+                <h2 className="confirmation">Are you sure you want to remove this item from your cart?</h2>
                 <button className="success" onClick={handleOrderCancel}>Remove Item</button>
                 <button className="success" onClick={closeModal}>Keep Item</button>
             </div>

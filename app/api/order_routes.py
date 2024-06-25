@@ -19,7 +19,7 @@ def getOrders():
 @order_routes.route('/current')
 @login_required
 def ordersByUser():
-    orders = OrderItem.query.filter_by(OrderItem.user_id == current_user.id).all()
+    orders = OrderItem.query.filter_by(user_id = current_user.id).all()
     response = [order.to_dict() for order in orders]
     return {'CurrOrders': response}, 200
 

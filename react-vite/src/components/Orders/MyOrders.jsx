@@ -51,7 +51,7 @@ const MyOrders = () => {
                     <div className="cart-product-contain" key={eachProd?.id}>
                         <div className="product-image">
                             <NavLink to={`/products/${eachProd?.id}`}>
-                                <img src={eachProd?.image} alt={eachProd?.name} />
+                                <img src={eachProd?.image} alt={eachProd?.name} className='product-img' />
                             </NavLink>
                         </div>
                         <div className="product-info">

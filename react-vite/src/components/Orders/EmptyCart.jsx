@@ -26,8 +26,8 @@ const EmptyCart = () => {
 
     return (
         <div className='delete-product-modal'>
-            <div className='delete-form-contain'>
-                <span className='confirmation'>Are you sure you want to empty your cart?</span>
+            <div id='confirm-delete'>
+                <h2 className='confirmation'>Are you sure you want to empty your cart?</h2>
                 <button className='success' onClick={handleOrderCancel}>Empty Cart</button>
                 <button className='success' onClick={closeModal}>Keep Cart</button>
             </div>

@@ -42,8 +42,8 @@ const Checkout = () => {
 
     return (
         <div className='delete-product-modal'>
-            <div className='delete-form-contain'>
-                <h1 className='confirmation'>Is this your final purchase?</h1>
+            <div id='confirm-delete'>
+                <h2 className='confirmation'>Is this your final purchase?</h2>
                 <h4>${total}</h4>
                 <button className='success' onClick={handleCheckout}>Checkout</button>
                 <button className='success' onClick={closeModal}>Cancel</button>

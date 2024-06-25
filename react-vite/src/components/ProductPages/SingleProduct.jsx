@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { loadOneProductThunk } from '../../redux/product';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import CreateReview from '../ReviewPages/ReviewForm';
 import ProductReviews from '../ReviewPages/ReviewList';
@@ -12,7 +12,6 @@ import { getWishlistsThunk, addToWishlistsThunk, deleteWishlistThunk } from '../
 import './SingleProduct.css'
 
 const ProductDetails = () => {
-    const nav = useNavigate()
     const dispatch = useDispatch()
     const { productId } = useParams()
     const product = useSelector(state => state.products[productId])
@@ -67,7 +66,6 @@ const ProductDetails = () => {
             }
             dispatch(createOrderThunk(newOrder))
             alert("You've placed the order successfully!")
-            nav('/orders')
         }
     }
 

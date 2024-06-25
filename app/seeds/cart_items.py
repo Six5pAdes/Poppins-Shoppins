@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 def seed_order_items():
     order_item1 = OrderItem(
         user_id=1,
-        product_id=1,
+        product_id=14,
         quantity=1,
     )
     order_item2 = OrderItem(
