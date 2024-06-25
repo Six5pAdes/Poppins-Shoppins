@@ -60,7 +60,7 @@ export const loadIdOrderThunk = (id) => async (dispatch) => {
   }
 };
 export const createOrderThunk = (newOrderData) => async (dispatch) => {
-  const res = await fetch(`/api/carts/new`, {
+  const res = await fetch(`/api/orders/new`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newOrderData),

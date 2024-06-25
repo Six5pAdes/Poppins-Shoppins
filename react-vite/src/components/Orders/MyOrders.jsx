@@ -5,10 +5,9 @@ import { loadUserOrderThunk } from "../../redux/cart";
 import { loadIdProductsThunk } from "../../redux/product";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import EmptyCart from "./EmptyCart";
-import OrderHistory from "./OrderHistory";
 import Checkout from "./Checkout";
 import OrderInteract from "./OrderInteract";
-// import './Orders.css'
+import './Orders.css'
 
 const MyOrders = () => {
     const dispatch = useDispatch()
@@ -49,7 +48,7 @@ const MyOrders = () => {
         <div className="cart-contain">
             <div className="cart-item-contain">
                 {productArr?.length > 0 ? (productArr?.map(eachProd => (
-                    <div className="product-contain" key={eachProd?.id}>
+                    <div className="cart-product-contain" key={eachProd?.id}>
                         <div className="product-image">
                             <NavLink to={`/products/${eachProd?.id}`}>
                                 <img src={eachProd?.image} alt={eachProd?.name} />
@@ -74,12 +73,6 @@ const MyOrders = () => {
                     <OpenModalMenuItem
                         itemText='Clear Cart'
                         modalComponent={<EmptyCart />}
-                    />
-                </button>
-                <button className="checkout-btn">
-                    <OpenModalMenuItem
-                        itemText='Order History'
-                        modalComponent={<OrderHistory />}
                     />
                 </button>
                 <button className="checkout-btn">

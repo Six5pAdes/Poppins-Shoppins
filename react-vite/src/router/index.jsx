@@ -10,6 +10,7 @@ import ProductUpdate from '../components/ProductPages/EditProduct';
 import UserPage from '../components/Profile/ProfileInfo';
 import Category from '../components/Categories/Category';
 import MyOrders from '../components/Orders/MyOrders';
+import OrderHistory from '../components/Orders/OrderHistory';
 
 export const router = createBrowserRouter([
   {
@@ -47,10 +48,10 @@ export const router = createBrowserRouter([
         path: "/orders",
         element: <MyOrders />
       },
-      // {
-      //   path: "/my-orders",
-      //   element: < />
-      // },
+      {
+        path: "/my-orders",
+        element: <OrderHistory />
+      },
       {
         path: "*",
         element: <h1>ELEMENT NOT FOUND</h1>

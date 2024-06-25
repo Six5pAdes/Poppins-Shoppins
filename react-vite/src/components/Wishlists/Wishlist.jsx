@@ -25,12 +25,12 @@ const Wishlist = () => {
             <h1 id="curr-title">My Wishlist</h1>
             <section className="wish-list">
                 {wishlists?.map((product) => (
-                    <div key={product.id} className='product-card'>
+                    <div key={product.id} className='wishlist-item'>
                         <div
                             title={product.name}
                             key={product.id}
                         >
-                            <img src={product.image} className='product-img'
+                            <img src={product.image} className='wishlist-img'
                                 onClick={() => handleNav(product.id)}
                             />
                             <p className='name'>{product.name}</p>

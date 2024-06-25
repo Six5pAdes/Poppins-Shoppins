@@ -1,0 +1,44 @@
+.order-history-contain {
+    padding: 36px;
+}
+
+.history-sect {
+    border: black 1px solid;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    /* margin: 36px 0; */
+}
+
+.history-head {
+    display: flex;
+    flex-direction: row;
+}
+
+.history-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+.order-history-item {
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    padding: 5px;
+    background-color: white;
+    /* width: 80%; */
+    margin: auto;
+}
+
+.order-history-item img {
+    width: 300px;
+    height: 200px;
+    /* object-fit: cover; */
+    margin-right: 20px;
+}
+
+.order-history-item div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

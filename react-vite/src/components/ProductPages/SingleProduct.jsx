@@ -18,7 +18,7 @@ const ProductDetails = () => {
     const product = useSelector(state => state.products[productId])
     // const users = useSelector(state => state.session.users)
     const session = useSelector(state => state.session)
-    const userId = useSelector(state => state.session.users?.id)
+    const userId = session?.user?.id
     const allCarts = useSelector(state => state.orders?.CurrOrders);
     const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
@@ -60,14 +60,14 @@ const ProductDetails = () => {
         const orderIds = allCarts.map(ele => ele.product_id)
         //check if already added item to the cart
         if (orderIds.includes(prodId)) {
-            alert("This product is already in your cart! You can change the quantity in your cart page.")
+            alert("You've already added this product to your cart. Quantity can be changed on the orders page.")
         } else {
             const newOrder = {
                 product_id: prodId
             }
             dispatch(createOrderThunk(newOrder))
             alert("You've placed the order successfully!")
-            nav('/orders/MyOrders')
+            nav('/orders')
         }
     }
 
@@ -134,8 +134,10 @@ const ProductDetails = () => {
                                 >Add to Wishlist
                                 </button>
                                 <div className='cart'>
-                                    <button className="add-to-here" onClick={() => handleAddToCart(product?.id)}>
-                                        Add to Cart</button>
+                                    <button className="add-to-here" onClick={() =>
+                                        handleAddToCart(product?.id)}
+                                    >Add to Cart
+                                    </button>
                                 </div>
                             </>
                         )}

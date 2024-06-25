@@ -90,9 +90,9 @@ function ProfileButton() {
               <div
                 className="menu-item"
                 onClick={() => {
-                  alert("New feature coming soon")
-                  // navigate(`/history`);
-                  // closeMenu();
+                  // alert("New feature coming soon")
+                  navigate(`/my-orders`);
+                  closeMenu();
                 }}>
                 My Order History
               </div>

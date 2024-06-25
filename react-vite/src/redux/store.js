@@ -19,9 +19,9 @@ const rootReducer = combineReducers({
   user: profileReducer,
   products: productReducer,
   reviews: reviewReducer,
-  cart: cartReducer,
+  orders: cartReducer,
   // cartItems: cartItemReducer,
-  history: historyReducer,
+  histories: historyReducer,
   wishlists: wishlistReducer,
 });
 

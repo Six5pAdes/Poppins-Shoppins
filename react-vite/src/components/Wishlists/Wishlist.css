@@ -16,23 +16,21 @@
     box-sizing: border-box;
   }
 
-  .product-card {
+  .wishlist-item {
     border-radius: 1em;
     width: 300px;
     margin: 5px;
     padding: 15px;
-    box-shadow: 2px 2px 3px 3px gray;
   }
 
-  .product-img {
-    width: 300px;
-    height: 200px;
-    border: 1px solid gray;
-  }
-
-  .product-img:hover {
+  .wishlist-item:hover {
     box-shadow: 2px 2px 3px 3px gray;
     cursor: pointer;
+  }
+
+  .wishlist-img {
+    width: 300px;
+    height: 200px;
   }
 
   #curr-title {
