@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateOrderThunk } from "../../redux/cart";
 import RemoveItem from "./RemoveItem";
@@ -13,30 +13,32 @@ const OrderInteract = ({ order, renderDelete }) => {
     const [quantity, setQuantity] = useState(order?.quantity);
 
     const handleAdd = () => {
-        setQuantity(ele => ele + 1);
-        const newOrder = { quantity: quantity + 1 }
+        const newQuantity = quantity + 1;
+        setQuantity(newQuantity);
+        const newOrder = { quantity: newQuantity };
         dispatch(updateOrderThunk(order.id, newOrder))
             .then(() => {
                 window.location.reload(true);
-            })
+            });
     }
 
     const handleDel = () => {
-        if (quantity == 1) {
+        if (quantity === 1) {
             return (
                 <RemoveItem orderId={order.id} />
             )
         } else {
-            setQuantity(ele => ele - 1);
-            const newOrder = { quantity: quantity - 1 }
+            const newQuantity = quantity - 1;
+            setQuantity(newQuantity);
+            const newOrder = { quantity: newQuantity };
             dispatch(updateOrderThunk(order.id, newOrder))
                 .then(() => {
                     window.location.reload(true);
-                })
+                });
         }
     }
 
-    useState(() => {
+    useEffect(() => {
         if (!user) {
             navigate("/");
         }
@@ -45,7 +47,7 @@ const OrderInteract = ({ order, renderDelete }) => {
     return (
         <div className="cart-buttons-contain">
             <div className="quantity-contain">
-                {quantity == 1 ? (
+                {quantity === 1 ? (
                     <button className="quantity-btn" onClick={handleDel}>
                         <OpenModalMenuItem
                             itemText='-'

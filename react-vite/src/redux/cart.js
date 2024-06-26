@@ -70,7 +70,7 @@ export const createOrderThunk = (newOrderData) => async (dispatch) => {
   }
   const data = await res.json();
   dispatch(createOrder(data));
-  return data;
+  // return data;
 };
 export const updateOrderThunk =
   (orderId, updatedOrderData) => async (dispatch) => {
@@ -83,8 +83,8 @@ export const updateOrderThunk =
       throw new Error("Failed to update order");
     }
     const data = await res.json();
-    dispatch(updateOrder(data));
-    return data;
+    dispatch(updateOrder(orderId, data));
+    // return data;
   };
 export const deleteOrderThunk = (orderId) => async (dispatch) => {
   const res = await fetch(`/api/orders/${orderId}/delete`, {
@@ -93,8 +93,8 @@ export const deleteOrderThunk = (orderId) => async (dispatch) => {
   if (!res.ok) {
     throw new Error("Failed to delete order");
   }
-  const data = await res.json();
-  dispatch(deleteOrder(data));
+  // const data = await res.json();
+  dispatch(deleteOrder(orderId));
 };
 export const clearCartThunk = () => async (dispatch) => {
   const res = await fetch(`/api/orders/current/clear`, {

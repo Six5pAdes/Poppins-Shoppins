@@ -16,18 +16,10 @@ const MyOrders = () => {
     const orders = useSelector(state => state.orders?.CurrOrders)
     const products = useSelector(state => state.products)
     const productArr = Object.values(products)?.slice(0, orders?.length)
-    const prodId = orders?.map(ele => ele.product_id)
+    // const prodId = orders?.map(ele => ele.product_id)
 
     const [isDeleted, setIsDeleted] = useState(false)
     const renderOnDelete = () => setIsDeleted(!isDeleted)
-
-    const total = productArr?.reduce((acc, product) => {
-        const orderEqual = orders?.find(order => order.product_id == product.id)
-        if (orderEqual) {
-            return acc + (product.price * orderEqual.quantity)
-        }
-        return acc
-    }, 0).toFixed(2)
 
     useEffect(() => {
         if (!user) {
@@ -37,12 +29,32 @@ const MyOrders = () => {
     }, [dispatch, user, navigate])
 
     useEffect(() => {
-        if (prodId?.length > 0 && orders) {
-            dispatch(loadIdProductsThunk(prodId))
+        if (orders) {
+            const prodId = orders.map(ele => ele.product_id);
+            if (prodId.length > 0) {
+                dispatch(loadIdProductsThunk(prodId));
+            }
         }
-    }, [dispatch, orders, prodId])
+    }, [dispatch, orders]);
 
     if (!orders || !products) return <h1>✨ Loading ✨</h1>
+
+    // const prodId = orders?.map(ele => ele.product_id) || [];
+    // const productArr = Object.values(products)?.filter(product => prodId.includes(product.id)) || [];
+
+    const total = productArr?.reduce((acc, product) => {
+        const orderEqual = orders?.find(order => order.product_id == product.id)
+        if (orderEqual) {
+            return acc + (product.price * orderEqual.quantity)
+        }
+        return acc
+    }, 0).toFixed(2)
+
+    // useEffect(() => {
+    //     if (prodId?.length > 0) {
+    //         dispatch(loadIdProductsThunk(prodId))
+    //     }
+    // }, [dispatch, prodId])
 
     return (
         <div className="cart-contain">
@@ -60,7 +72,7 @@ const MyOrders = () => {
                             {/* <h4>Quantity: {orders?.find(order => order.product_id === eachProd?.id)?.quantity}</h4> */}
                         </div>
                         <OrderInteract
-                            orderInfo={orders.filter(ele => ele.product_id == eachProd?.id)[0]}
+                            order={orders.find(ele => ele.product_id === eachProd?.id)}
                             renderDelete={renderOnDelete}
                         />
                     </div>
@@ -83,7 +95,7 @@ const MyOrders = () => {
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
 export default MyOrders;

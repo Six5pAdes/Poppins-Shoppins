@@ -13,7 +13,7 @@ product_routes = Blueprint('product', __name__ )
 def getProducts():
     products = Product.query.all()
     response = [product.to_dict() for product in products]
-    return {'products': response}
+    return {'Products': response}
 
 
 # create a product
