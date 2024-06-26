@@ -87,7 +87,7 @@ export const loadIdProductsThunk = (productId) => async (dispatch) => {
       productId.includes(ele.id)
     );
     dispatch(loadIdProducts(selectedProducts));
-    return data;
+    return selectedProducts;
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {

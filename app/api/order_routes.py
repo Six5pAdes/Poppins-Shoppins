@@ -46,8 +46,8 @@ def createOrder():
     product_id = data.get('product_id')
     new_order = OrderItem(
         user_id=current_user.id,
-        product_id=data['product_id'],
-        quantity=data['quantity'],
+        product_id=product_id,
+        quantity=1,
     )
     db.session.add(new_order)
     db.session.commit()

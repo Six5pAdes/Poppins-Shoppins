@@ -19,10 +19,10 @@ const RemoveItem = ({ orderId, renderDelete }) => {
 
     const handleOrderCancel = async (e) => {
         e.preventDefault();
-        await dispatch(deleteOrderThunk(orderId));
+        dispatch(deleteOrderThunk(orderId));
         closeModal();
         renderDelete();
-        navigate("/");
+        navigate("/orders");
     }
 
     return (

@@ -22,7 +22,7 @@ const MyOrders = () => {
     const renderOnDelete = () => setIsDeleted(!isDeleted)
 
     const total = productArr?.reduce((acc, product) => {
-        const orderEqual = orders?.find(order => order.product_id === product.id)
+        const orderEqual = orders?.find(order => order.product_id == product.id)
         if (orderEqual) {
             return acc + (product.price * orderEqual.quantity)
         }
@@ -57,10 +57,10 @@ const MyOrders = () => {
                         <div className="product-info">
                             <h3>{eachProd?.name}</h3>
                             <h4>Price: ${eachProd?.price}</h4>
-                            <h4>Quantity: {orders?.find(order => order.product_id === eachProd?.id)?.quantity}</h4>
+                            {/* <h4>Quantity: {orders?.find(order => order.product_id === eachProd?.id)?.quantity}</h4> */}
                         </div>
                         <OrderInteract
-                            orderInfo={orders.filter(ele => ele.product_id === eachProd?.id)[0]}
+                            orderInfo={orders.filter(ele => ele.product_id == eachProd?.id)[0]}
                             renderDelete={renderOnDelete}
                         />
                     </div>
