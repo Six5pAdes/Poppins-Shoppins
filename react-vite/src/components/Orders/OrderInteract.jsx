@@ -23,19 +23,17 @@ const OrderInteract = ({ order, renderDelete }) => {
     }
 
     const handleDel = () => {
-        if (quantity === 1) {
-            return (
-                <RemoveItem orderId={order.id} />
-            )
-        } else {
-            const newQuantity = quantity - 1;
-            setQuantity(newQuantity);
-            const newOrder = { quantity: newQuantity };
-            dispatch(updateOrderThunk(order.id, newOrder))
-                .then(() => {
-                    window.location.reload(true);
-                });
-        }
+        const newQuantity = quantity - 1;
+        setQuantity(newQuantity);
+        const newOrder = { quantity: newQuantity };
+        dispatch(updateOrderThunk(order.id, newOrder))
+            .then(() => {
+                window.location.reload(true);
+            });
+    }
+
+    const disabledButton = () => {
+        return (quantity === 1)
     }
 
     useEffect(() => {
@@ -47,16 +45,10 @@ const OrderInteract = ({ order, renderDelete }) => {
     return (
         <div className="cart-buttons-contain">
             <div className="quantity-contain">
-                {quantity === 1 ? (
-                    <button className="quantity-btn" onClick={handleDel}>
-                        <OpenModalMenuItem
-                            itemText='-'
-                            modalComponent={<RemoveItem orderId={order?.id} renderDelete={renderDelete} />}
-                        />
-                    </button>
-                ) : (
+                {disabledButton() ?
+                    <button className="disabled">-</button> :
                     <button className="quantity-btn" onClick={handleDel}>-</button>
-                )}
+                }
                 <p className="button-text">Quantity: {quantity}</p>
                 <button className="quantity-btn" onClick={handleAdd}>+</button>
             </div>

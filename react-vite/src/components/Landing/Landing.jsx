@@ -29,6 +29,7 @@ const Landing = () => {
                     <img
                         className='image'
                         src={product.image}
+                        alt={product.name}
                     />
                     <p className='name'
                     >{product.name}</p>

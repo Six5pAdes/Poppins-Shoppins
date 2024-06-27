@@ -41,9 +41,10 @@ const MyOrders = () => {
 
     // const prodId = orders?.map(ele => ele.product_id) || [];
     // const productArr = Object.values(products)?.filter(product => prodId.includes(product.id)) || [];
+    // const productArr = Object.values(products)?.filter(product => orders.some(order => order.product_id === product.id));
 
     const total = productArr?.reduce((acc, product) => {
-        const orderEqual = orders?.find(order => order.product_id == product.id)
+        const orderEqual = orders?.find(order => order.product_id === product.id)
         if (orderEqual) {
             return acc + (product.price * orderEqual.quantity)
         }

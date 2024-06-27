@@ -41,18 +41,12 @@
     list-style: none;
     font-size: 14px;
     padding: 5px;
-    margin: 0 5px;
+    margin: 10px;
     color: white;
 }
 
 .button-text {
     margin: 0 10px;
-}
-
-.quantity-btn:hover, .checkout-btn:hover, .delete-btn:hover {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    background-color: #e0e0e0;
 }
 
 .cart-product-contain {
