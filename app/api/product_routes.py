@@ -105,6 +105,6 @@ def getUserProducts():
 # getting products by category
 @product_routes.route('/categories/<string:category>')
 def productsByCategory(category):
-    products = Product.query.filter(Product.category == category).all()
+    products = Product.query.filter(Product.category.ilike(category)).all()
     response = {"Products": [product.to_dict() for product in products]}
     return response
