@@ -3,6 +3,7 @@ import ProfileButton from "./ProfileButton";
 import SearchBar from "../Searchbar/Searchbar";
 import "./Navigation.css";
 import logo from "../../../images/Poppins's Shoppins.png"
+import { FaShoppingCart } from "react-icons/fa";
 
 function Navigation() {
   return (
@@ -18,6 +19,11 @@ function Navigation() {
           </NavLink>
         </div>
         <SearchBar className='search-contain' />
+        <div className="nav-cart">
+          <NavLink to='/orders'>
+            <FaShoppingCart className="cart-icon" />
+          </NavLink>
+        </div>
         <div className="nav-profile">
           <ProfileButton />
         </div>

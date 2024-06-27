@@ -77,7 +77,7 @@ function ProfileButton() {
                 Create Product Listing
               </div>
               <hr className="profile-divider" />
-              <div
+              {/* <div
                 className="menu-item"
                 onClick={() => {
                   // alert("New feature coming soon")
@@ -85,7 +85,7 @@ function ProfileButton() {
                   closeMenu();
                 }}>
                 Manage Cart
-              </div>
+              </div> */}
               <hr className="profile-divider" />
               <div
                 className="menu-item"
