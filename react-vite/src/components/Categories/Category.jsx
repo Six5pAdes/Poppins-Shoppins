@@ -33,7 +33,7 @@ function Category() {
 
     return (
         <div className="category-contain">
-            <h1 className="category-title">{category.toLocaleUpperCase()}</h1>
+            <h1 className="category-title">{category.toUpperCase()}</h1>
             {products?.length > 0 && <p>{products?.length} result{products.length > 1 ? 's' : ''}</p>}
             <div className="category-items">
                 {products && products.map((product) => (
