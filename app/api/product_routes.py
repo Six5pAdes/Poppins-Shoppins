@@ -1,11 +1,11 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import Product, db
 from flask_login import current_user
 from .aws import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from ..forms.product_form import ProductForm
 
 
-product_routes = Blueprint('product', __name__ )
+product_routes = Blueprint('products', __name__ )
 
 
 # getting all products
@@ -106,5 +106,7 @@ def getUserProducts():
 @product_routes.route('/categories/<string:category>')
 def productsByCategory(category):
     products = Product.query.filter(Product.category == category).all()
+    # if not products:
+    #     return jsonify({'error': 'No products with this category.'}), 404
     response = [product.to_dict() for product in products]
-    return {"Category": response}
+    return {"Products": response}

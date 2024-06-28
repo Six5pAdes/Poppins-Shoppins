@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "../Searchbar/Searchbar";
 import "./Navigation.css";
@@ -6,6 +7,9 @@ import logo from "../../../images/Poppins's Shoppins.png"
 import { FaShoppingCart } from "react-icons/fa";
 
 function Navigation() {
+
+  const user = useSelector((store) => store.session.user);
+
   return (
     <div className="full-navbar">
       <div className="nav-contain">
@@ -19,11 +23,15 @@ function Navigation() {
           </NavLink>
         </div>
         <SearchBar className='search-contain' />
-        <div className="nav-cart">
-          <NavLink to='/orders'>
-            <FaShoppingCart className="cart-icon" />
-          </NavLink>
-        </div>
+        {user ? (
+          <div className="nav-cart">
+            <NavLink to='/orders'>
+              <FaShoppingCart className="cart-icon" />
+            </NavLink>
+          </div>) : (
+          null
+        )
+        }
         <div className="nav-profile">
           <ProfileButton />
         </div>

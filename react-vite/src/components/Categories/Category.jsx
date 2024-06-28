@@ -14,12 +14,14 @@ function Category() {
         dispatch(loadCategoryProductsThunk(category));
     }, [dispatch, category]);
 
-    const filteredProducts = Object.values(products).filter((product) => product.category == category);
+    const filteredProducts = Object.values(products)
     if (filteredProducts.length === 0) {
         return <h1>✨ Loading ✨</h1>;
     }
+    // console.log(filteredProducts)
 
-    // const prodArr = filteredProducts.filter((product) => product.category == category);
+    const prodArr = filteredProducts.filter((product) => product?.category?.toLowerCase() == category);
+    // console.log(category)
 
     const validCategories = ['clothing', 'creativity', 'furniture', 'handmade', 'miscellaneous'];
     const isValidCategory = validCategories.includes(category);
@@ -35,9 +37,9 @@ function Category() {
     return (
         <div className="category-contain">
             <h1 className="category-title">{category.toUpperCase()}</h1>
-            {filteredProducts?.length > 0 && <p>{filteredProducts?.length} result{filteredProducts.length > 1 ? 's' : ''}</p>}
+            {prodArr?.length > 0 && <p>{prodArr?.length} result{prodArr.length > 1 ? 's' : ''}</p>}
             <div className="category-items">
-                {filteredProducts?.map((product) => (
+                {prodArr?.map((product) => (
                     <div
                         key={product?.id}
                         className='one-product-contain'
@@ -47,9 +49,9 @@ function Category() {
                         <img
                             className='image'
                             src={product?.image}
+                            alt={product?.name}
                         />
-                        <p className='name'
-                        >{product?.name}</p>
+                        <p className='name'>{product?.name}</p>
                         <div className='info'>
                             <p className='price'>{`$${parseFloat(product?.price).toFixed(2)}`}</p>
                         </div>

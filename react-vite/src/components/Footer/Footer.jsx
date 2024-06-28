@@ -6,7 +6,7 @@ function Footer() {
         <div className='footer-container'>
             <h2 className='contactme-txt'>Contact Me</h2>
             <div className='icons-container'>
-                <a className='footer-icons-link' href='https://www.linkedin.com/in/austinhall-6spades/'>
+                <a className='footer-icons-link' href='https://www.linkedin.com/in/austinhall-6spades/' target='_blank' rel='noreferrer'>
                     {/* <svg className='foot-logos' width="40px" height="40px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

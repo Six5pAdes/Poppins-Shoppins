@@ -3,7 +3,7 @@ from app.models import Review, db
 from app.forms.review_form import ReviewForm
 
 
-review_routes = Blueprint('review', __name__ )
+review_routes = Blueprint('reviews', __name__ )
 
 # getting reviews
 @review_routes.route('/<int:id>')
