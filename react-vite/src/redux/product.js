@@ -19,9 +19,8 @@ const loadOneProduct = (product) => ({
   type: SINGLE_PRODUCT,
   product,
 });
-const loadCategoryProducts = (category, products) => ({
+const loadCategoryProducts = (products) => ({
   type: CATEGORY_PRODUCTS,
-  category,
   products,
 });
 const loadIdProducts = (products) => ({
@@ -70,7 +69,7 @@ export const loadCategoryProductsThunk = (category) => async (dispatch) => {
     const res = await fetch(`/api/products/categories/${category}`);
     if (res.ok) {
       const data = await res.json();
-      dispatch(loadCategoryProducts(category, data.Products));
+      dispatch(loadCategoryProducts(data.Category));
       return data;
     } else {
       throw new Error("Category not found");
@@ -152,10 +151,11 @@ export default function productReducer(state = initialState, action) {
       return newState;
     }
     case CATEGORY_PRODUCTS: {
-      return {
-        ...state,
-        [action.category]: action.products,
-      };
+      const catState = {};
+      action.products.forEach((p) => {
+        catState[p.id] = p;
+      });
+      return { ...state, ...catState };
     }
     case ID_PRODUCTS: {
       return { ...state, ...action.products };
