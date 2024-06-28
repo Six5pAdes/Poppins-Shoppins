@@ -86,7 +86,7 @@ function ProfileButton() {
                 }}>
                 Manage Cart
               </div> */}
-              <hr className="profile-divider" />
+              {/* <hr className="profile-divider" /> */}
               <div
                 className="menu-item"
                 onClick={() => {

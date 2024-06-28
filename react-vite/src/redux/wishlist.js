@@ -20,7 +20,7 @@ export const getWishlistsThunk = () => async (dispatch) => {
     const res = await fetch("/api/wishlist/current");
     if (res.ok) {
       const allWishlists = await res.json();
-      console.log("Fetched wishlists:", allWishlists); // Debug log
+      // console.log("Fetched wishlists:", allWishlists); // Debug log
       dispatch(loadWishlists(allWishlists));
       return allWishlists;
     } else {
@@ -71,7 +71,7 @@ const initialState = {};
 const wishlistReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_WISHLISTS: {
-      console.log("Loading wishlists into state:", action.wishlists); // Debug log
+      // console.log("Loading wishlists into state:", action.wishlists); // Debug log
       return { ...action.wishlists };
     }
     case ADD_TO_WISHLISTS: {

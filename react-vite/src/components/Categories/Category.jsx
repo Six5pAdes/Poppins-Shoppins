@@ -36,12 +36,12 @@ function Category() {
 
     return (
         <div className="category-contain">
-            <h1 className="category-title">{category.toUpperCase()}</h1>
+            <h1 className="category-title">{category[0].toUpperCase() + category.slice(1)}</h1>
             {prodArr?.length > 0 && <p>{prodArr?.length} result{prodArr.length > 1 ? 's' : ''}</p>}
             <div className="category-items">
                 {prodArr?.map((product) => (
                     <div
-                        key={product?.id}
+                        key={`${product?.id}`}
                         className='one-product-contain'
                         title={product?.name}
                         onClick={() => handleProductClick(product.id)}

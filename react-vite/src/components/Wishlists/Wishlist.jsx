@@ -10,15 +10,28 @@ const Wishlist = () => {
     const userId = useSelector((state) => state.session.user);
     const wishlists = useSelector((state) => state.wishlists?.WishProd);
 
-    if (!userId) navigate("/");
+    // if (!userId) navigate("/");
+
+    // const handleNav = (productId) => {
+    //     navigate(`/products/${productId}`);
+    // }
+
+    // useEffect(() => {
+    //     dispatch(getWishlistsThunk());
+    // }, [dispatch]);
+
+    useEffect(() => {
+        if (!userId) {
+            navigate("/");
+        }
+        dispatch(getWishlistsThunk());
+    }, [dispatch, userId, navigate]);
 
     const handleNav = (productId) => {
         navigate(`/products/${productId}`);
     }
 
-    useEffect(() => {
-        dispatch(getWishlistsThunk());
-    }, [dispatch]);
+    if (!wishlists) return <h1>✨ Loading ✨</h1>;
 
     return (
         <div className="wish-contain">

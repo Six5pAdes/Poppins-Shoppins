@@ -30,8 +30,7 @@ function Navigation() {
             </NavLink>
           </div>) : (
           null
-        )
-        }
+        )}
         <div className="nav-profile">
           <ProfileButton />
         </div>

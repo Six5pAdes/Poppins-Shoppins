@@ -21,7 +21,7 @@ const Landing = () => {
         <div className='all-products-contain'>
             {Object.values(products).map((product) => (
                 <div
-                    key={product.id}
+                    key={`${product.id}`}
                     className='one-product-contain'
                     title={product.name}
                     onClick={() => handleProductClick(product.id)}
