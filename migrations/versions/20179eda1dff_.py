@@ -45,7 +45,7 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('image', sa.String(), nullable=False),
     sa.Column('price', sa.Float(precision=10, asdecimal=2), nullable=False),
-    sa.Column('category', sa.Enum('Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous', name='product_category'), nullable=False),
+    sa.Column('category', sa.Enum('Clothing', 'Creativity', 'Furniture', 'Handmade', 'Miscellaneous', name='category'), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
