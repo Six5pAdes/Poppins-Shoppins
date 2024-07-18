@@ -84,6 +84,7 @@ function LoginFormModal() {
           <button className='success' type="submit">Log In</button>
         }
         <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
+        {/* <a href={`${window.origin}/api/auth/oauth_login`}><button>OAUTH</button></a> */}
       </form>
     </div>
   );
