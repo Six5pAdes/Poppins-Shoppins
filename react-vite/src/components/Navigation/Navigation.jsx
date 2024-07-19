@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "../Searchbar/Searchbar";
-import "./Navigation.css";
 import logo from "../../../images/Poppins's Shoppins.png"
 import { FaShoppingCart } from "react-icons/fa";
+import "./Navigation.css";
 
 function Navigation() {
 
@@ -22,7 +22,7 @@ function Navigation() {
             />
           </NavLink>
         </div>
-        <SearchBar className='search-contain' />
+        <SearchBar className='search-container' />
         {user ? (
           <div className="nav-cart">
             <NavLink to='/orders'>

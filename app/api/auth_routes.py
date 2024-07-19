@@ -19,6 +19,7 @@ import google.auth.transport.requests
 
 
 auth_routes = Blueprint('auth', __name__)
+environment = os.getenv('FLASK_ENV')
 
 
 ############ OAUTH 2.0 SETUP #####################################################################
@@ -47,7 +48,8 @@ client_secrets = {
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_secret": CLIENT_SECRET,
     "redirect_uris": [
-      "http://localhost:8000/api/auth/callback"
+      "http://localhost:5173/api/auth/callback"
+      "https://poppins-shoppings.onrender.com/api/auth/callback"
     ]
   }
 }
@@ -72,15 +74,20 @@ secrets.close() # This method call deletes our temporary file from the /tmp fold
 
 """
 Initializing our flow class below, note that there is a parameter named 'autogenerate_code_verifier'
-which is not shown as it has a default value of True, which is preceisely what we want.
+which is not shown as it has a default value of True, which is precisely what we want.
 As a result, our flow class constructor will generate a code verifier for us and transmit it in
 URL parameters of the first redirect in our OAuth flow.
 """
+
+uri = "http://localhost:5173/api/auth/callback"
+if (environment == "production") :
+    uri = "https://poppins-shoppings.onrender.com/api/auth/callback"
+
 flow = google_auth_oauthlib.flow.Flow(
     oauth2_session,
     client_type='web',
     client_config=client_config,
-    redirect_uri="http://localhost:8000/api/auth/callback",
+    redirect_uri=uri,
 )
 
 ############ END OAUTH 2.0 SETUP ##########################################################################
@@ -158,7 +165,7 @@ def oauth_login():
     authorization_url, state = flow.authorization_url(prompt="select_account consent")
     # print("AUTH URL: ", authorization_url) # I recommend that you print this value out to see what it's generating.
     """
-    Ex: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<Your Clien ID>&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fapi%2Fauth%2Fcallback&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&state=MTSa8pz4vH4Tpgl6qVaISesExrPpBE&code_challenge=bpJG7pNYuCkA-8CZ6lo-P-GbvdOeYpXTCXT6ZB2j-4o&code_challenge_method=S256&prompt=select_account+consent&access_type=offline
+    Ex: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<Your Client ID>&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fapi%2Fauth%2Fcallback&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&state=MTSa8pz4vH4Tpgl6qVaISesExrPpBE&code_challenge=bpJG7pNYuCkA-8CZ6lo-P-GbvdOeYpXTCXT6ZB2j-4o&code_challenge_method=S256&prompt=select_account+consent&access_type=offline
     It SHOULD look a lot like the URL in the SECOND or THIRD line of our flow chart!
 
     Note that in the auth url above the value 'access_type' is set to 'offline' by default. Without this parameter being set, we would not receive a Refresh Token with our Access Token.
@@ -215,8 +222,11 @@ def callback():
 
     if not user_exists:
         user_exists = User(
+            first_name=id_info.get("name").split(' ')[0],
+            last_name=id_info.get("name").split(' ')[1],
             username=id_info.get("name"),
-            email=temp_email
+            email=temp_email,
+            password='OAUTH'
         )
 
         db.session.add(user_exists)

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
+import googleimage from '../../../images/googleimage.png'
 import "./SignupForm.css";
 
 function SignupFormModal() {
@@ -157,7 +158,11 @@ function SignupFormModal() {
           <button className="success" type="submit">Sign Up</button>
         }
       </form>
-      {/* <a href={`${window.origin}/api/auth/oauth_login`}><button>OAUTH</button></a> */}
+      <a href={`${window.origin}/api/auth/oauth_login`} className="google-oauth">
+        <button className="goog-log-btn">
+          <img src={googleimage} alt="google-img" className="google-logo" />Sign Up With Google
+        </button>
+      </a>
     </div>
   );
 }

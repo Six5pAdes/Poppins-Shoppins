@@ -3,6 +3,7 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useNavigate } from "react-router-dom";
+import googleimage from '../../../images/googleimage.png';
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -84,7 +85,11 @@ function LoginFormModal() {
           <button className='success' type="submit">Log In</button>
         }
         <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
-        {/* <a href={`${window.origin}/api/auth/oauth_login`}><button>OAUTH</button></a> */}
+        <a href={`${window.origin}/api/auth/oauth_login`} className="google-oauth">
+          <button className="goog-log-btn">
+            <img src={googleimage} alt="google-img" className="google-logo" />Log In With Google
+          </button>
+        </a>
       </form>
     </div>
   );
