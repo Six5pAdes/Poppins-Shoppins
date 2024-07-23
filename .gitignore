@@ -7,3 +7,5 @@ __pycache__/
 */dev.db
 app/api/file_routes.py
 app/forms/file_form.py
+
+client_secret_999490583406-kmhbsp276j11t7n51u3paog74k6lur2n.apps.googleusercontent.com.json

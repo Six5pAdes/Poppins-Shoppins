@@ -75,9 +75,10 @@ function SignupFormModal() {
               type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Enter Your First Name"
             />
             <div className="floating-placeholders" style={firstName ? { top: "-10.5px" } : null}>
-              <label>Enter Your First Name</label>
+              <label>First Name *</label>
             </div>
             {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
           </label>
@@ -89,9 +90,10 @@ function SignupFormModal() {
               type="text"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              placeholder="Enter Your Last Name"
             />
             <div className="floating-placeholders" style={lastName ? { top: "-10.5px" } : null}>
-              <label>Enter Your Last Name</label>
+              <label>Last Name *</label>
             </div>
             {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
           </label>
@@ -103,9 +105,10 @@ function SignupFormModal() {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Your Valid Email Address"
             />
             <div className="floating-placeholders" style={email ? { top: "-10.5px" } : null}>
-              <label>Enter a Valid Email Address</label>
+              <label>Email *</label>
             </div>
             {errors.email && <p className="err-msg">{errors.email}</p>}
           </label>
@@ -117,9 +120,10 @@ function SignupFormModal() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter Your Username (3 characters minimum)"
             />
             <div className="floating-placeholders" style={username ? { top: "-10.5px" } : null}>
-              <label>Username must be at least 3 characters long</label>
+              <label>Username *</label>
             </div>
             {errors.username && <p className="err-msg">{errors.username}</p>}
           </label>
@@ -131,9 +135,10 @@ function SignupFormModal() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Your Password (6 characters minimum)"
             />
             <div className="floating-placeholders" style={password ? { top: "-10.5px" } : null}>
-              <label>Password must be at least 6 characters long</label>
+              <label>Password *</label>
             </div>
             {errors.password && <p className="err-msg">{errors.password}</p>}
           </label>
@@ -145,9 +150,10 @@ function SignupFormModal() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Reenter Your Password Exactly As The First Time"
             />
             <div className="floating-placeholders" style={confirmPassword ? { top: "-10.5px" } : null}>
-              <label>Confirm Your Password</label>
+              <label>Confirm Your Password *</label>
             </div>
             {errors.confirmPassword && <p className="err-msg">{errors.confirmPassword}</p>}
           </label>

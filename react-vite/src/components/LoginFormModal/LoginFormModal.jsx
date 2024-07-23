@@ -61,9 +61,10 @@ function LoginFormModal() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter Email"
           />
           <div className="floating-placeholders" style={email ? { top: "-10.5px" } : null}>
-            <label>Enter Email</label>
+            <label>Email *</label>
           </div>
           {errors.email && <p className="err-msg">{errors.email}</p>}
         </label>
@@ -73,24 +74,25 @@ function LoginFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter Password"
           />
           <div className="floating-placeholders" style={password ? { top: "-10.5px" } : null}>
-            <label>Enter Password</label>
+            <label>Password *</label>
           </div>
           {errors.password && <p className="err-msg">{errors.password}</p>}
         </label>
-        {disabledButton() ?
-          <button className='disabled' type="submit">Log In</button>
-          :
-          <button className='success' type="submit">Log In</button>
-        }
-        <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
-        <a href={`${window.origin}/api/auth/oauth_login`} className="google-oauth">
-          <button className="goog-log-btn">
-            <img src={googleimage} alt="google-img" className="google-logo" />Log In With Google
-          </button>
-        </a>
       </form>
+      {disabledButton() ?
+        <button className='disabled' type="submit">Log In</button>
+        :
+        <button className='success' type="submit">Log In</button>
+      }
+      <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
+      <a href={`${window.origin}/api/auth/oauth_login`} className="google-oauth">
+        <button className="goog-log-btn">
+          <img src={googleimage} alt="google-img" className="google-logo" />Log In With Google
+        </button>
+      </a>
     </div>
   );
 }

@@ -1,62 +1,62 @@
 .signup-modal {
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
 }
 
 .signup-header {
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
 }
 
 .signup-form {
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 95%;
-gap: 10px
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    gap: 10px
 }
 
 .signup-labels {
-position: relative;
-width: 25rem;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-margin: 10px 0;
+    position: relative;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
 }
 
 .signup-inputs {
-width: 100%;
-margin: 5px 0;
-border: 1px black solid;
-background-color: #dee7e4;
+    width: 100%;
+    margin: 5px 0;
+    border: 1px black solid;
+    background-color: #dee7e4;
 }
 
 .signup-inputs:focus {
-border-color: #5c8374;
-box-shadow: 0 0 10px #5c8374;
-outline: none;
+    border-color: #5c8374;
+    box-shadow: 0 0 10px #5c8374;
+    outline: none;
 }
 
 .signupForm p {
-padding: 5px;
-color: red;
+    padding: 5px;
+    color: red;
 }
 
 .floating-placeholders {
-position: absolute;
-pointer-events: none; /* We don't want the label to be recognized on hover or click */
-top: -10px;
-left: 10px
+    position: absolute;
+    pointer-events: none; /* We don't want the label to be recognized on hover or click */
+    top: -10px;
+    left: 10px
 }
 
 .signup-inputs:focus+.floating-placeholders {
-top: -10.5px
+    top: -10.5px
 }
 
 .google-oauth {
@@ -68,7 +68,6 @@ top: -10.5px
 
 .goog-log-btn {
     display: flex;
-    /* padding: auto; */
     margin-top: 5px;
     color: black;
     background-color: whitesmoke;
@@ -80,7 +79,6 @@ top: -10.5px
 }
 
 .google-logo {
-    /* width: 20px; */
     height: 21px;
     padding-right: 5px;
     padding-top: 3px

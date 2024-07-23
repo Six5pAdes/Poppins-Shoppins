@@ -51,7 +51,7 @@ function ProfileButton() {
               <FaUserCircle className="dropdown-icon" />
             </>
           ) : (
-            <p className="greeting">Please sign in here.</p>
+            <p className="greeting">Hello! Please sign in here.</p>
           )}
         </div>
       </div>

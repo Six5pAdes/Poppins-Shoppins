@@ -28,7 +28,8 @@ function Navigation() {
             <NavLink to='/orders'>
               <FaShoppingCart className="cart-icon" />
             </NavLink>
-          </div>) : (
+          </div>
+        ) : (
           null
         )}
         <div className="nav-profile">
