@@ -4,6 +4,8 @@
 
 .full-navbar {
   background-color: #d63d0a;
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-contain {
@@ -11,7 +13,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  height: 100px
+  height: 100px;
+  list-style-type: none;
 }
 
 .nav-logo {
@@ -83,6 +86,8 @@
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  list-style-type: none;
+  z-index: 1;
 }
 
 .profile-dropdown li {
@@ -126,19 +131,6 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 300px;
-}
-
-.search-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-  cursor: pointer;
-}
-
-.search-icon:hover {
-  color: #333;
 }
 
 .profile-container {

@@ -5,12 +5,11 @@
 }
 
 .search-bar {
-    margin: 0 20px;
+    margin: 0 20px 8px;
     height: 30px;
     align-self: center;
     flex: 1;
     border-radius: 5px;
-    margin-bottom: 8px;
     z-index: 1;
 }
 
