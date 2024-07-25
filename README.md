@@ -60,7 +60,7 @@ More details: https://github.com/Six5pAdes/Poppins-Shoppings/wiki/Feature-List
 
 ## What Comes Next?
 
-- OAuth integration so users can create a new account or log in via their Google account
+- ~~OAuth integration so users can create a new account or log in via their Google account~~ ✅
 - Image preview during product upload
 - More options for categorizing products (i.e.: price range, sold by, alphabetical, etc)
 
