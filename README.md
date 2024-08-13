@@ -8,7 +8,7 @@ Inspired by e-commerce sites such as Etsy and Amazon, and themed around the magi
 
 ## Preview
 
-<img width="1440" alt="Screen Shot 2024-08-13 at 08 52 56" src="https://github.com/user-attachments/assets/2de2f592-2399-40b8-8d1a-aff8f87c24ea">
+<img width="1440" alt="Poppins Shoppings" src="https://github.com/user-attachments/assets/2de2f592-2399-40b8-8d1a-aff8f87c24ea">
 
 
 ## Technologies
