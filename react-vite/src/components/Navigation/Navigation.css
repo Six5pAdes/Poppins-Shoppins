@@ -60,6 +60,7 @@
   font-size: 50px;
   justify-content: flex-end;
   padding-right: 10px;
+  color: #fff;
 }
 
 .greeting {
@@ -158,4 +159,10 @@
   color: white;
   text-decoration: none;
   padding: 3px 10px;
+}
+
+.cat-item:hover {
+  background-color: #272d5a;
+  color: white;
+  text-decoration: underline;
 }
