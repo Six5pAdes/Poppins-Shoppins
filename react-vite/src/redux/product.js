@@ -80,7 +80,7 @@ export const loadCategoryProductsThunk = (category) => async (dispatch) => {
 };
 export const loadIdProductsThunk = (productId) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/products`);
+    const res = await fetch(`/api/products/${productId}`);
     if (res.ok) {
       const data = await res.json();
       const selectedProducts = data.Products.filter((ele) =>
@@ -158,11 +158,7 @@ export default function productReducer(state = initialState, action) {
       return { ...state, ...action.products };
     }
     case ID_PRODUCTS: {
-      const newProducts = action.products.reduce((acc, product) => {
-        acc[product.id] = product;
-        return acc;
-      }, {});
-      return { ...state, ...newProducts };
+      return { ...state, ...action.products };
     }
     case CREATE_PRODUCT: {
       return {
