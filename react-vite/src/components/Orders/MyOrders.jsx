@@ -106,6 +106,9 @@ const MyOrders = () => {
     const orders = useSelector(state => state.orders?.CurrOrders);
     const products = useSelector(state => state.products);
 
+    const prodArr = Object.values(products)?.slice(0, orders?.length);
+    const prodIds = orders?.map(ele => ele.product_id);
+
     const [isDeleted, setIsDeleted] = useState(false)
     const renderOnDelete = () => setIsDeleted(!isDeleted)
 
@@ -117,13 +120,10 @@ const MyOrders = () => {
     }, [dispatch, user, navigate, isDeleted]);
 
     useEffect(() => {
-        if (orders) {
-            const prodId = orders.map(ele => ele.product_id);
-            if (prodId.length > 0) {
-                dispatch(loadIdProductsThunk(prodId));
-            }
+        if (orders && prodIds?.length > 0) {
+            dispatch(loadIdProductsThunk(prodIds));
         }
-    }, [dispatch, orders]);
+    }, [dispatch, orders, prodIds, isDeleted]);
 
     if (!orders || !products) return <h1>✨ Loading ✨</h1>;
 
@@ -142,18 +142,18 @@ const MyOrders = () => {
     return (
         <div className="cart-contain">
             <div className="cart-item-contain">
-                {orderedProducts.length > 0 ? (
-                    orderedProducts.map(eachProd => (
-                        <div className="cart-product-contain" key={eachProd.id}>
+                {prodArr?.length > 0 ? (
+                    prodArr?.map((eachProd) => (
+                        <div className="cart-product-contain" key={eachProd?.id}>
                             <div className="product-image">
-                                <NavLink to={`/products/${eachProd.id}`}>
-                                    <img src={eachProd.image} alt={eachProd.name} className='product-img' />
+                                <NavLink to={`/products/${eachProd?.id}`}>
+                                    <img src={eachProd?.image} alt={eachProd?.name} className='product-img' />
                                 </NavLink>
                             </div>
                             <div className="product-info">
-                                <h3>{eachProd.name}</h3>
-                                <h4>Price: ${eachProd.price}</h4>
-                                <h4>Quantity: {eachProd.quantity}</h4>
+                                <h3>{eachProd?.name}</h3>
+                                <h4>Price: ${eachProd?.price}</h4>
+                                <h4>Quantity: {eachProd?.quantity}</h4>
                             </div>
                             <OrderInteract
                                 order={orders.find(ele => ele.product_id === eachProd.id)}

@@ -35,7 +35,7 @@ def getOrderById(id):
         return jsonify({'message': 'Unauthorized'}), 401
     else:
         order = order.to_dict()
-        return order.to_dict(), 200
+        return order, 200
 
 
 # creating an order

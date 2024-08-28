@@ -79,14 +79,18 @@ export const loadCategoryProductsThunk = (category) => async (dispatch) => {
   }
 };
 export const loadIdProductsThunk = (productId) => async (dispatch) => {
-  const res = await fetch(`/api/products`);
-  if (res.ok) {
-    const data = await res.json();
-    const selectedProducts = data.Products.filter((ele) =>
-      productId.includes(ele.id)
-    );
-    dispatch(loadIdProducts(selectedProducts));
-    return selectedProducts;
+  try {
+    const res = await fetch(`/api/products`);
+    if (res.ok) {
+      const data = await res.json();
+      const selectedProducts = data.Products.filter((ele) =>
+        productId.includes(ele.id)
+      );
+      dispatch(loadIdProducts(selectedProducts));
+      return selectedProducts;
+    }
+  } catch (error) {
+    console.error("Failed to load products by ID:", error);
   }
 };
 export const newProductThunk = (product) => async (dispatch) => {
@@ -154,7 +158,11 @@ export default function productReducer(state = initialState, action) {
       return { ...state, ...action.products };
     }
     case ID_PRODUCTS: {
-      return { ...state, ...action.products };
+      const newProducts = action.products.reduce((acc, product) => {
+        acc[product.id] = product;
+        return acc;
+      }, {});
+      return { ...state, ...newProducts };
     }
     case CREATE_PRODUCT: {
       return {
