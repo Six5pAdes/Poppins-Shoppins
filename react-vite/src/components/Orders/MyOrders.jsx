@@ -42,7 +42,7 @@ const MyOrders = () => {
     if (!orders || !products) return <h1>✨ Loading ✨</h1>;
 
     if (!Object.values(products).length) {
-        return <h2>Your Cart is Empty.</h2>;
+        return <h2>Your cart is empty, please go ahead and shop.</h2>;
     }
 
     const orderedProducts = orders.map(order => {

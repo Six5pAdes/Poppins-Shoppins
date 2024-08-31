@@ -22,7 +22,6 @@ class User(db.Model, UserMixin):
     products = db.relationship('Product', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
     order_items = db.relationship('OrderItem', back_populates='users')
-    # carts = db.relationship('Cart', back_populates='user')
     order_histories = db.relationship('OrderHistory', back_populates='user')
     wishlists = db.relationship('Wishlist', back_populates='user')
 
