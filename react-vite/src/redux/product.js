@@ -78,13 +78,14 @@ export const loadCategoryProductsThunk = (category) => async (dispatch) => {
     console.error("Failed to load category products:", error);
   }
 };
-export const loadIdProductsThunk = (productId) => async (dispatch) => {
+export const loadIdProductsThunk = (productIds) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/products/${productId}`);
+    const res = await fetch(`/api/products`);
     if (res.ok) {
       const data = await res.json();
-      const selectedProducts = data.Products.filter((ele) =>
-        productId.includes(ele.id)
+      console.log("Fetched products data:", data);
+      const selectedProducts = data.Products.filter((product) =>
+        productIds.includes(product.id)
       );
       dispatch(loadIdProducts(selectedProducts));
       return selectedProducts;
