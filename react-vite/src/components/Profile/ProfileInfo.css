@@ -1,4 +1,4 @@
-.profile-contain, #this-product, #wish-contain {
+.profile-contain, #this-product, #wish-contain, #this-review {
     display: flex;
     flex-direction: column;
     justify-content: center;

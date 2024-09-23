@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from app.models import Review, db
+from flask_login import current_user
 from app.forms.review_form import ReviewForm
 
 
@@ -55,3 +56,10 @@ def deleteReview(id):
     db.session.delete(review)
     db.session.commit()
     return {'message': 'Successfully deleted'}, 200
+
+# get review by user
+@review_routes.route('/current')
+def getReviewByUser():
+    reviews = Review.query.filter(Review.user_id == current_user.id).all()
+    response = [review.to_dict() for review in reviews]
+    return {'reviews': response}

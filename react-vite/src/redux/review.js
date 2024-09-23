@@ -1,10 +1,15 @@
 const LOAD_REVIEWS = "reviews/loadReviews";
+const LOAD_USER_REVIEWS = "reviews/loadUserReviews";
 const CREATE_REVIEW = "reviews/createReview";
 const UPDATE_REVIEW = "reviews/updateReview";
 const DELETE_REVIEW = "reviews/deleteReview";
 
 const loadReviews = (reviews) => ({
   type: LOAD_REVIEWS,
+  reviews,
+});
+const loadUserReviews = (reviews) => ({
+  type: LOAD_USER_REVIEWS,
   reviews,
 });
 const createReview = (review) => ({
@@ -25,6 +30,14 @@ export const loadReviewsThunk = (productId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(loadReviews(data));
+    return data;
+  }
+};
+export const loadUserReviewsThunk = () => async (dispatch) => {
+  const res = await fetch(`/api/reviews/current`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadUserReviews(data));
     return data;
   }
 };
@@ -67,6 +80,13 @@ const initialState = {};
 export default function reviewReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_REVIEWS: {
+      const newState = { ...state };
+      action.reviews.reviews.forEach((review) => {
+        newState[review.id] = review;
+      });
+      return newState;
+    }
+    case LOAD_USER_REVIEWS: {
       const newState = { ...state };
       action.reviews.reviews.forEach((review) => {
         newState[review.id] = review;
