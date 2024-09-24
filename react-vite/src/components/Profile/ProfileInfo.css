@@ -144,6 +144,12 @@ button {
     cursor: pointer;
 }
 
+.product-name:hover {
+    cursor: pointer;
+    color: #c6286d;
+    text-decoration: underline;
+}
+
 .button-contain {
     display: flex;
     /* flex-direction: row; */
@@ -158,5 +164,5 @@ button {
 
 #logout-but,
 #delete-user-but {
-    margin: 10px; /* Add some space between buttons */
+    margin-left: 50px; /* Add some space between buttons */
 }

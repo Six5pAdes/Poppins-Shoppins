@@ -1,4 +1,3 @@
-import { deleteUserThunk } from '../../redux/profile'
 import * as sessionActions from '../../redux/session'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useModal } from '../../context/Modal'
@@ -7,6 +6,7 @@ import { useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfile'
 import UpdateReview from '../ReviewPages/EditReview'
+import { deleteUserThunk } from '../../redux/profile'
 import { loadUserProductsThunk, deleteProductThunk } from '../../redux/product'
 import { loadUserReviewsThunk, deleteReviewThunk } from '../../redux/review'
 import Wishlist from '../Wishlists/Wishlist'
@@ -29,16 +29,15 @@ const UserPage = () => {
     const navigate = useNavigate()
     const { closeModal } = useModal()
 
-    let user = useSelector(state => state.session.user ? state.session.user : null)
+    let userStore = useSelector(state => state.session.user ? state.session.user : null)
     const products = useSelector(state => state.products)
+    const userProducts = Object.values(products).filter(product => product.user_id === toInt)
     const reviews = useSelector(state => state.reviews)
-    // const userId = useSelector(state => state.session.user ? state.session.user.id : null)
-    const userProducts = Object.values(products).filter(product => product.user_id === parseInt(userId))
-    const userReviews = Object.values(reviews).filter(review => review.user_id === parseInt(userId))
-
+    const userReviews = Object.values(reviews).filter(review => review.user_id === toInt)
+    console.log(userReviews)
     useEffect(() => {
         dispatch(loadUserProductsThunk())
-        dispatch(loadUserReviewsThunk())
+        dispatch(loadUserReviewsThunk(toInt))
         // dispatch(getWishlistsThunk())
     }, [dispatch])
 
@@ -83,16 +82,16 @@ const UserPage = () => {
                 <div id='prof-info'>
                     <div id='prof-stuff'>
                         <div className='prof-piece'>First Name:
-                            <p className='info'>{user?.first_name}</p>
+                            <p className='info'>{userStore?.first_name}</p>
                         </div>
                         <div className='prof-piece'>Last Name:
-                            <p className='info'>{user?.last_name}</p>
+                            <p className='info'>{userStore?.last_name}</p>
                         </div>
                         <div className='prof-piece'>Email:
-                            <p className='info'>{user?.email}</p>
+                            <p className='info'>{userStore?.email}</p>
                         </div>
                         <div className='prof-piece'>Username:
-                            <p className='info'>{user?.username}</p>
+                            <p className='info'>{userStore?.username}</p>
                         </div>
                     </div>
                 </div>
@@ -146,32 +145,41 @@ const UserPage = () => {
                 <h1 id='curr-title'>My Reviews</h1>
                 <ul id='reviews'>
                     {userReviews.map((review) => (
-                        <div key={review.id} className='review-card'>
+                        <div key={review?.id} className='review-card'>
                             <h3
+                                title={products[review?.product_id]?.name}
                                 className="product-name"
-                                onClick={() => navigate(`/products/${review?.Product?.id}`)}
-                            >{review?.Product?.name}</h3>
-                            <div className="product-date">{formatDate(new Date(review?.createdAt))}</div>
-                            <p className="review-comments">{review?.review}</p>
-                            <div className='edit-or-delete'>
-                                <OpenModalMenuItem
-                                    itemText='Update Review'
-                                    className='edit-button'
-                                    modalComponent={<UpdateReview reviewId={review.id} />}
-                                />
-                                <OpenModalMenuItem
-                                    itemText='Delete Review'
-                                    className='delete-button'
-                                    modalComponent={(
-                                        <div id='confirm-delete'>
-                                            <h2>Confirm Delete</h2>
-                                            <span>Are you sure you want to remove this review?</span>
-                                            <button className='success' type='button' onClick={() => handleReviewDelete(review.id)}>Delete Review</button>
-                                            <button className='success' type='button' onClick={closeModal}>Keep Review</button>
-                                        </div>
-                                    )}
-                                />
-                            </div>
+                                onClick={() => navigate(`/products/${review?.product_id}`)}
+                            >{products[review?.product_id]?.name}</h3>
+                            <div className="product-date">{formatDate(new Date(review?.created_at))}</div>
+                            <p className="review-comments">{review?.body}</p>
+                            <p className="review-rating">Rating: {review?.rating} / 5</p>
+                            {userStore?.id === review?.user_id && (
+                                <div className='edit-or-delete'>
+                                    <OpenModalMenuItem
+                                        itemText='Update Review'
+                                        className='edit-button'
+                                        modalComponent={<UpdateReview
+                                            reviewId={review.id}
+                                            initialReview={review.body}
+                                            initialRating={review.rating}
+                                            productId={review.product_id}
+                                        />}
+                                    />
+                                    <OpenModalMenuItem
+                                        itemText='Delete Review'
+                                        className='delete-button'
+                                        modalComponent={(
+                                            <div id='confirm-delete'>
+                                                <h2>Confirm Delete</h2>
+                                                <span>Are you sure you want to remove this review?</span>
+                                                <button className='success' type='button' onClick={() => handleReviewDelete(review.id)}>Delete Review</button>
+                                                <button className='success' type='button' onClick={closeModal}>Keep Review</button>
+                                            </div>
+                                        )}
+                                    />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </ul>
@@ -189,7 +197,7 @@ const UserPage = () => {
                                 <div id='confirm-delete'>
                                     <h2>Confirm Delete</h2>
                                     <span>Are you sure you want to remove this user?</span>
-                                    <button className='success' type='button' onClick={() => handleDeleteProfile(user.id)}>Delete User</button>
+                                    <button className='success' type='button' onClick={() => handleDeleteProfile(userStore.id)}>Delete User</button>
                                     <button className='success' type='button' onClick={closeModal}>Keep User</button>
                                 </div>
                             )}
