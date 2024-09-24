@@ -34,10 +34,10 @@ const UserPage = () => {
     const userProducts = Object.values(products).filter(product => product.user_id === toInt)
     const reviews = useSelector(state => state.reviews)
     const userReviews = Object.values(reviews).filter(review => review.user_id === toInt)
-    console.log(userReviews)
+
     useEffect(() => {
         dispatch(loadUserProductsThunk())
-        dispatch(loadUserReviewsThunk(toInt))
+        dispatch(loadUserReviewsThunk())
         // dispatch(getWishlistsThunk())
     }, [dispatch])
 
