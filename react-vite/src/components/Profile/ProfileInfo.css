@@ -150,6 +150,23 @@ button {
     text-decoration: underline;
 }
 
+#reviews {
+    row-gap: 40px;
+    width: auto;
+    margin: 0 auto;
+    padding-top: 20px;
+    box-sizing: border-box;
+    align-content: center;
+    text-align: center;
+}
+
+.review-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 .button-contain {
     display: flex;
     /* flex-direction: row; */

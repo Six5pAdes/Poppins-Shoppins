@@ -1,8 +1,11 @@
 .reviews-contain {
-    margin: 2rem;
-    display: grid;
-    align-content: center;
-    text-align: center;
+  row-gap: 40px;
+  width: auto;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  align-content: center;
+  text-align: center;
   }
 
   .no-reviews {

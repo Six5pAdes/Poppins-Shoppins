@@ -22,6 +22,14 @@ const formatDate = (date = new Date()) => {
     return `${months[month]} ${year}`
 }
 
+const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+        stars.push(<span key={i}>🪄</span>);
+    }
+    return stars;
+};
+
 const UserPage = () => {
     const dispatch = useDispatch()
     const { userId } = useParams()
@@ -153,7 +161,7 @@ const UserPage = () => {
                             >{products[review?.product_id]?.name}</h3>
                             <div className="product-date">{formatDate(new Date(review?.created_at))}</div>
                             <p className="review-comments">{review?.body}</p>
-                            <p className="review-rating">Rating: {review?.rating} / 5</p>
+                            <p className="review-rating">Rating: {renderStars(review?.rating)}</p>
                             {userStore?.id === review?.user_id && (
                                 <div className='edit-or-delete'>
                                     <OpenModalMenuItem
