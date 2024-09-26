@@ -36,6 +36,17 @@
     text-transform: uppercase;
 }
 
+.add-to-here:hover {
+    background-color: #d63d0a;
+    transition: background-color 0.3s;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-here:not(:hover) {
+    background-color: navy;
+    transition: background-color 0.3s;
+}
+
 .actions {
     display: flex;
     flex-direction: row;
@@ -52,4 +63,17 @@
     font-weight: bold;
     text-transform: uppercase;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  }
+}
+
+.reviews button:hover {
+    background-color: #fffe71;
+    color: #27282d;
+    transition: background-color 0.3s;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reviews button:not(:hover) {
+    background-color: #27282d;
+    color: white;
+    transition: background-color 0.3s;
+}

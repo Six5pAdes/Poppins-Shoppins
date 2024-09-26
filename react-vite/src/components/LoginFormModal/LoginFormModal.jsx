@@ -18,8 +18,15 @@ function LoginFormModal() {
     e.preventDefault();
     const newErr = {}
 
+    const validEmail = (email) => {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    };
+
     if (!email) newErr.email = "Email must be provided"
+    if (!validEmail(email)) newErr.email = "Email must be formatted correctly"
     if (!password) newErr.password = "Password must be provided"
+    if (password.length < 6) newErr.password = "Password must be at least 6 characters long"
 
     setErrors(newErr);
     if (Object.keys(newErr).length > 0) return;
@@ -32,14 +39,14 @@ function LoginFormModal() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setErrors({ server: serverResponse });
     } else {
       closeModal();
     }
   };
 
   const disabledButton = () => {
-    return (!email || !password)
+    return (!email.length || password.length < 6)
   }
 
   const demoUser = async (e) => {
@@ -54,6 +61,7 @@ function LoginFormModal() {
   return (
     <div className='login-modal'>
       <h1 className='login-header'>Log In</h1>
+      {errors.server && <p className="err-msg">{errors.server}</p>}
       <form className='login-form' onSubmit={handleSubmit}>
         <label className='login-labels'>
           <input

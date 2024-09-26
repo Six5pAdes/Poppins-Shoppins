@@ -76,6 +76,13 @@
 
 .goog-log-btn:hover {
     background-color: white;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.goog-log-btn:not(:hover) {
+    background-color: whitesmoke;
+    transition: background-color 0.3s;
 }
 
 .google-logo {

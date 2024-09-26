@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 
-.profile-button, .nav-cart {
+.profile-button, .cart-icon {
   position: relative;
   display: flex;
   align-items: center;
@@ -35,6 +35,22 @@
   cursor: pointer;
   margin-top: 5px;
   justify-content: space-between;
+  transition: transform 0.6s;
+}
+
+.profile-button:hover, .cart-icon:hover {
+  transform: rotate(360deg);
+  transition: transform 0.5s;
+}
+
+.profile-button:hover:active, .cart-icon:hover:active {
+  transform: rotate(0deg);
+  transition: transform 0.6s;
+}
+
+.profile-button:not(:hover), .cart-icon:not(:hover) {
+  transform: rotate(0deg);
+  transition: transform 0.6s;
 }
 
 .menu-item {

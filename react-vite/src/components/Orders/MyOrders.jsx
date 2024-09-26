@@ -71,7 +71,6 @@ const MyOrders = () => {
                             <div className="product-info">
                                 <h3>{eachProd?.name}</h3>
                                 <h4>Price: ${eachProd?.price}</h4>
-                                <h4>Quantity: {eachProd?.quantity}</h4>
                             </div>
                             <OrderInteract
                                 order={orders.find(ele => ele.product_id === eachProd.id)}
@@ -87,10 +86,12 @@ const MyOrders = () => {
                 <OpenModalMenuItem
                     itemText='Clear Cart'
                     modalComponent={<EmptyCart />}
+                    className='success'
                 />
                 <OpenModalMenuItem
                     itemText='Checkout'
                     modalComponent={<Checkout />}
+                    className='success'
                 />
             </div>
         </div>

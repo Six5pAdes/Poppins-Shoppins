@@ -30,6 +30,11 @@ button:hover {
     text-transform: uppercase;
     padding: 5px;
     background-color: #afdfdf;
+    transition: background-color 0.3s ease;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
 }
 
 .success {
@@ -43,4 +48,10 @@ button:hover {
     text-transform: uppercase;
     padding: 5px;
     background-color: #c6286d;
+    transition: background-color 0.3s ease;
+}
+
+.success:hover {
+    background-color: #e73b8e;
+    cursor: pointer;
 }

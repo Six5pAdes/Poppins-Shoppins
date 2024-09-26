@@ -28,11 +28,15 @@ const ProductDetails = () => {
     const [isWishlist, setIsWishlist] = useState(false);
     const [removeWishlist, setRemoveWishlist] = useState(false);
 
+    const [isLoaded, setIsLoaded] = useState(true)
+
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
+            .then(() => setIsLoaded(false))
         if (session.user) {
             dispatch(getAllUsersThunk())
             dispatch(loadUserOrderThunk())
+            dispatch(getWishlistsThunk())
         }
     }, [dispatch, productId, session.user])
 
@@ -52,6 +56,12 @@ const ProductDetails = () => {
             setNumReviews(0);
         }
     }, [reviews, productId]);
+
+    useEffect(() => {
+        if (wishlists && product) {
+            setIsWishlist(wishlists.some(item => item.product_id === product.id))
+        }
+    }, [wishlists, product])
 
     // const user = users?.find(user => user.id === product?.user_id)[0]
 
@@ -91,8 +101,12 @@ const ProductDetails = () => {
         }
     };
 
-    if (!product) {
+    if (isLoaded) {
         return <h1>✨ Loading ✨</h1>;
+    }
+
+    if (!product) {
+        return <h1>Product not found</h1>;
     }
 
     return (
@@ -129,7 +143,7 @@ const ProductDetails = () => {
                             <>
                                 <button className="add-to-here" onClick={() =>
                                     handleFav(product?.id)}
-                                >Add to Wishlist
+                                >{isWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
                                 </button>
                                 <div className='cart'>
                                     <button className="add-to-here" onClick={() =>

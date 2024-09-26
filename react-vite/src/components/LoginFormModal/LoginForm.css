@@ -56,6 +56,19 @@
   text-transform: uppercase;
 }
 
+.demo-user:hover {
+  background-color: #e73b8e;
+  color: #27282d;
+  transition: background-color 0.3s;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.demo-user:not(:hover) {
+  background-color: #c6286d;
+  color: white;
+  transition: background-color 0.3s;
+}
+
 .floating-placeholders {
   position: absolute;
   pointer-events: none; /* We don't want the label to be recognized on hover or click */

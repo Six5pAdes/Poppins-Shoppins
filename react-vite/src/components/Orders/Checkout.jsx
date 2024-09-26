@@ -32,7 +32,9 @@ const Checkout = () => {
     const handleCheckout = async (e) => {
         e.preventDefault()
         orders.forEach(async (order) => {
-            await dispatch(addToHistoryThunk({ product_id: order.product_id, quantity: order.quantity }))
+            await dispatch(addToHistoryThunk(
+                { product_id: order.product_id, quantity: order.quantity }
+            ))
         })
         await dispatch(clearCartThunk())
         closeModal()

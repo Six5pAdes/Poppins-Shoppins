@@ -74,6 +74,19 @@ button {
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+#new-product:hover {
+    background-color: #fffe71;
+    color: #27282d;
+    transition: background-color 0.3s;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#new-product:not(:hover) {
+    background-color: #27282d;
+    color: white;
+    transition: background-color 0.3s;
+}
+
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -116,7 +129,20 @@ button {
     font-weight: bold;
     text-transform: uppercase;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  }
+}
+
+.edit-or-delete button:hover {
+    background-color: #fffe71;
+    color: #27282d;
+    transition: background-color 0.3s;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-or-delete button:not(:hover) {
+    background-color: #27282d;
+    color: white;
+    transition: background-color 0.3s;
+}
 
 #update-btn, .product-price {
     margin-left: 5px;

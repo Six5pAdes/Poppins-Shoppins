@@ -47,14 +47,15 @@ const OrderInteract = ({ order, renderDelete }) => {
             <div className="quantity-contain">
                 {disabledButton() ?
                     <button className="disabled">-</button> :
-                    <button className="quantity-btn" onClick={handleDel}>-</button>
+                    <button className="success" onClick={handleDel}>-</button>
                 }
                 <p className="button-text">Quantity: {quantity}</p>
-                <button className="quantity-btn" onClick={handleAdd}>+</button>
+                <button className="success" onClick={handleAdd}>+</button>
             </div>
             <div className="delete-contain">
                 <OpenModalMenuItem
                     itemText='Remove from cart'
+                    className='success'
                     modalComponent={<RemoveItem orderId={order?.id} renderDelete={renderDelete} />}
                 />
             </div>
