@@ -15,7 +15,7 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
     const product = useSelector(state => state.products[productId])
-    // const users = useSelector(state => state.session.users)
+    const sellers = useSelector(state => state.session.users)
     const session = useSelector(state => state.session)
     const userId = session?.user?.id
     const allCarts = useSelector(state => state.orders?.CurrOrders);
@@ -63,7 +63,7 @@ const ProductDetails = () => {
         }
     }, [wishlists, product])
 
-    // const user = users?.find(user => user.id === product?.user_id)[0]
+    const seller = sellers?.find(user => user.id === product?.user_id)
 
     const handleAddToCart = (prodId) => {
         const orderIds = allCarts.map(ele => ele.product_id)
@@ -83,7 +83,7 @@ const ProductDetails = () => {
         dispatch(getWishlistsThunk())
         setIsWishlist(false)
         setRemoveWishlist(false)
-    }, [dispatch, isWishlist, removeWishlist, isWishlist, removeWishlist])
+    }, [dispatch, isWishlist, removeWishlist])
 
     const wishlistIds = wishlists ? wishlists?.map(ele => ele.product_id) : []
 
@@ -136,7 +136,7 @@ const ProductDetails = () => {
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
                     <p className="seller">
-                        Seller: {product?.first_name} {product?.last_name}
+                        Seller: {seller?.first_name} {seller?.last_name}
                     </p>
                     <div className="actions">
                         {session.user && product.user_id !== session.user.id && (
