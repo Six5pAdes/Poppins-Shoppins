@@ -15,8 +15,8 @@ class OrderHistory(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
 
 
-    user = db.relationship('User', back_populates='order_histories')
-    product = db.relationship('Product', back_populates='order_histories')
+    users = db.relationship('User', back_populates='order_histories')
+    products = db.relationship('Product', back_populates='order_histories')
 
 
     def to_dict(self):

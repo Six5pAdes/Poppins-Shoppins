@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderThunk } from "../../redux/cart";
 import { loadIdProductsThunk } from "../../redux/product";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OrderInteract from "./OrderInteract";
 import EmptyCart from "./EmptyCart";
 import Checkout from "./Checkout";
-import OrderInteract from "./OrderInteract";
 import './Orders.css'
 
 const MyOrders = () => {
@@ -32,18 +32,16 @@ const MyOrders = () => {
     useEffect(() => {
         console.log('orders:', orders);
         console.log('prodIds:', prodIds);
-        if (orders?.length) {
-            if (prodIds?.length) {
-                dispatch(loadIdProductsThunk(prodIds));
-            }
+        if (orders && prodIds?.length > 0) {
+            dispatch(loadIdProductsThunk(prodIds));
         }
     }, [dispatch, orders, prodIds, isDeleted]);
 
     if (!orders || !products) return <h1>✨ Loading ✨</h1>;
 
-    if (!Object.values(products).length) {
-        return <h2>Your cart is empty, please go ahead and shop.</h2>;
-    }
+    // if (!Object.values(products).length) {
+    //     return <h2>Your cart is empty, please go ahead and shop.</h2>;
+    // }
 
     const orderedProducts = orders.map(order => {
         const product = products[order.product_id];

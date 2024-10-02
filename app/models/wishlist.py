@@ -12,8 +12,8 @@ class Wishlist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
-    user = db.relationship('User', back_populates='wishlists')
-    product = db.relationship('Product', back_populates='wishlists')
+    users = db.relationship('User', back_populates='wishlists')
+    products = db.relationship('Product', back_populates='wishlists')
 
     def to_dict(self):
         return {

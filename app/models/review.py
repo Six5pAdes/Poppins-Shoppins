@@ -17,14 +17,14 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
 
-    user = db.relationship('User', back_populates='reviews')
-    product = db.relationship('Product', back_populates='reviews', foreign_keys="[Review.product_id]")
+    users = db.relationship('User', back_populates='reviews')
+    products = db.relationship('Product', back_populates='reviews')
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'username': self.user.username,
+            'username': self.users.username,
             'product_id': self.product_id,
             'body': self.body,
             'rating': self.rating,

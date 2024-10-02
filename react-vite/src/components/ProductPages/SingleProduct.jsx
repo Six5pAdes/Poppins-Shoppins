@@ -7,24 +7,23 @@ import CreateReview from '../ReviewPages/ReviewForm';
 import ProductReviews from '../ReviewPages/ReviewList';
 import { getAllUsersThunk } from '../../redux/session';
 import { createOrderThunk, loadUserOrderThunk } from '../../redux/cart';
-// import { createCartThunk } from '../../redux/cart';
 import { getWishlistsThunk, addToWishlistsThunk, deleteWishlistThunk } from '../../redux/wishlist';
 import './SingleProduct.css'
 
 const ProductDetails = () => {
     const dispatch = useDispatch()
     const { productId } = useParams()
-    const product = useSelector(state => state.products[productId])
-    const sellers = useSelector(state => state.session.users)
     const session = useSelector(state => state.session)
+    const sellers = useSelector(state => state.session.users)
+    const product = useSelector(state => state.products[productId])
     const userId = session?.user?.id
     const allCarts = useSelector(state => state.orders?.CurrOrders);
-    const wishlists = useSelector(state => state.wishlists?.MyWishlists || [])
 
     const reviews = useSelector((state) => state.reviews);
     const [avgRating, setAvgRating] = useState(null);
     const [numReviews, setNumReviews] = useState(0);
 
+    const wishlists = useSelector(state => state.wishlists?.MyWishlists)
     const [isWishlist, setIsWishlist] = useState(false);
     const [removeWishlist, setRemoveWishlist] = useState(false);
 

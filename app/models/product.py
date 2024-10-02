@@ -18,11 +18,11 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
 
-    user = db.relationship('User', back_populates='products')
-    reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan", foreign_keys="[Review.product_id]")
-    order_items = db.relationship('OrderItem', back_populates='product', cascade="all, delete-orphan", foreign_keys="[OrderItem.product_id]")
-    order_histories = db.relationship('OrderHistory', back_populates='product', cascade="all, delete-orphan", foreign_keys="[OrderHistory.product_id]")
-    wishlists = db.relationship('Wishlist', back_populates='product', cascade="all, delete-orphan", foreign_keys="[Wishlist.product_id]")
+    users = db.relationship('User', back_populates='products')
+    reviews = db.relationship('Review', back_populates='products', cascade="all, delete-orphan", foreign_keys="[Review.product_id]")
+    order_items = db.relationship('OrderItem', back_populates='products', cascade="all, delete-orphan", foreign_keys="[OrderItem.product_id]")
+    order_histories = db.relationship('OrderHistory', back_populates='products', cascade="all, delete-orphan", foreign_keys="[OrderHistory.product_id]")
+    wishlists = db.relationship('Wishlist', back_populates='products', cascade="all, delete-orphan", foreign_keys="[Wishlist.product_id]")
 
     def to_dict(self):
         return {

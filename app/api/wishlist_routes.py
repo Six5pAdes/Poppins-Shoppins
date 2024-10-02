@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import db, Wishlist, Product
 
+
 wishlist_routes = Blueprint('wishlist', __name__)
 
 
@@ -27,13 +28,13 @@ def fav_by_user():
 def add_fav():
     data = request.json
     product_id = data.get('product_id')
-    existing_fav = Wishlist.query.filter_by(user_id=current_user.id, product_id=product_id).first()
-    if existing_fav:
-        return {'message': 'Already added to wishlist'}, 400
+    # existing_fav = Wishlist.query.filter_by(user_id=current_user.id, product_id=product_id).first()
     new_fav = Wishlist(user_id=current_user.id, product_id=product_id)
+    if not new_fav:
+        return {'message': 'Already added to wishlist'}, 400
     db.session.add(new_fav)
     db.session.commit()
-    return {'wishlist': new_fav.to_dict()}, 201
+    return {'message': 'Added to wishlist'}, 201
 
 
 # Delete a wishlist

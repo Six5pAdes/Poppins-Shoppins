@@ -49,6 +49,8 @@ def createOrder():
         product_id=product_id,
         quantity=1,
     )
+    if not new_order:
+        return {'message': 'Cannot add to cart'}, 400
     db.session.add(new_order)
     db.session.commit()
     return {'message': 'Order created successfully'}, 201

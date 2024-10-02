@@ -13,17 +13,17 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
-    email = db.Column(db.String(255), nullable=False, unique=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=True, default=None)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate = datetime.now)
 
-    products = db.relationship('Product', back_populates='user')
-    reviews = db.relationship('Review', back_populates='user')
+    products = db.relationship('Product', back_populates='users')
+    reviews = db.relationship('Review', back_populates='users')
     order_items = db.relationship('OrderItem', back_populates='users')
-    order_histories = db.relationship('OrderHistory', back_populates='user')
-    wishlists = db.relationship('Wishlist', back_populates='user')
+    order_histories = db.relationship('OrderHistory', back_populates='users')
+    wishlists = db.relationship('Wishlist', back_populates='users')
 
     @property
     def password(self):

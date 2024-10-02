@@ -37,27 +37,33 @@ const clearCart = (removeItems) => ({
 
 export const loadOrdersThunk = () => async (dispatch) => {
   const res = await fetch(`/api/orders`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(loadCartsItems(data));
-    return data;
+  if (!res.ok) {
+    throw new Error("Failed to fetch orders");
   }
+  const orders = await res.json();
+  if (orders.errors) return orders.errors;
+  dispatch(loadCartsItems(orders));
+  return orders;
 };
 export const loadUserOrderThunk = () => async (dispatch) => {
   const res = await fetch(`/api/orders/current`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(loadUserOrder(data));
-    return data;
+  if (!res.ok) {
+    throw new Error("Failed to fetch user order");
   }
+  const userOrders = await res.json();
+  if (userOrders.errors) return userOrders.errors;
+  dispatch(loadUserOrder(userOrders));
+  return userOrders;
 };
 export const loadIdOrderThunk = (id) => async (dispatch) => {
   const res = await fetch(`/api/orders/${id}`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(loadIdOrder(data));
-    return data;
+  if (!res.ok) {
+    throw new Error("Failed to fetch order");
   }
+  const idOrder = await res.json();
+  if (idOrder.errors) return idOrder.errors;
+  dispatch(loadIdOrder(idOrder));
+  return idOrder;
 };
 export const createOrderThunk = (newOrderData) => async (dispatch) => {
   const res = await fetch(`/api/orders/new`, {
@@ -68,9 +74,9 @@ export const createOrderThunk = (newOrderData) => async (dispatch) => {
   if (!res.ok) {
     throw new Error("Failed to create order");
   }
-  const data = await res.json();
-  dispatch(createOrder(data));
-  // return data;
+  const newOrder = await res.json();
+  dispatch(createOrder(newOrder));
+  return newOrder;
 };
 export const updateOrderThunk =
   (orderId, updatedOrderData) => async (dispatch) => {
@@ -82,29 +88,31 @@ export const updateOrderThunk =
     if (!res.ok) {
       throw new Error("Failed to update order");
     }
-    const data = await res.json();
-    dispatch(updateOrder(orderId, data));
-    // return data;
+    const updatedOrder = await res.json();
+    dispatch(updateOrder(updatedOrder));
+    return updatedOrder;
   };
 export const deleteOrderThunk = (orderId) => async (dispatch) => {
   const res = await fetch(`/api/orders/${orderId}/delete`, {
     method: "DELETE",
   });
-  if (!res.ok) {
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteOrder(data));
+  } else {
     throw new Error("Failed to delete order");
   }
-  // const data = await res.json();
-  dispatch(deleteOrder(orderId));
 };
 export const clearCartThunk = () => async (dispatch) => {
   const res = await fetch(`/api/orders/current/clear`, {
     method: "DELETE",
   });
-  if (!res.ok) {
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(clearCart(data));
+  } else {
     throw new Error("Failed to clear cart");
   }
-  const data = await res.json();
-  dispatch(clearCart(data));
 };
 
 const initialState = {};
@@ -115,10 +123,10 @@ export default function cartReducer(state = initialState, action) {
       return { ...state, ...action.orders };
     }
     case LOAD_USER_ORDER: {
-      return { ...state, ...action.orders };
+      return { ...state, ...action.userOrders };
     }
     case LOAD_ID_ORDER: {
-      return { ...state, ...action.order };
+      return { ...state, ...action.idOrder };
     }
     case CREATE_ORDER: {
       return { ...state, ...action.newOrder };
