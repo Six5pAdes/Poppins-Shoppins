@@ -63,7 +63,7 @@ const OrderHistory = () => {
                 ) : (
                     <div className="no-orders">
                         <h2>No orders found</h2>
-                        <p>You haven't placed any orders yet. Start shopping to see your order history!</p>
+                        <p>You haven&apos;t placed any orders yet. Start shopping to see your order history!</p>
                     </div>
                 )}
             </div>
