@@ -25,19 +25,21 @@ const ProductDetails = () => {
 
     const wishlists = useSelector(state => state.wishlists?.MyWishlists)
     const [isWishlist, setIsWishlist] = useState(false);
-    const [removeWishlist, setRemoveWishlist] = useState(false);
+    // const [removeWishlist, setRemoveWishlist] = useState(false);
 
     const [isLoaded, setIsLoaded] = useState(true)
 
     useEffect(() => {
         dispatch(loadOneProductThunk(productId))
             .then(() => setIsLoaded(false))
-        if (session.user) {
-            dispatch(getAllUsersThunk())
-            dispatch(loadUserOrderThunk())
-            dispatch(getWishlistsThunk())
-        }
-    }, [dispatch, productId, session.user])
+        // if (session.user) {
+        dispatch(getAllUsersThunk())
+        dispatch(loadUserOrderThunk())
+        dispatch(getWishlistsThunk())
+        setIsWishlist(false)
+        // setRemoveWishlist(false)
+        // }
+    }, [dispatch, productId, sellers])
 
     useEffect(() => {
         const productReviews = Object.values(reviews).filter(
@@ -62,11 +64,12 @@ const ProductDetails = () => {
         }
     }, [wishlists, product])
 
-    const seller = sellers?.find(user => user.id === product?.user_id)
+    const allSellers = session.users
+    const seller = allSellers?.find(user => user.id === product?.user_id)
 
     const handleAddToCart = (prodId) => {
         const orderIds = allCarts.map(ele => ele.product_id)
-        //check if already added item to the cart
+        //check if item was already added to cart
         if (orderIds.includes(prodId)) {
             alert("You've already added this product to your cart. Quantity can be changed on the orders page.")
         } else {
@@ -78,25 +81,19 @@ const ProductDetails = () => {
         }
     }
 
-    useEffect(() => {
-        dispatch(getWishlistsThunk())
-        setIsWishlist(false)
-        setRemoveWishlist(false)
-    }, [dispatch, isWishlist, removeWishlist])
-
-    const wishlistIds = wishlists ? wishlists?.map(ele => ele.product_id) : []
+    // const wishlistIds = wishlists ? wishlists?.map(ele => ele.product_id) : []
 
     const handleFav = (productId) => {
-        if (wishlistIds.includes(productId)) {
-            const favToRemove = wishlists.filter(fav => fav.product_id == productId)[0];
+        if (isWishlist) {
+            const favToRemove = wishlists.find(fav => fav.product_id === productId);
             dispatch(deleteWishlistThunk(favToRemove.id));
             alert(`Successfully removed ${product.name} from wishlist!`);
-            setIsWishlist(true);
+            setIsWishlist(false);
         } else {
             const newFav = { "product_id": productId };
             dispatch(addToWishlistsThunk(newFav));
             alert(`Successfully added ${product.name} to wishlist!`);
-            setRemoveWishlist(true);
+            setIsWishlist(true);
         }
     };
 

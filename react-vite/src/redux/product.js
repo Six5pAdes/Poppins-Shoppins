@@ -83,7 +83,7 @@ export const loadIdProductsThunk = (productIds) => async (dispatch) => {
     const res = await fetch(`/api/products`);
     if (res.ok) {
       const data = await res.json();
-      console.log("Fetched products data:", data);
+      // console.log("Fetched products data:", data);
       const selectedProducts = data.Products.filter((product) =>
         productIds.includes(product.id)
       );

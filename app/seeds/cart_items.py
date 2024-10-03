@@ -23,17 +23,11 @@ def seed_order_items():
         product_id=13,
         quantity=6,
     )
-    order_item5 = OrderItem(
-        user_id=4,
-        product_id=19,
-        quantity=1,
-    )
 
     db.session.add(order_item1)
     db.session.add(order_item2)
     db.session.add(order_item3)
     db.session.add(order_item4)
-    db.session.add(order_item5)
 
     db.session.commit()
 

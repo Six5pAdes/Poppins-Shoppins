@@ -10,13 +10,13 @@ const loadCartsItems = (orders) => ({
   type: LOAD_CART_ITEMS,
   orders,
 });
-const loadUserOrder = (orders) => ({
+const loadUserOrder = (userOrders) => ({
   type: LOAD_USER_ORDER,
-  orders,
+  userOrders,
 });
-const loadIdOrder = (order) => ({
+const loadIdOrder = (idOrder) => ({
   type: LOAD_ID_ORDER,
-  order,
+  idOrder,
 });
 const createOrder = (newOrder) => ({
   type: CREATE_ORDER,

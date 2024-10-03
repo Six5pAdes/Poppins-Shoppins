@@ -72,6 +72,7 @@ const UserPage = () => {
         e.preventDefault()
         dispatch(sessionActions.thunkLogout());
         navigate('/')
+        closeModal()
     }
 
     const handleDeleteProfile = toInt => {
@@ -146,9 +147,6 @@ const UserPage = () => {
                     ))}
                 </ul>
             </section>
-            <section id='wish-contain'>
-                <Wishlist />
-            </section>
             <section id='this-review'>
                 <h1 id='curr-title'>My Reviews</h1>
                 <ul id='reviews'>
@@ -192,10 +190,25 @@ const UserPage = () => {
                     ))}
                 </ul>
             </section>
+            <section id='wish-contain'>
+                <Wishlist />
+            </section>
             <section className='button-contain'>
                 <div className='button-group'>
                     <div id='logout-but'>
-                        <button onClick={logout}>Log Out</button>
+                        <OpenModalMenuItem
+                            itemText='Log Out'
+                            className='delete-button'
+                            modalComponent={(
+                                <div id='confirm-delete'>
+                                    <h2>Confirm Log Out</h2>
+                                    <span>Are you sure you want to log out?</span>
+                                    <button className='success' type='button' onClick={logout}>Log Out</button>
+                                    <button className='success' type='button' onClick={closeModal}>Cancel</button>
+                                </div>
+                            )}
+                        />
+                        {/* <button onClick={logout}>Log Out</button> */}
                     </div>
                     <div id='delete-user-but'>
                         <OpenModalMenuItem
@@ -218,3 +231,5 @@ const UserPage = () => {
 }
 
 export default UserPage
+
+// testuser.io, password

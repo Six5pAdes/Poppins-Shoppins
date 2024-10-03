@@ -16,8 +16,8 @@ const MyOrders = () => {
     const orders = useSelector(state => state.orders?.CurrOrders);
     const products = useSelector(state => state.products);
 
-    const prodArr = Object.values(products)?.slice(0, orders?.length);
-    const prodIds = orders?.map(ele => ele.product_id);
+    // const prodArr = Object.values(products)?.slice(0, orders?.length);
+    // const prodIds = orders?.map(ele => ele.product_id);
 
     const [isDeleted, setIsDeleted] = useState(false)
     const renderOnDelete = () => setIsDeleted(!isDeleted)
@@ -30,24 +30,26 @@ const MyOrders = () => {
     }, [dispatch, user, navigate, isDeleted]);
 
     useEffect(() => {
-        console.log('orders:', orders);
-        console.log('prodIds:', prodIds);
-        if (orders && prodIds?.length > 0) {
+        // console.log('orders:', orders);
+        // console.log('prodIds:', prodIds);
+        if (orders && orders.length > 0) {
+            const prodIds = orders?.map(ele => ele.product_id);
             dispatch(loadIdProductsThunk(prodIds));
         }
-    }, [dispatch, orders, prodIds, isDeleted]);
+    }, [dispatch, orders, isDeleted]);
 
     if (!orders || !products) return <h1>✨ Loading ✨</h1>;
 
-    // if (!Object.values(products).length) {
-    //     return <h2>Your cart is empty, please go ahead and shop.</h2>;
-    // }
+    if (!Object.values(products).length) {
+        return <h2>Your cart is empty, please go ahead and shop.</h2>;
+    }
 
     const orderedProducts = orders.map(order => {
         const product = products[order.product_id];
         return {
             ...product,
-            quantity: order.quantity
+            quantity: order.quantity,
+            orderId: order.id
         };
     });
 
@@ -58,12 +60,16 @@ const MyOrders = () => {
     return (
         <div className="cart-contain">
             <div className="cart-item-contain">
-                {prodArr?.length > 0 ? (
-                    prodArr?.map((eachProd) => (
-                        <div className="cart-product-contain" key={eachProd?.id}>
+                {orderedProducts?.length > 0 ? (
+                    orderedProducts?.map((eachProd) => (
+                        <div className="cart-product-contain" key={`order-${eachProd?.id}`}>
                             <div className="product-image">
                                 <NavLink to={`/products/${eachProd?.id}`}>
-                                    <img src={eachProd?.image} alt={eachProd?.name} className='product-img' />
+                                    <img src={eachProd?.image}
+                                        alt={eachProd?.name}
+                                        className='product-img'
+                                        title={eachProd?.name}
+                                    />
                                 </NavLink>
                             </div>
                             <div className="product-info">

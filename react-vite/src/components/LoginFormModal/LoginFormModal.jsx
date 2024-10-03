@@ -18,11 +18,6 @@ function LoginFormModal() {
     e.preventDefault();
     const newErr = {}
 
-    const validEmail = (email) => {
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return regex.test(email);
-    };
-
     if (!email) newErr.email = "Email must be provided"
     if (!validEmail(email)) newErr.email = "Email must be formatted correctly"
     if (!password) newErr.password = "Password must be provided"
@@ -45,8 +40,13 @@ function LoginFormModal() {
     }
   };
 
+  const validEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const disabledButton = () => {
-    return (!email.length || password.length < 6)
+    return (!email.length || !validEmail(email) || password.length < 6)
   }
 
   const demoUser = async (e) => {
@@ -89,12 +89,12 @@ function LoginFormModal() {
           </div>
           {errors.password && <p className="err-msg">{errors.password}</p>}
         </label>
+        {disabledButton() ?
+          <button className='disabled' type="submit">Log In</button>
+          :
+          <button className='success' type="submit">Log In</button>
+        }
       </form>
-      {disabledButton() ?
-        <button className='disabled' type="submit">Log In</button>
-        :
-        <button className='success' type="submit">Log In</button>
-      }
       <button href="/" onClick={demoUser} className="demo-user">Log In as Demo User</button>
       <a href={`${window.origin}/api/auth/oauth_login`} className="google-oauth">
         <button className="goog-log-btn">
