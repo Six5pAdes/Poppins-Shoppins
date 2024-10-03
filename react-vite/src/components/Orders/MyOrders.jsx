@@ -82,7 +82,7 @@ const MyOrders = () => {
                             />
                         </div>
                     ))
-                ) : <h2>Your Cart is Empty.</h2>}
+                ) : <h2 className="empty-cart">Your Cart is Empty.</h2>}
             </div>
             <div className="checkout-contain">
                 <h1>My Orders</h1>

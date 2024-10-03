@@ -68,3 +68,12 @@
 .product-info {
     margin: 12px;
 }
+
+.empty-cart {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 1rem;
+}

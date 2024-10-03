@@ -1,4 +1,4 @@
-.profile-contain, #this-product, #wish-contain, #this-review {
+.profile-contain, #this-product, #this-review {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,7 +63,7 @@ button {
 }
 
 #new-product {
-    margin: 1rem;
+    margin: 5px;
     padding: 10px;
     background-color: #27282d;
     color:  white;
@@ -109,10 +109,6 @@ button {
     box-shadow: 2px 2px 3px 3px gray;
     cursor: pointer;
   }
-
-#curr-title, #new-product {
-    margin-left: 45px;
-}
 
 .edit-or-delete {
     display: flex;
@@ -191,6 +187,14 @@ button {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
+}
+
+.empty-products, .empty-reviews {
+    text-align: center;
+}
+
+.empty-products h3, .empty-reviews h3 {
+    color: #333;
 }
 
 .button-contain {

@@ -10,16 +10,6 @@ const Wishlist = () => {
     const userId = useSelector((state) => state.session.user);
     const wishlists = useSelector((state) => state.wishlists?.WishProd);
 
-    // if (!userId) navigate("/");
-
-    // const handleNav = (productId) => {
-    //     navigate(`/products/${productId}`);
-    // }
-
-    // useEffect(() => {
-    //     dispatch(getWishlistsThunk());
-    // }, [dispatch]);
-
     useEffect(() => {
         if (!userId) {
             navigate("/");
@@ -36,21 +26,27 @@ const Wishlist = () => {
     return (
         <div className="wish-contain">
             <h1 id="curr-title">My Wishlist</h1>
-            <section className="wish-list">
-                {wishlists?.map((product) => (
-                    <div key={product.id} className='wishlist-item'>
-                        <div
-                            title={product.name}
-                            key={product.id}
-                        >
-                            <img src={product.image} className='wishlist-img'
-                                onClick={() => handleNav(product.id)}
-                            />
-                            <p className='name'>{product.name}</p>
-                            <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
+            <section className={`wish-list ${wishlists?.length === 0 ? 'empty' : ''}`}>
+                {wishlists?.length > 0 ? (
+                    wishlists?.map((product) => (
+                        <div key={product.id} className='wishlist-item'>
+                            <div
+                                title={product.name}
+                                key={product.id}
+                            >
+                                <img src={product.image} className='wishlist-img'
+                                    onClick={() => handleNav(product.id)}
+                                />
+                                <p className='name'>{product.name}</p>
+                                <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
+                            </div>
                         </div>
+                    ))
+                ) : (
+                    <div className='empty-wishlist'>
+                        <h3>🌟 Your wishlist is empty 🌟</h3>
                     </div>
-                ))}
+                )}
             </section>
         </div>
     );

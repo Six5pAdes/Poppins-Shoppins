@@ -115,79 +115,91 @@ const UserPage = () => {
                 <h1 id='curr-title'>My Products</h1>
                 <button type='button' id='new-product' onClick={() => navigate('/new-product')}>Create a New Product</button>
                 <br />
-                <ul id='products'>
-                    {userProducts.map((product) => (
-                        <div key={product.id} className='product-card'>
-                            <div
-                                title={product.name}
-                                key={product.id}
-                            >
-                                <img src={product.image} className='product-img'
-                                    onClick={() => navigate(`/products/${product.id}`)}
-                                />
-                                <p className='name' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
-                                <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
-                            </div>
-                            <div className='edit-or-delete'>
-                                <button id='update-btn' type='button' onClick={() => handleProductUpdate(product.id)}>Edit Product</button>
-                                <OpenModalMenuItem
-                                    itemText='Delete Product'
-                                    className='delete-button'
-                                    modalComponent={(
-                                        <div id='confirm-delete'>
-                                            <h2>Confirm Delete</h2>
-                                            <span>Are you sure you want to remove this product?</span>
-                                            <button className='success' type='button' onClick={() => handleProductDelete(product.id)}>Delete Product</button>
-                                            <button className='success' type='button' onClick={closeModal}>Keep Product</button>
-                                        </div>
-                                    )}
-                                />
-                            </div>
-                        </div>
-                    ))}
-                </ul>
-            </section>
-            <section id='this-review'>
-                <h1 id='curr-title'>My Reviews</h1>
-                <ul id='reviews'>
-                    {userReviews.map((review) => (
-                        <div key={review?.id} className='review-card'>
-                            <h3
-                                title={products[review?.product_id]?.name}
-                                className="product-name"
-                                onClick={() => navigate(`/products/${review?.product_id}`)}
-                            >{products[review?.product_id]?.name}</h3>
-                            <div className="product-date">{formatDate(new Date(review?.created_at))}</div>
-                            <p className="review-comments">{review?.body}</p>
-                            <p className="review-rating">Rating: {renderStars(review?.rating)}</p>
-                            {userStore?.id === review?.user_id && (
-                                <div className='edit-or-delete'>
-                                    <OpenModalMenuItem
-                                        itemText='Update Review'
-                                        className='edit-button'
-                                        modalComponent={<UpdateReview
-                                            reviewId={review.id}
-                                            initialReview={review.body}
-                                            initialRating={review.rating}
-                                            productId={review.product_id}
-                                        />}
+                <ul id={`products ${userProducts?.length === 0 ? 'empty' : ''}`}>
+                    {userProducts.length > 0 ? (
+                        userProducts.map((product) => (
+                            <div key={product.id} className='product-card'>
+                                <div
+                                    title={product.name}
+                                    key={product.id}
+                                >
+                                    <img src={product.image} className='product-img'
+                                        onClick={() => navigate(`/products/${product.id}`)}
                                     />
+                                    <p className='name' onClick={() => navigate(`/products/${product.id}`)}>{product.name}</p>
+                                    <p className='product-price'>${parseFloat(product.price).toFixed(2)}</p>
+                                </div>
+                                <div className='edit-or-delete'>
+                                    <button id='update-btn' type='button' onClick={() => handleProductUpdate(product.id)}>Edit Product</button>
                                     <OpenModalMenuItem
-                                        itemText='Delete Review'
+                                        itemText='Delete Product'
                                         className='delete-button'
                                         modalComponent={(
                                             <div id='confirm-delete'>
                                                 <h2>Confirm Delete</h2>
-                                                <span>Are you sure you want to remove this review?</span>
-                                                <button className='success' type='button' onClick={() => handleReviewDelete(review.id)}>Delete Review</button>
-                                                <button className='success' type='button' onClick={closeModal}>Keep Review</button>
+                                                <span>Are you sure you want to remove this product?</span>
+                                                <button className='success' type='button' onClick={() => handleProductDelete(product.id)}>Delete Product</button>
+                                                <button className='success' type='button' onClick={closeModal}>Keep Product</button>
                                             </div>
                                         )}
                                     />
                                 </div>
-                            )}
+                            </div>
+                        ))
+                    ) : (
+                        <div className='empty-products'>
+                            <h3>🌟 Your products are empty 🌟</h3>
                         </div>
-                    ))}
+                    )}
+                </ul>
+            </section>
+            <section id='this-review'>
+                <h1 id='curr-title'>My Reviews</h1>
+                <ul id={`reviews ${userReviews?.length === 0 ? 'empty' : ''}`}>
+                    {userReviews.length > 0 ? (
+                        userReviews.map((review) => (
+                            <div key={review?.id} className='review-card'>
+                                <h3
+                                    title={products[review?.product_id]?.name}
+                                    className="product-name"
+                                    onClick={() => navigate(`/products/${review?.product_id}`)}
+                                >{products[review?.product_id]?.name}</h3>
+                                <div className="product-date">{formatDate(new Date(review?.created_at))}</div>
+                                <p className="review-comments">{review?.body}</p>
+                                <p className="review-rating">Rating: {renderStars(review?.rating)}</p>
+                                {userStore?.id === review?.user_id && (
+                                    <div className='edit-or-delete'>
+                                        <OpenModalMenuItem
+                                            itemText='Update Review'
+                                            className='edit-button'
+                                            modalComponent={<UpdateReview
+                                                reviewId={review.id}
+                                                initialReview={review.body}
+                                                initialRating={review.rating}
+                                                productId={review.product_id}
+                                            />}
+                                        />
+                                        <OpenModalMenuItem
+                                            itemText='Delete Review'
+                                            className='delete-button'
+                                            modalComponent={(
+                                                <div id='confirm-delete'>
+                                                    <h2>Confirm Delete</h2>
+                                                    <span>Are you sure you want to remove this review?</span>
+                                                    <button className='success' type='button' onClick={() => handleReviewDelete(review.id)}>Delete Review</button>
+                                                    <button className='success' type='button' onClick={closeModal}>Keep Review</button>
+                                                </div>
+                                            )}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <div className='empty-reviews'>
+                            <h3>🌟 Your reviews are empty 🌟</h3>
+                        </div>
+                    )}
                 </ul>
             </section>
             <section id='wish-contain'>
