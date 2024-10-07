@@ -86,7 +86,7 @@ const UserPage = () => {
 
     return (
         <>
-            <section className='profile-contain'>
+            <section id='this-profile'>
                 <h1 id='curr-title'>About Me</h1>
                 <div id='prof-info'>
                     <div id='prof-stuff'>
@@ -115,7 +115,7 @@ const UserPage = () => {
                 <h1 id='curr-title'>My Products</h1>
                 <button type='button' id='new-product' onClick={() => navigate('/new-product')}>Create a New Product</button>
                 <br />
-                <ul id={`products ${userProducts?.length === 0 ? 'empty' : ''}`}>
+                <ul id='products' className={userProducts.length === 0 ? 'empty' : ''}>
                     {userProducts.length > 0 ? (
                         userProducts.map((product) => (
                             <div key={product.id} className='product-card'>
@@ -155,12 +155,11 @@ const UserPage = () => {
             </section>
             <section id='this-review'>
                 <h1 id='curr-title'>My Reviews</h1>
-                <ul id={`reviews ${userReviews?.length === 0 ? 'empty' : ''}`}>
+                <ul id='reviews' className={userReviews?.length === 0 ? 'empty' : ''}>
                     {userReviews.length > 0 ? (
                         userReviews.map((review) => (
                             <div key={review?.id} className='review-card'>
                                 <h3
-                                    title={products[review?.product_id]?.name}
                                     className="product-name"
                                     onClick={() => navigate(`/products/${review?.product_id}`)}
                                 >{products[review?.product_id]?.name}</h3>

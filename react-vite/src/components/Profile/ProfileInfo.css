@@ -1,4 +1,4 @@
-.profile-contain, #this-product, #this-review {
+#this-profile, #this-product, #this-review {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,6 +60,7 @@ button {
 
 #curr-title {
     margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 #new-product {
@@ -90,11 +91,18 @@ button {
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    row-gap: 40px;
+    row-gap: 20px;
     width: auto;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
+}
+
+#products.empty, #reviews.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .product-card {
@@ -173,10 +181,12 @@ button {
 }
 
 #reviews {
-    row-gap: 40px;
-    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
     margin: 0 auto;
-    padding-top: 20px;
+    padding: 0;
     box-sizing: border-box;
     align-content: center;
     text-align: center;
@@ -184,8 +194,8 @@ button {
 
 .review-card {
     margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
     padding: 10px;
 }
 
