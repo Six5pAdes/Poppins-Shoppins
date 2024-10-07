@@ -34,6 +34,20 @@
     align-items: center;
     width: auto;
     height: auto;
+    font-size: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+    background-color: #c6286d;
+    transition: background-color 0.3s ease;
+}
+
+#cancel:hover {
+    background-color: #e73b8e;
+    cursor: pointer;
 }
 
 .user-inputs {
