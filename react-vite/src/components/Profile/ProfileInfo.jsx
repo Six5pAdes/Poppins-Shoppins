@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfile'
+import EditPassword from './ChangePassword'
 import UpdateReview from '../ReviewPages/EditReview'
 import { deleteUserThunk } from '../../redux/profile'
 import { loadUserProductsThunk, deleteProductThunk } from '../../redux/product'
@@ -104,12 +105,20 @@ const UserPage = () => {
                         </div>
                     </div>
                 </div>
-                <OpenModalMenuItem
-                    itemText='Edit Profile'
-                    className='edit-profile'
-                    modalComponent={(
-                        <ProfileUpdate toInt={toInt} />
-                    )} />
+                <div id="edit-profile-buttons">
+                    <OpenModalMenuItem
+                        itemText='Edit Profile'
+                        className='edit-profile'
+                        modalComponent={(
+                            <ProfileUpdate toInt={toInt} />
+                        )} />
+                    <OpenModalMenuItem
+                        itemText='Change Password'
+                        className='edit-profile'
+                        modalComponent={(
+                            <EditPassword toInt={toInt} />
+                        )} />
+                </div>
             </section>
             <section id='this-product'>
                 <h1 id='curr-title'>My Products</h1>

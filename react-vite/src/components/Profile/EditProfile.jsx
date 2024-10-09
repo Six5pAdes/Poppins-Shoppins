@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { useParams, } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { editUserThunk, getUserThunk } from "../../redux/profile"
 import { useModal } from "../../context/Modal"
 import './EditProfile.css'
@@ -123,7 +123,7 @@ const ProfileUpdate = () => {
                     <button className="success" type="submit">Update User</button>
                 }
                 <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
-            </form >
+            </form>
         </div >
     )
 }
