@@ -17,6 +17,8 @@ const CreateProduct = () => {
     const [submit, setSubmit] = useState(false)
     const user = useSelector(state => state.session.user)
 
+    const [imagePreview, setImagePreview] = useState("")
+
     const handleSubmit = async e => {
         e.preventDefault()
         setSubmit(true)
@@ -78,6 +80,14 @@ const CreateProduct = () => {
         navigate(-1)
     }
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        setImage(file)
+        if (file) {
+            setImagePreview(URL.createObjectURL(file))
+        }
+    }
+
     return (
         <div id="product-new">
             <h1>Create a New Product</h1>
@@ -99,12 +109,16 @@ const CreateProduct = () => {
                     {submit && errors.name && <p className="err-msg">{errors.name}</p>}
                     <label className="product-label">
                         Image
-                        <input
-                            type="file"
-                            className="product-inputs product-image"
-                            accept="image/*"
-                            onChange={(e) => setImage(e.target.files[0])}
-                        />
+                        <div className="image-input-contain">
+                            <input
+                                type="file"
+                                className="product-inputs product-image"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                            // style={{ backgroundImage: imagePreview ? `url(${imagePreview})` : 'none', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}
+                            />
+                            {imagePreview && <img src={imagePreview} className="image-preview" />}
+                        </div>
                     </label>
                     {submit && errors.image && <p className="err-msg">{errors.image}</p>}
                     <label className="product-label">
@@ -138,7 +152,7 @@ const CreateProduct = () => {
                         Description
                         <textarea
                             className="product-inputs"
-                            placeholder="Please describe what the item is"
+                            placeholder="Please describe what the item is..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />

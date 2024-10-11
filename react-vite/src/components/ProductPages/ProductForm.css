@@ -19,25 +19,46 @@
     margin-bottom: 20px;
   }
 
-  .product-inputs {
+.product-inputs {
     width: 100%;
     margin: 10px;
     margin-bottom: 20px;
     padding: 10px;
     border: 1px #ccc solid;
-  }
+}
 
-  input[type="file"],
-  textarea {
+input[type="file"],
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 10px;
-  }
+}
 
-  .product-image::-webkit-file-upload-button {
+.image-input-contain {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  /* height: 100px;
+  color: transparent;
+  text-indent: 10px;
+  background-color: rgba(255, 255, 255, 0.8); */
+  flex: 1;
+  margin-right: 10px;
+}
+
+.product-image::-webkit-file-upload-button {
     cursor: pointer;
+}
+
+.image-preview {
+  width: fit-content;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50px;
 }
 
 #button-contain {
