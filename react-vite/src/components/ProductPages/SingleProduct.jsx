@@ -65,7 +65,7 @@ const ProductDetails = () => {
     }, [wishlists, product])
 
     // const allSellers = session.users
-    // const seller = allSellers?.find(user => user.id === product?.user_id)
+    // const seller = sellers?.find(user => user.id === product?.user_id)
 
     const handleAddToCart = (prodId) => {
         const orderIds = allCarts.map(ele => ele.product_id)
@@ -131,9 +131,10 @@ const ProductDetails = () => {
                     <p className="price">
                         Price: ${parseFloat(product?.price).toFixed(2)}
                     </p>
-                    {/* <p className="seller">
-                        Seller: {seller ? `${seller.first_name} ${seller.last_name}` : "Unknown Seller"}
-                    </p> */}
+                    <p className="seller">
+                        {/* Seller: {seller ? `${seller?.first_name} ${seller?.last_name}` : "Unknown Seller"} */}
+                        Seller:
+                    </p>
                     <div className="actions">
                         {session.user && product.user_id !== session.user.id && (
                             <>

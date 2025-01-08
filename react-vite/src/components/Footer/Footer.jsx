@@ -4,6 +4,7 @@ import { BsLinkedin } from "react-icons/bs";
 import { CgWebsite } from "react-icons/cg";
 
 function Footer() {
+    const currYear = new Date().getFullYear();
 
     return (
         <div className='footer-container'>
@@ -54,7 +55,7 @@ function Footer() {
                     </a>
                 </div>
             </div>
-            <p id="copyright">© 2024</p>
+            <p id="copyright">© {currYear}</p>
         </div>
     )
 }
